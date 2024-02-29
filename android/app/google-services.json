@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "956784069902",
+    "project_id": "ihelth-monitor",
+    "storage_bucket": "ihelth-monitor.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:956784069902:android:b55248112c14a3fc599b5f",
+        "android_client_info": {
+          "package_name": "com.example.first_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0dAuqnyGBARFGx3j65DItuCms_InSDTY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:956784069902:android:e9d928ee6a0f4345599b5f",
+        "android_client_info": {
+          "package_name": "com.example.ihealth_monitor"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0dAuqnyGBARFGx3j65DItuCms_InSDTY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,97 @@
+// ignore_for_file: camel_case_types, file_names
+
+import 'package:flutter/material.dart';
+
+class verifyPassword extends StatelessWidget {
+  const verifyPassword({super.key});
+  
+  static String id = 'verifyPassword';
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xffF0F0F0),
+      body: ListView(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Icon(
+                    Icons.arrow_back_sharp,
+                    size: 33,
+                  ),
+                ),
+                const SizedBox(
+                  width: 60,
+                ),
+                const Text(
+                  'Forget password?',
+                  style: TextStyle(
+                    fontFamily: 'alata',
+                    fontSize: 25,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 70,
+          ),
+          const Image(
+            image: AssetImage('assets/images/forgetPassword.png'),
+            height: 200,
+          ),
+          const SizedBox(
+            height: 70,
+          ),
+          const Text(
+            textAlign: TextAlign.center,
+            'Enter your registered email to reset your password',
+            style: TextStyle(
+              fontFamily: 'alata',
+              fontSize: 18,
+              color: Colors.black,
+            ),
+          ),
+          const SizedBox(
+            height: 70,
+          ),
+          
+          const SizedBox(
+            height: 60,
+          ),
+          Center(
+            child: GestureDetector(
+              onTap: () {},
+              child: Container(
+                decoration: const BoxDecoration(
+                  color: Color(0xff92B28F),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                ),
+                height: 50,
+                width: 234,
+                child: const Text(
+                  textAlign: TextAlign.center,
+                  'Send',
+                  style: TextStyle(
+                    fontFamily: 'alata',
+                    fontSize: 32,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
