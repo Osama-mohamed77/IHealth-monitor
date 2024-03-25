@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:ihealth_monitor/components/HomeNav_Bar.dart';
 import 'package:ihealth_monitor/helper/ShowSnackBar.dart';
 import 'package:ihealth_monitor/screens/Shadow/Home%20Nav%20Bar.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';

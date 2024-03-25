@@ -3,11 +3,8 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:ihealth_monitor/components/HomeNav_Bar.dart';
 import 'package:ihealth_monitor/components/textformfield.dart';
 import 'package:ihealth_monitor/helper/ShowSnackBar.dart';
-import 'package:ihealth_monitor/screens/Doctor/forget%20password.dart';
-import 'package:ihealth_monitor/screens/Doctor/sign%20up.dart';
 import 'package:ihealth_monitor/screens/Patient/Forget%20patient.dart';
 import 'package:ihealth_monitor/screens/Patient/HomeNav_Bar_patient.dart';
 import 'package:ihealth_monitor/screens/Patient/sign%20up%20Patient.dart';

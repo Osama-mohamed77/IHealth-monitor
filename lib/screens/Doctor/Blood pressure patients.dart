@@ -1,7 +1,6 @@
 // ignore_for_file: camel_case_types, file_names
 
 import 'package:flutter/material.dart';
-import 'package:ihealth_monitor/screens/Doctor/Dpmore%20deteils.dart';
 import 'package:ihealth_monitor/screens/Doctor/Bpmore%20deteils.dart';
 
 class bloodPressure extends StatelessWidget {

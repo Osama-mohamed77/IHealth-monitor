@@ -1,8 +1,6 @@
 // ignore_for_file: file_names
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:ihealth_monitor/screens/Doctor/sign%20in%20doctor.dart';
 import 'package:ihealth_monitor/screens/Patient/Sign%20in%20Patient%20.dart';
 import 'package:ihealth_monitor/screens/Shadow/Sign%20in%20shadow.dart';

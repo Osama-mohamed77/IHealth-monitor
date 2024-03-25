@@ -3,8 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/screens/Patient/Sign%20in%20Patient%20.dart';
 import 'package:ihealth_monitor/screens/Patient/verify%20patient.dart';
-import 'package:ihealth_monitor/screens/Shadow/Sign%20in%20shadow.dart';
-import 'package:ihealth_monitor/screens/Shadow/verify%20shadow.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class creatPatient extends StatefulWidget {

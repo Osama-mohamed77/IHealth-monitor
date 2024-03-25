@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/components/HomeNav_Bar.dart';
 import 'package:ihealth_monitor/components/textformfield.dart';
 import 'package:ihealth_monitor/helper/ShowSnackBar.dart';
-import 'package:ihealth_monitor/screens/Doctor/Home.dart';
 import 'package:ihealth_monitor/screens/Doctor/forget%20password.dart';
 import 'package:ihealth_monitor/screens/Doctor/sign%20up.dart';
 import 'package:ihealth_monitor/screens/choose%20screen.dart';
