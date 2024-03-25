@@ -5,9 +5,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/components/splash_screen.dart';
 import 'package:ihealth_monitor/firebase_options.dart';
+import 'package:ihealth_monitor/screens/Blood%20pressure%20patients.dart';
 import 'package:ihealth_monitor/screens/Home.dart';
 import 'package:ihealth_monitor/screens/choose%20screen.dart';
 import 'package:ihealth_monitor/screens/forget%20password.dart';
+import 'package:ihealth_monitor/screens/more%20deteils%20for%20blood%20pressure.dart';
 import 'package:ihealth_monitor/screens/sign%20in%20doctor.dart';
 import 'package:ihealth_monitor/screens/sign%20up.dart';
 
@@ -45,8 +47,10 @@ class _IHealthMonitorState extends State<IHealthMonitor> {
           ChooseScreen.id: (context) => const ChooseScreen(),
           signIn.id: (context) => const signIn(),
           signUp.id: (context) => const signUp(),
+          forgetPassword.id: (context) => const forgetPassword(),
           HomeDoctor.id: (context) => const HomeDoctor(),
-          forgetPassword.id: (context) => const forgetPassword()
+          bloodPressure.id:(context) => const bloodPressure(),
+          moreDeteils.id:(context) => const moreDeteils()
         },
         home: const SplashScreen());
   }
