@@ -1,11 +1,11 @@
-// ignore_for_file: camel_case_types, file_names, unused_local_variable, use_build_context_synchronously, must_be_immutable, non_constant_identifier_names, unused_field
+// ignore_for_file: camel_case_types, file_names, unused_local_variable, use_build_context_synchronously, must_be_immutable, non_constant_identifier_names, unused_field, avoid_print
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ihealth_monitor/components/HomeNav_Bar.dart';
 import 'package:ihealth_monitor/helper/ShowSnackBar.dart';
-import 'package:ihealth_monitor/screens/Home.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class signUp extends StatefulWidget {
@@ -88,7 +88,7 @@ class _signUpState extends State<signUp> {
                   height: 20,
                 ),
                 SizedBox(
-                  height: 70,
+                  height: 65,
                   child: TextFormField(
                     controller: fullName,
                     validator: (value) {
@@ -114,7 +114,7 @@ class _signUpState extends State<signUp> {
                   height: 20,
                 ),
                 SizedBox(
-                  height: 70,
+                  height: 65,
                   child: TextFormField(
                     controller: userName,
                     validator: (value) {
@@ -139,7 +139,7 @@ class _signUpState extends State<signUp> {
                   height: 20,
                 ),
                 SizedBox(
-                  height: 70,
+                  height: 65,
                   child: TextFormField(
                     keyboardType: TextInputType.number,
                     inputFormatters: <TextInputFormatter>[
@@ -171,7 +171,7 @@ class _signUpState extends State<signUp> {
                   height: 20,
                 ),
                 SizedBox(
-                  height: 70,
+                  height: 65,
                   child: TextFormField(
                     controller: email,
                     validator: (value) {
@@ -194,7 +194,7 @@ class _signUpState extends State<signUp> {
                   height: 20,
                 ),
                 SizedBox(
-                  height: 70,
+                  height: 65,
                   child: TextFormField(
                     controller: password,
                     validator: (value) {
@@ -223,7 +223,7 @@ class _signUpState extends State<signUp> {
                   width: 33,
                 ),
                 SizedBox(
-                  height: 70,
+                  height: 65,
                   child: TextFormField(
                     validator: (value) {
                       if (value!.isEmpty) {
@@ -255,7 +255,7 @@ class _signUpState extends State<signUp> {
                         try {
                           await signUpUser();
                           ShowSnackBar(context, 'Success');
-                          Navigator.pushNamed(context, HomeDoctor.id);
+                          Navigator.pushNamed(context, HomeNavBarDoctor.id);
                           addUser();
                         } on FirebaseAuthException catch (ex) {
                           if (ex.code == 'weak-password') {

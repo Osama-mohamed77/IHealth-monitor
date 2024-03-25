@@ -1,6 +1,8 @@
+// ignore_for_file: file_names, camel_case_types, use_build_context_synchronously
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:ihealth_monitor/screens/sign%20in%20doctor.dart';
+import 'package:ihealth_monitor/screens/Doctor/sign%20in%20doctor.dart';
 
 class logout extends StatelessWidget {
   const logout({super.key});

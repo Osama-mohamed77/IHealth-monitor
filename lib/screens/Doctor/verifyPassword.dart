@@ -1,12 +1,13 @@
 // ignore_for_file: camel_case_types, file_names
 
 import 'package:flutter/material.dart';
+import 'package:ihealth_monitor/components/Oto.dart';
+import 'package:ihealth_monitor/screens/Doctor/creat%20password.dart';
 
-class forgetPassword extends StatelessWidget {
-  const forgetPassword({super.key});
-  static RegExp regexEmail = RegExp(
-      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-  static String id = 'forgetPassword';
+class verifyPassword extends StatelessWidget {
+  const verifyPassword({super.key});
+
+  static String id = 'verifyPassword';
 
   @override
   Widget build(BuildContext context) {
@@ -27,16 +28,22 @@ class forgetPassword extends StatelessWidget {
                     size: 33,
                   ),
                 ),
-                const SizedBox(
-                  width: 60,
+                const Spacer(
+                  flex: 1,
                 ),
                 const Text(
-                  'Forget password?',
+                  'Verify your email',
                   style: TextStyle(
                     fontFamily: 'alata',
                     fontSize: 25,
                     color: Colors.black,
                   ),
+                ),
+                const Spacer(
+                  flex: 1,
+                ),
+                const SizedBox(
+                  width: 30,
                 ),
               ],
             ),
@@ -45,7 +52,7 @@ class forgetPassword extends StatelessWidget {
             height: 70,
           ),
           const Image(
-            image: AssetImage('assets/images/forgetPassword.png'),
+            image: AssetImage('assets/images/Verify.png'),
             height: 200,
           ),
           const SizedBox(
@@ -53,7 +60,7 @@ class forgetPassword extends StatelessWidget {
           ),
           const Text(
             textAlign: TextAlign.center,
-            'Enter your registered email to reset your password',
+            'Please enter the 4 digit code ',
             style: TextStyle(
               fontFamily: 'alata',
               fontSize: 18,
@@ -63,34 +70,29 @@ class forgetPassword extends StatelessWidget {
           const SizedBox(
             height: 70,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25),
-            child: SizedBox(
-              height: 70,
-              child: TextFormField(
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Enter Your Email';
-                  } else if (!regexEmail.hasMatch(value)) {
-                    return 'Enter a valid Email';
-                  }
-                  return null;
-                },
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    labelText: 'Email',
-                    filled: true,
-                    fillColor: Colors.white70),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(
+                width: 20,
               ),
-            ),
+              OtpForm(),
+              OtpForm(),
+              OtpForm(),
+              OtpForm(),
+              SizedBox(
+                width: 20,
+              ),
+            ],
           ),
           const SizedBox(
-            height: 60,
+            height: 70,
           ),
           Center(
             child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, creatPassword.id);
+              },
               child: Container(
                 decoration: const BoxDecoration(
                   color: Color(0xff92B28F),
@@ -102,7 +104,7 @@ class forgetPassword extends StatelessWidget {
                 width: 234,
                 child: const Text(
                   textAlign: TextAlign.center,
-                  'Send',
+                  'Verify',
                   style: TextStyle(
                     fontFamily: 'alata',
                     fontSize: 32,

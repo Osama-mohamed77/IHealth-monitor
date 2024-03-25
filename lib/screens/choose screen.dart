@@ -1,7 +1,11 @@
 // ignore_for_file: file_names
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ihealth_monitor/screens/sign%20in%20doctor.dart';
+import 'package:flutter/widgets.dart';
+import 'package:ihealth_monitor/screens/Doctor/sign%20in%20doctor.dart';
+import 'package:ihealth_monitor/screens/Patient/Sign%20in%20Patient%20.dart';
+import 'package:ihealth_monitor/screens/Shadow/Sign%20in%20shadow.dart';
 
 // ignore: camel_case_types
 class ChooseScreen extends StatelessWidget {
@@ -27,41 +31,51 @@ class ChooseScreen extends StatelessWidget {
             const SizedBox(
               height: 100,
             ),
-            Container(
-              height: 70,
-              width: 210,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(20)),
-                color: Color(0xff69B5B4),
-              ),
-              child: const Text(
-                textAlign: TextAlign.center,
-                'Patient',
-                style: TextStyle(
-                    fontFamily: 'alata',
-                    fontSize: 40,
-                    color: Colors.white,
-                    height: 1.6),
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, signInPatient.id);
+              },
+              child: Container(
+                height: 70,
+                width: 210,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  color: Color(0xff69B5B4),
+                ),
+                child: const Text(
+                  textAlign: TextAlign.center,
+                  'Patient',
+                  style: TextStyle(
+                      fontFamily: 'alata',
+                      fontSize: 40,
+                      color: Colors.white,
+                      height: 1.6),
+                ),
               ),
             ),
             const SizedBox(
               height: 40,
             ),
-            Container(
-              height: 70,
-              width: 210,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(20)),
-                color: Color(0xffA9A360),
-              ),
-              child: const Text(
-                textAlign: TextAlign.center,
-                'Shadow',
-                style: TextStyle(
-                    fontFamily: 'alata',
-                    fontSize: 40,
-                    color: Colors.white,
-                    height: 1.6),
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, signInShadow.id);
+              },
+              child: Container(
+                height: 70,
+                width: 210,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  color: Color(0xffA9A360),
+                ),
+                child: const Text(
+                  textAlign: TextAlign.center,
+                  'Shadow',
+                  style: TextStyle(
+                      fontFamily: 'alata',
+                      fontSize: 40,
+                      color: Colors.white,
+                      height: 1.6),
+                ),
               ),
             ),
             const SizedBox(

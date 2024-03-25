@@ -13,33 +13,45 @@ class CustomTextForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 70,
-      child: TextFormField(
-        validator: (value) {
-          if (value!.isEmpty) {
-            return 'Enter Your Email';
-          } else if (!regexEmail.hasMatch(value)) {
-            return 'Enter a valid email';
-          }
-          return null;
-        },
-        controller: mycontroller,
-        decoration: InputDecoration(
-          labelText: labelText,
-          filled: true,
-          fillColor: Colors.white70,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: const BorderSide(
-              color: Color.fromARGB(255, 184, 184, 184),
+    return Row(
+      children: [
+        const SizedBox(
+          width: 30,
+        ),
+        Expanded(
+          child: SizedBox(
+            height: 65,
+            child: TextFormField(
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Enter Your Email';
+                } else if (!regexEmail.hasMatch(value)) {
+                  return 'Enter a valid email';
+                }
+                return null;
+              },
+              controller: mycontroller,
+              decoration: InputDecoration(
+                labelText: labelText,
+                filled: true,
+                fillColor: Colors.white70,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(
+                    color: Color.fromARGB(255, 184, 184, 184),
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
             ),
           ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
         ),
-      ),
+        const SizedBox(
+          width: 30,
+        ),
+      ],
     );
   }
 }

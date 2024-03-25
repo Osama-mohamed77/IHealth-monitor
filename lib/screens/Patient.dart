@@ -1,8 +1,6 @@
 // ignore_for_file: file_names
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 // ignore: camel_case_types
 class PatientExplain extends StatelessWidget {
