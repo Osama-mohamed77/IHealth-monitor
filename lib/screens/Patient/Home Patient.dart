@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously, file_names, prefer_final_fields, unused_field
 import 'package:flutter/material.dart';
+import 'package:ihealth_monitor/screens/Patient/Measuring%20devices.dart';
 import 'package:ihealth_monitor/screens/Patient/choose%20Type.dart';
 
 class HomePatients extends StatefulWidget {
@@ -222,36 +223,41 @@ class _HomePatientsState extends State<HomePatients> {
                 width: 20,
               ),
               Expanded(
-                child: Container(
-                  height: 170,
-                  width: 140,
-                  decoration: BoxDecoration(
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Colors.grey,
-                          spreadRadius: 0,
-                          blurRadius: 4,
-                          offset: Offset(0, 4), // changes position of shadow
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, measuringDevices.id);
+                  },
+                  child: Container(
+                    height: 170,
+                    width: 140,
+                    decoration: BoxDecoration(
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.grey,
+                            spreadRadius: 0,
+                            blurRadius: 4,
+                            offset: Offset(0, 4), // changes position of shadow
+                          ),
+                        ],
+                        border: Border.all(color: const Color(0xffB2B2B2)),
+                        borderRadius: const BorderRadius.only(
+                            bottomLeft: Radius.circular(15),
+                            bottomRight: Radius.circular(15)),
+                        color: const Color(0xffEDEDED)),
+                    child: const Column(
+                      children: [
+                        Image(image: AssetImage('assets/images/Measuring.png')),
+                        SizedBox(
+                          height: 6,
                         ),
+                        Text('Measuring \n   devices',
+                            style: TextStyle(
+                              fontFamily: 'alata',
+                              fontSize: 15,
+                              color: Colors.black,
+                            )),
                       ],
-                      border: Border.all(color: const Color(0xffB2B2B2)),
-                      borderRadius: const BorderRadius.only(
-                          bottomLeft: Radius.circular(15),
-                          bottomRight: Radius.circular(15)),
-                      color: const Color(0xffEDEDED)),
-                  child: const Column(
-                    children: [
-                      Image(image: AssetImage('assets/images/Measuring.png')),
-                      SizedBox(
-                        height: 6,
-                      ),
-                      Text('Measuring \n   devices',
-                          style: TextStyle(
-                            fontFamily: 'alata',
-                            fontSize: 15,
-                            color: Colors.black,
-                          )),
-                    ],
+                    ),
                   ),
                 ),
               ),
@@ -282,7 +288,7 @@ class _HomePatientsState extends State<HomePatients> {
                       ],
                       border: Border.all(color: const Color(0xffB2B2B2)),
                       borderRadius: BorderRadius.circular(20),
-                      color:  const Color(0xffEDEDED)),
+                      color: const Color(0xffEDEDED)),
                   child: const Row(
                     children: [
                       SizedBox(

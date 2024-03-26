@@ -104,7 +104,7 @@ class Requests extends StatelessWidget {
                               const BoxDecoration(color: Color(0xffFF6E6E)),
                           child: const Text(
                             textAlign: TextAlign.center,
-                            'Confirm',
+                            'Cancel',
                             style: TextStyle(
                               fontFamily: 'Alata',
                               fontSize: 13,

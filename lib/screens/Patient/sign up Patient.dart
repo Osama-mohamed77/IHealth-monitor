@@ -166,7 +166,7 @@ class _signUpPatientState extends State<signUpPatient> {
                           keyboardType: TextInputType.number,
                           inputFormatters: <TextInputFormatter>[
                             FilteringTextInputFormatter.allow(
-                              RegExp(r'[10-100]'),
+                              RegExp(r'[0-9]'),
                             ),
                             FilteringTextInputFormatter.digitsOnly
                           ],
@@ -174,7 +174,7 @@ class _signUpPatientState extends State<signUpPatient> {
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Enter Your Age';
-                            } else if (value.length < 2) {
+                            } else if (value.length > 2) {
                               return 'Enter a Valid Age';
                             }
                             return null;
@@ -202,12 +202,15 @@ class _signUpPatientState extends State<signUpPatient> {
                         height: 65,
                         width: 0,
                         child: Padding(
-                          padding: const EdgeInsets.only(left: 10, top: 5),
+                          padding: const EdgeInsets.only(top: 5, left: 20),
                           child: DropdownButton<String>(
                             value: dropdownValue,
-                            icon: const Icon(
-                              Icons.arrow_drop_down,
-                              size: 30,
+                            icon: const Padding(
+                              padding: EdgeInsets.only(left: 20),
+                              child: Icon(
+                                Icons.arrow_drop_down,
+                                size: 30,
+                              ),
                             ),
                             style: const TextStyle(
                                 color: Color.fromARGB(255, 73, 71, 71),

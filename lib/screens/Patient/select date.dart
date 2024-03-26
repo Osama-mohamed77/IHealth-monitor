@@ -1,8 +1,10 @@
 // ignore_for_file: use_build_context_synchronously, file_names, prefer_final_fields, unused_field, non_constant_identifier_names, unused_element
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:ihealth_monitor/helper/class.dart';
 import 'package:ihealth_monitor/screens/Patient/Enter%20measurements.dart';
+import 'package:ihealth_monitor/screens/Patient/Measuring%20devices.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class SelectDate extends StatefulWidget {
@@ -133,6 +135,14 @@ class _SelectDateState extends State<SelectDate> {
                     height: 50,
                     width: 110,
                     decoration: BoxDecoration(
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.grey,
+                            spreadRadius: 0,
+                            blurRadius: 4,
+                            offset: Offset(0, 4), // changes position of shadow
+                          ),
+                        ],
                         border: Border.all(),
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.white),
@@ -189,6 +199,14 @@ class _SelectDateState extends State<SelectDate> {
                     height: 50,
                     width: 110,
                     decoration: BoxDecoration(
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.grey,
+                            spreadRadius: 0,
+                            blurRadius: 4,
+                            offset: Offset(0, 4), // changes position of shadow
+                          ),
+                        ],
                         border: Border.all(),
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.white),
@@ -225,35 +243,91 @@ class _SelectDateState extends State<SelectDate> {
             const SizedBox(
               height: 50,
             ),
-            Center(
-              child: GestureDetector(
-                onTap: () async {
-                  isLoading = true;
-                  setState(() {});
-                  await MoreClass().firstDatesMeasurement(
-                      firstTime: _FirstTimeOfDay.format(context).toString(),
-                      secondTime: _SecondTimeOfDay.format(context).toString());
+            Row(
+              children: [
+                const SizedBox(
+                  width: 30,
+                ),
+                GestureDetector(
+                  onTap: () async {
+                    isLoading = true;
+                    setState(() {});
+                    await MoreClass().firstDatesMeasurement(
+                        firstTime: _FirstTimeOfDay.format(context).toString(),
+                        secondTime:
+                            _SecondTimeOfDay.format(context).toString());
 
-                  Navigator.pushNamed(context, EnterMeasurements.id);
-                  isLoading = false;
-                  setState(() {});
-                },
-                child: Container(
-                  height: 50,
-                  width: 150,
-                  decoration: BoxDecoration(
-                      color: const Color(0xff69B5AB),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: const Center(
-                    child: Text('Save',
-                        style: TextStyle(
-                          fontFamily: 'alata',
-                          fontSize: 25,
-                          color: Colors.black,
-                        )),
+                    Navigator.pushNamed(context, EnterMeasurements.id);
+                    isLoading = false;
+                    setState(() {});
+                  },
+                  child: Expanded(
+                    child: Container(
+                      height: 50,
+                      width: 150,
+                      decoration: BoxDecoration(
+                          border: Border.all(),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Colors.grey,
+                              spreadRadius: 0,
+                              blurRadius: 4,
+                              offset:
+                                  Offset(0, 4), // changes position of shadow
+                            ),
+                          ],
+                          color: const Color(0xff69B5AB),
+                          borderRadius: BorderRadius.circular(10)),
+                      child: const Center(
+                        child: Text('Save',
+                            style: TextStyle(
+                              fontFamily: 'alata',
+                              fontSize: 25,
+                              color: Colors.black,
+                            )),
+                      ),
+                    ),
                   ),
                 ),
-              ),
+                const SizedBox(
+                  width: 30,
+                ),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, EnterMeasurements.id);
+                    },
+                    child: Container(
+                      height: 50,
+                      width: 150,
+                      decoration: BoxDecoration(
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Colors.grey,
+                              spreadRadius: 0,
+                              blurRadius: 4,
+                              offset:
+                                  Offset(0, 4), // changes position of shadow
+                            ),
+                          ],
+                          border: Border.all(),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10)),
+                      child: const Center(
+                        child: Text('Skip',
+                            style: TextStyle(
+                              fontFamily: 'alata',
+                              fontSize: 25,
+                              color: Colors.black,
+                            )),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 30,
+                )
+              ],
             ),
           ],
         ),

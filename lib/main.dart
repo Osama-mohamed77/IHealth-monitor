@@ -16,6 +16,7 @@ import 'package:ihealth_monitor/screens/Doctor/Home.dart';
 import 'package:ihealth_monitor/screens/Doctor/Requests%20received.dart';
 import 'package:ihealth_monitor/screens/Patient/Add%20address.dart';
 import 'package:ihealth_monitor/screens/Patient/Enter%20measurements.dart';
+import 'package:ihealth_monitor/screens/Patient/Measuring%20devices.dart';
 import 'package:ihealth_monitor/screens/Patient/choose%20Type.dart';
 import 'package:ihealth_monitor/screens/Patient/Forget%20patient.dart';
 import 'package:ihealth_monitor/screens/Patient/Home%20Patient.dart';
@@ -118,6 +119,8 @@ class _IHealthMonitorState extends State<IHealthMonitor> {
           ChooseType.id: (context) => const ChooseType(),
           SelectDate.id: (context) => const SelectDate(),
           EnterMeasurements.id: (context) => const EnterMeasurements(),
+          measuringDevices.id:(context) => const measuringDevices(),
+          
         },
         home: const SplashScreen());
   }

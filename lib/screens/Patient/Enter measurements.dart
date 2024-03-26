@@ -1,6 +1,11 @@
 // ignore_for_file: use_build_context_synchronously, file_names, prefer_final_fields, unused_field, non_constant_identifier_names, unused_element, unrelated_type_equality_checks
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ihealth_monitor/helper/class.dart';
+import 'package:ihealth_monitor/screens/Doctor/Home.dart';
+import 'package:ihealth_monitor/screens/Patient/Home%20Patient.dart';
 import 'package:ihealth_monitor/screens/Patient/select%20date.dart';
 
 class EnterMeasurements extends StatefulWidget {
@@ -13,10 +18,18 @@ class EnterMeasurements extends StatefulWidget {
 
 class _EnterMeasurementsState extends State<EnterMeasurements> {
   int _page = 0;
-  TextEditingController second = TextEditingController();
-  TextEditingController first = TextEditingController();
+  TextEditingController firstMeasurement = TextEditingController();
+  TextEditingController secondMeasurement = TextEditingController();
+
   static RegExp numberRegExp = RegExp('[50-200]');
   GlobalKey<FormState> formKey = GlobalKey();
+
+  // List<QuerySnapshot> data = [];
+
+  // getData() async{
+  //   QuerySnapshot querySnapshot =
+  //   await FirebaseFirestore.instance.collection('Patients').doc(FirebaseAuth.instance.currentUser!.uid).collection('Measurement dates')
+  // }
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -142,6 +155,7 @@ class _EnterMeasurementsState extends State<EnterMeasurements> {
                     height: 60,
                     width: 150,
                     child: TextFormField(
+                      controller: firstMeasurement,
                       keyboardType: TextInputType.number,
                       inputFormatters: <TextInputFormatter>[
                         FilteringTextInputFormatter.allow(
@@ -175,19 +189,26 @@ class _EnterMeasurementsState extends State<EnterMeasurements> {
               height: 50,
             ),
             Center(
-              child: Container(
-                height: 50,
-                width: 150,
-                decoration: BoxDecoration(
-                    color: const Color(0xff69B5AB),
-                    borderRadius: BorderRadius.circular(10)),
-                child: const Center(
-                  child: Text('Save',
-                      style: TextStyle(
-                        fontFamily: 'alata',
-                        fontSize: 25,
-                        color: Colors.black,
-                      )),
+              child: GestureDetector(
+                onTap: () {
+                  MoreClass().addFirstMeasurement(
+                      firstMeasurement: firstMeasurement.text);
+                  Navigator.pushNamed(context, HomePatients.id);
+                },
+                child: Container(
+                  height: 50,
+                  width: 150,
+                  decoration: BoxDecoration(
+                      color: const Color(0xff69B5AB),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: const Center(
+                    child: Text('Save',
+                        style: TextStyle(
+                          fontFamily: 'alata',
+                          fontSize: 25,
+                          color: Colors.black,
+                        )),
+                  ),
                 ),
               ),
             ),
@@ -229,11 +250,11 @@ class _EnterMeasurementsState extends State<EnterMeasurements> {
                     height: 60,
                     width: 150,
                     child: TextFormField(
-                      controller: second,
+                      controller: secondMeasurement,
                       keyboardType: TextInputType.number,
                       inputFormatters: <TextInputFormatter>[
                         FilteringTextInputFormatter.allow(
-                          RegExp(r'[50-200]'),
+                          RegExp(r'[0-9]'),
                         ),
                         FilteringTextInputFormatter.digitsOnly
                       ],
@@ -265,9 +286,9 @@ class _EnterMeasurementsState extends State<EnterMeasurements> {
             Center(
               child: GestureDetector(
                 onTap: () {
-                  if (formKey.currentState!.validate()) {
-                    Navigator.pushNamed(context, SelectDate.id);
-                  }
+                  MoreClass().addSecondMeasurement(
+                      secondMeasurement: secondMeasurement.text);
+                  Navigator.pushNamed(context, HomePatients.id);
                 },
                 child: Container(
                   height: 50,

@@ -53,7 +53,29 @@ class MoreClass {
         .catchError((error) => print("Failed to add user: $error"));
   }
 
-  Future<void> firstDatesMeasurement({required String firstTime,required String secondTime}) async {
+  Future<void> addFirstMeasurement({required String firstMeasurement}) async {
+    await _fireStore
+        .collection('Patients')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('Measurement')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .set({'firstMeasurement': firstMeasurement})
+        .then((value) => print("User Added"))
+        .catchError((error) => print("Failed to add user: $error"));
+  }
+
+  Future<void> addSecondMeasurement({required String secondMeasurement}) async {
+    await _fireStore
+        .collection('Patients')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('Measurement')
+        .add({'Second Measurement': secondMeasurement})
+        .then((value) => print("User Added"))
+        .catchError((error) => print("Failed to add user: $error"));
+  }
+
+  Future<void> firstDatesMeasurement(
+      {required String firstTime, required String secondTime}) async {
     await _fireStore
         .collection('Patients')
         .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -66,17 +88,15 @@ class MoreClass {
         .catchError((error) => print("Failed to add user: $error"));
   }
 
-   
-
-  Future<void> signUpUser(
-      {required String email,
-      required String password,
-      required String fullname,
-      required String userName,
-      required String age,
-      required String phoneNumer,
-      required String gender,
-      }) async {
+  Future<void> signUpUser({
+    required String email,
+    required String password,
+    required String fullname,
+    required String userName,
+    required String age,
+    required String phoneNumer,
+    required String gender,
+  }) async {
     UserCredential user = await FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: password)
         .whenComplete(() => MoreClass().addUser(
