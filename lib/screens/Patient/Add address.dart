@@ -173,7 +173,7 @@ class _AddAddressState extends State<AddAddress> {
                       if (formKey.currentState!.validate()) {
                         isLoading = true;
                         setState(() {});
-                        await MoreClass().addSubcollection(
+                        await MoreClass().addAddress(
                             area: area.text,
                             streetName: streetName.text,
                             buildingName: buildingName.text,

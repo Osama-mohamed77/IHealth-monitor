@@ -22,7 +22,7 @@ class MoreClass {
           'FullName': fullname,
           'userName': userName,
           'age': age,
-          'phoneNumer': phoneNumer,
+          'phoneNumber': phoneNumer,
           'email': email,
           'gender': gender,
         })
@@ -30,7 +30,7 @@ class MoreClass {
         .catchError((error) => print("Failed to add user: $error"));
   }
 
-  Future<void> addSubcollection(
+  Future<void> addAddress(
       {required String area,
       required String streetName,
       required String buildingName,
@@ -57,9 +57,9 @@ class MoreClass {
     await _fireStore
         .collection('Patients')
         .doc(FirebaseAuth.instance.currentUser!.uid)
-        .collection('Measurement')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .set({'firstMeasurement': firstMeasurement})
+        .update({
+          '${DateTime.now().day}': [firstMeasurement],
+        })
         .then((value) => print("User Added"))
         .catchError((error) => print("Failed to add user: $error"));
   }
@@ -69,18 +69,20 @@ class MoreClass {
         .collection('Patients')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection('Measurement')
-        .add({'Second Measurement': secondMeasurement})
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .update({'secound': secondMeasurement})
         .then((value) => print("User Added"))
         .catchError((error) => print("Failed to add user: $error"));
   }
 
-  Future<void> firstDatesMeasurement(
+  Future<void> datesMeasurement(
       {required String firstTime, required String secondTime}) async {
     await _fireStore
         .collection('Patients')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection('Measurement dates')
-        .add({
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .set({
           'The first date for entering measurements': firstTime,
           'The second date for entering measurements': secondTime,
         })
@@ -99,12 +101,27 @@ class MoreClass {
   }) async {
     UserCredential user = await FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: password)
-        .whenComplete(() => MoreClass().addUser(
-            fullname: fullname,
-            userName: userName,
-            age: age,
-            phoneNumer: phoneNumer,
-            email: email,
-            gender: gender));
+        .whenComplete(() {
+      return MoreClass().addUser(
+          fullname: fullname,
+          userName: userName,
+          age: age,
+          phoneNumer: phoneNumer,
+          email: email,
+          gender: gender);
+    });
+  }
+
+  Future<void> bookingTime(
+      {required String bookingTime, required String bookingDate,
+      required String doctorName
+  }) async {
+    await _fireStore.collection('reservation').doc(_auth.currentUser!.uid).set({
+      'id': _auth.currentUser!.uid,
+      'time': bookingTime,
+      'bookingDate': bookingDate,
+      'doctorName': doctorName,
+      
+    });
   }
 }

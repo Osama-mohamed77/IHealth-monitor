@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/screens/Patient/Measuring%20devices.dart';
 import 'package:ihealth_monitor/screens/Patient/choose%20Type.dart';
+import 'package:ihealth_monitor/screens/Patient/clinic.dart';
 
 class HomePatients extends StatefulWidget {
   const HomePatients({super.key});
@@ -13,6 +14,22 @@ class HomePatients extends StatefulWidget {
 
 class _HomePatientsState extends State<HomePatients> {
   int _page = 0;
+
+  // List<QueryDocumentSnapshot> data = [];
+
+  // getData() async {
+  //   QuerySnapshot querySnapshot =
+  //       await FirebaseFirestore.instance.collection('Patients').get();
+
+  //   data.addAll(querySnapshot.docs);
+  //   setState(() {});
+  // }
+
+  // @override
+  // void initState() {
+  //   getData();
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +54,7 @@ class _HomePatientsState extends State<HomePatients> {
                       SizedBox(
                         width: 20,
                       ),
-                      Text('Hi,Eslam777',
+                      Text('Hi,Osama77',
                           style: TextStyle(
                             fontFamily: 'alata',
                             fontSize: 30,
@@ -139,36 +156,41 @@ class _HomePatientsState extends State<HomePatients> {
                 width: 20,
               ),
               Expanded(
-                child: Container(
-                  height: 170,
-                  width: 140,
-                  decoration: BoxDecoration(
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Colors.grey,
-                          spreadRadius: 0,
-                          blurRadius: 4,
-                          offset: Offset(0, 4), // changes position of shadow
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, ClinicScreen.id);
+                  },
+                  child: Container(
+                    height: 170,
+                    width: 140,
+                    decoration: BoxDecoration(
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.grey,
+                            spreadRadius: 0,
+                            blurRadius: 4,
+                            offset: Offset(0, 4), // changes position of shadow
+                          ),
+                        ],
+                        border: Border.all(color: const Color(0xffB2B2B2)),
+                        borderRadius: const BorderRadius.only(
+                            bottomLeft: Radius.circular(15),
+                            bottomRight: Radius.circular(15)),
+                        color: const Color(0xffEDEDED)),
+                    child: const Column(
+                      children: [
+                        Image(image: AssetImage('assets/images/clinic.png')),
+                        SizedBox(
+                          height: 12,
                         ),
+                        Text('Clinic',
+                            style: TextStyle(
+                              fontFamily: 'alata',
+                              fontSize: 15,
+                              color: Colors.black,
+                            )),
                       ],
-                      border: Border.all(color: const Color(0xffB2B2B2)),
-                      borderRadius: const BorderRadius.only(
-                          bottomLeft: Radius.circular(15),
-                          bottomRight: Radius.circular(15)),
-                      color: const Color(0xffEDEDED)),
-                  child: const Column(
-                    children: [
-                      Image(image: AssetImage('assets/images/clinic.png')),
-                      SizedBox(
-                        height: 12,
-                      ),
-                      Text('Clinic',
-                          style: TextStyle(
-                            fontFamily: 'alata',
-                            fontSize: 15,
-                            color: Colors.black,
-                          )),
-                    ],
+                    ),
                   ),
                 ),
               ),
@@ -225,7 +247,7 @@ class _HomePatientsState extends State<HomePatients> {
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, measuringDevices.id);
+                    Navigator.pushNamed(context, PharmacyScreen.id);
                   },
                   child: Container(
                     height: 170,

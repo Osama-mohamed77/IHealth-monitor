@@ -17,11 +17,13 @@ import 'package:ihealth_monitor/screens/Doctor/Requests%20received.dart';
 import 'package:ihealth_monitor/screens/Patient/Add%20address.dart';
 import 'package:ihealth_monitor/screens/Patient/Enter%20measurements.dart';
 import 'package:ihealth_monitor/screens/Patient/Measuring%20devices.dart';
+import 'package:ihealth_monitor/screens/Patient/add_Followers.dart';
 import 'package:ihealth_monitor/screens/Patient/choose%20Type.dart';
 import 'package:ihealth_monitor/screens/Patient/Forget%20patient.dart';
 import 'package:ihealth_monitor/screens/Patient/Home%20Patient.dart';
 import 'package:ihealth_monitor/screens/Patient/HomeNav_Bar_patient.dart';
 import 'package:ihealth_monitor/screens/Patient/Sign%20in%20Patient%20.dart';
+import 'package:ihealth_monitor/screens/Patient/clinic.dart';
 import 'package:ihealth_monitor/screens/Patient/creat%20patient.dart';
 import 'package:ihealth_monitor/screens/Patient/select%20date.dart';
 import 'package:ihealth_monitor/screens/Patient/sign%20up%20Patient.dart';
@@ -77,6 +79,11 @@ class _IHealthMonitorState extends State<IHealthMonitor> {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
+        theme: ThemeData(fontFamily: 'alata'
+        
+        
+        ),
+        
         routes: {
           ChooseScreen.id: (context) => const ChooseScreen(),
           signIn.id: (context) => const signIn(),
@@ -119,8 +126,10 @@ class _IHealthMonitorState extends State<IHealthMonitor> {
           ChooseType.id: (context) => const ChooseType(),
           SelectDate.id: (context) => const SelectDate(),
           EnterMeasurements.id: (context) => const EnterMeasurements(),
-          measuringDevices.id:(context) => const measuringDevices(),
-          
+          PharmacyScreen.id: (context) => const PharmacyScreen(),
+          AddFollowers.id: (context) =>  const AddFollowers(),
+          ClinicScreen.id:(context) => const ClinicScreen(),
+         
         },
         home: const SplashScreen());
   }
