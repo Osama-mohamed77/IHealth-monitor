@@ -4,18 +4,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:ihealth_monitor/helper/ShowSnackBar.dart';
 import 'package:ihealth_monitor/helper/class.dart';
 
-class EnterMeasurements extends StatefulWidget {
-  const EnterMeasurements({super.key});
-  static String id = 'EnterMeasurements';
+class EnterMeasurementsPressure extends StatefulWidget {
+  const EnterMeasurementsPressure({super.key});
+  static String id = 'EnterMeasurementsPressure';
 
   @override
-  State<EnterMeasurements> createState() => _EnterMeasurementsState();
+  State<EnterMeasurementsPressure> createState() =>
+      _EnterMeasurementsPressureState();
 }
 
-class _EnterMeasurementsState extends State<EnterMeasurements> {
+class _EnterMeasurementsPressureState extends State<EnterMeasurementsPressure> {
   int _page = 0;
   TextEditingController firstMeasurement = TextEditingController();
   TextEditingController secondMeasurement = TextEditingController();
@@ -29,7 +29,7 @@ class _EnterMeasurementsState extends State<EnterMeasurements> {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('Patients')
         .doc(FirebaseAuth.instance.currentUser!.uid)
-        .collection('Measurement dates')
+        .collection('Pressure Measurement')
         .get();
     data.addAll(querySnapshot.docs);
     setState(() {});
@@ -50,251 +50,143 @@ class _EnterMeasurementsState extends State<EnterMeasurements> {
         body: ListView.builder(
           itemCount: data.length,
           itemBuilder: (context, index) {
-            return Column(
-              children: [
-                AppBar(
-                  backgroundColor: const Color(0xffF0F0F0),
-                  title: const Text(
-                    'Enter measurements',
-                    style: TextStyle(
-                      fontFamily: 'alata',
-                      fontSize: 25,
-                      color: Colors.black,
-                    ),
+            return Column(children: [
+              AppBar(
+                backgroundColor: const Color(0xffF0F0F0),
+                title: const Text(
+                  'Enter measurements',
+                  style: TextStyle(
+                    fontFamily: 'alata',
+                    fontSize: 25,
+                    color: Colors.black,
                   ),
                 ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Row(
-                  children: [
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    Column(
-                      children: [
-                        const Text('Sugar measurements',
-                            style: TextStyle(
-                              fontFamily: 'alata',
-                              fontSize: 23,
-                              color: Colors.black,
-                            )),
-                        Container(
-                          height: 2,
-                          width: 225,
-                          color: Colors.black,
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                const Text('First measurement',
-                    style: TextStyle(
-                      fontFamily: 'alata',
-                      fontSize: 18,
-                      color: Colors.black,
-                    )),
-                const SizedBox(
-                  height: 40,
-                ),
-                Row(
-                  children: [
-                    const SizedBox(
-                      width: 30,
-                    ),
-                    Expanded(
-                      child: Container(
-                        height: 60,
-                        width: 120,
-                        decoration: BoxDecoration(
-                            border: Border.all(),
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white),
-                        child: Center(
-                          child: Text(
-                              '${data[index]['The first date for entering measurements']}',
-                              style: const TextStyle(
-                                fontFamily: 'alata',
-                                fontSize: 20,
-                                color: Colors.black,
-                              )),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    Expanded(
-                      child: SizedBox(
-                        height: 60,
-                        width: 150,
-                        child: TextFormField(
-                          controller: firstMeasurement,
-                          keyboardType: TextInputType.number,
-                          inputFormatters: <TextInputFormatter>[
-                            FilteringTextInputFormatter.allow(
-                              RegExp(r'[0-9]'),
-                            ),
-                            FilteringTextInputFormatter.digitsOnly
-                          ],
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Enter your measurement';
-                            }
-
-                            return null;
-                          },
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              filled: true,
-                              fillColor: Colors.white),
-                          style: const TextStyle(
-                              fontFamily: 'alata', fontSize: 20, height: 1),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 30,
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Center(
-                  child: GestureDetector(
-                    onTap: () async {
-                      await MoreClass().addFirstMeasurement(
-                          firstMeasurement: firstMeasurement.text);
-                    },
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              Row(
+                children: [
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  Column(
+                    children: [
+                      const Text('Pressure measurements',
+                          style: TextStyle(
+                            fontFamily: 'alata',
+                            fontSize: 23,
+                            color: Colors.black,
+                          )),
+                      Container(
+                        height: 2,
+                        width: 250,
+                        color: Colors.black,
+                      )
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              const Text('Enter your measurement',
+                  style: TextStyle(
+                    fontFamily: 'alata',
+                    fontSize: 18,
+                    color: Colors.black,
+                  )),
+              const SizedBox(
+                height: 40,
+              ),
+              Row(
+                children: [
+                  const SizedBox(
+                    width: 30,
+                  ),
+                  Expanded(
                     child: Container(
-                      height: 50,
-                      width: 150,
+                      height: 60,
+                      width: 120,
                       decoration: BoxDecoration(
-                          color: const Color(0xff69B5AB),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: const Center(
-                        child: Text('Save',
-                            style: TextStyle(
+                          border: Border.all(),
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white),
+                      child: Center(
+                        child: Text('${data[index]['date measurements']}',
+                            style: const TextStyle(
                               fontFamily: 'alata',
-                              fontSize: 25,
+                              fontSize: 20,
                               color: Colors.black,
                             )),
                       ),
                     ),
                   ),
-                ),
-
-                //second measurement
-
-                const SizedBox(
-                  height: 30,
-                ),
-                const Text('Second measurement',
-                    style: TextStyle(
-                      fontFamily: 'alata',
-                      fontSize: 18,
-                      color: Colors.black,
-                    )),
-                const SizedBox(
-                  height: 40,
-                ),
-                Row(
-                  children: [
-                    const SizedBox(
-                      width: 30,
-                    ),
-                    Expanded(
-                      child: Container(
-                        height: 60,
-                        width: 120,
-                        decoration: BoxDecoration(
-                            border: Border.all(),
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white),
-                        child: Center(
-                          child: Text(
-                              '${data[index]['The second date for entering measurements']}',
-                              style: const TextStyle(
-                                fontFamily: 'alata',
-                                fontSize: 20,
-                                color: Colors.black,
-                              )),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    Expanded(
-                      child: SizedBox(
-                        height: 60,
-                        width: 150,
-                        child: TextFormField(
-                          controller: secondMeasurement,
-                          keyboardType: TextInputType.number,
-                          inputFormatters: <TextInputFormatter>[
-                            FilteringTextInputFormatter.allow(
-                              RegExp(r'[0-9]'),
-                            ),
-                            FilteringTextInputFormatter.digitsOnly
-                          ],
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Enter your measurement';
-                            }
-
-                            return null;
-                          },
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              filled: true,
-                              fillColor: Colors.white),
-                          style: const TextStyle(
-                              fontFamily: 'alata', fontSize: 20, height: 1),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 30,
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 50,
-                ),
-                Center(
-                  child: GestureDetector(
-                    onTap: () {
-                      if (formKey.currentState!.validate()) {
-                        MoreClass().addSecondMeasurement(
-                            secondMeasurement: secondMeasurement.text);
-                      }
-                    },
-                    child: Container(
-                      height: 50,
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  Expanded(
+                    child: SizedBox(
+                      height: 60,
                       width: 150,
-                      decoration: BoxDecoration(
-                          color: const Color(0xff69B5AB),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: const Center(
-                        child: Text('Save',
-                            style: TextStyle(
-                              fontFamily: 'alata',
-                              fontSize: 25,
-                              color: Colors.black,
-                            )),
+                      child: TextFormField(
+                        controller: firstMeasurement,
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(
+                            RegExp(r'[0-9]'),
+                          ),
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Enter your measurement';
+                          }
+
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            filled: true,
+                            fillColor: Colors.white),
+                        style: const TextStyle(
+                            fontFamily: 'alata', fontSize: 20, height: 1),
                       ),
                     ),
                   ),
+                  const SizedBox(
+                    width: 30,
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              Center(
+                child: GestureDetector(
+                  onTap: () async {
+                    await MoreClass().measurementPressure(
+                        firstMeasurement: firstMeasurement.text);
+                  },
+                  child: Container(
+                    height: 50,
+                    width: 150,
+                    decoration: BoxDecoration(
+                        color: const Color(0xff69B5AB),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: const Center(
+                      child: Text('Save',
+                          style: TextStyle(
+                            fontFamily: 'alata',
+                            fontSize: 25,
+                            color: Colors.black,
+                          )),
+                    ),
+                  ),
                 ),
-              ],
-            );
+              )
+            ]);
           },
         ),
       ),

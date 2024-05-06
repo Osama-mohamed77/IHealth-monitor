@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ihealth_monitor/components/HomeNav_Bar.dart';
 import 'package:ihealth_monitor/helper/ShowSnackBar.dart';
+import 'package:ihealth_monitor/helper/class.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class signUp extends StatefulWidget {
@@ -34,19 +35,6 @@ class _signUpState extends State<signUp> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController ConfairmPassword = TextEditingController();
-  CollectionReference users = FirebaseFirestore.instance.collection('Doctors');
-  Future<void> addUser() {
-    return users
-        .add({
-          'FullName': fullName.text,
-          'userName': userName.text,
-          'PhoneNumber': PhoneNumer.text,
-          'Email': email.text,
-          'password': password.text,
-        })
-        .then((value) => print("User Added"))
-        .catchError((error) => print("Failed to add user: $error"));
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -253,10 +241,14 @@ class _signUpState extends State<signUp> {
                         isLoading = true;
                         setState(() {});
                         try {
-                          await signUpUser();
-                          ShowSnackBar(context, 'Success');
+                          MoreClass().signUpDoctor(
+                            email: email.text,
+                            password: password.text,
+                            fullname: fullName.text,
+                            userName: userName.text,
+                            phoneNumer: PhoneNumer.text,
+                          );
                           Navigator.pushNamed(context, HomeNavBarDoctor.id);
-                          addUser();
                         } on FirebaseAuthException catch (ex) {
                           if (ex.code == 'weak-password') {
                             ShowSnackBar(context, 'Weak password');
@@ -324,11 +316,5 @@ class _signUpState extends State<signUp> {
         ),
       ),
     );
-  }
-
-  Future<void> signUpUser() async {
-    UserCredential user = await FirebaseAuth.instance
-        .createUserWithEmailAndPassword(
-            email: email.text, password: password.text);
   }
 }

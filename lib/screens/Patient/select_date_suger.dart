@@ -2,18 +2,18 @@
 
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/helper/class.dart';
-import 'package:ihealth_monitor/screens/Patient/Enter%20measurements.dart';
+import 'package:ihealth_monitor/screens/Patient/enter_measurements_suger.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class SelectDate extends StatefulWidget {
-  const SelectDate({super.key});
-  static String id = 'SelectDate';
+class SelectDateSuger extends StatefulWidget {
+  const SelectDateSuger({super.key});
+  static String id = 'SelectDateSuger';
 
   @override
-  State<SelectDate> createState() => _SelectDateState();
+  State<SelectDateSuger> createState() => _SelectDateSugerState();
 }
 
-class _SelectDateState extends State<SelectDate> {
+class _SelectDateSugerState extends State<SelectDateSuger> {
   int _page = 0;
   bool isLoading = false;
   TimeOfDay _FirstTimeOfDay = const TimeOfDay(hour: 00, minute: 00);
@@ -44,63 +44,28 @@ class _SelectDateState extends State<SelectDate> {
       child: Form(
         key: formKey,
         child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: const Color(0xff69B5AB),
+            title: const Row(
+              children: [
+                Spacer(
+                  flex: 1,
+                ),
+                Text('Enter measurements',
+                    style: TextStyle(
+                      fontFamily: 'alata',
+                      fontSize: 25,
+                      color: Colors.black,
+                    )),
+                Spacer(
+                  flex: 2,
+                ),
+              ],
+            ),
+          ),
           backgroundColor: const Color(0xffF0F0F0),
           body: ListView(
             children: [
-              Container(
-                decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(30),
-                        bottomRight: Radius.circular(30)),
-                    color: Color(0xff69B5AB)),
-                height: 74,
-                width: 360,
-                child: const Padding(
-                  padding: EdgeInsets.only(top: 10),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Spacer(
-                            flex: 2,
-                          ),
-                          Text('Select date',
-                              style: TextStyle(
-                                fontFamily: 'alata',
-                                fontSize: 25,
-                                color: Colors.black,
-                              )),
-                          Expanded(
-                              child: SizedBox(
-                            width: 0,
-                          )),
-                          Column(
-                            children: [
-                              Image(
-                                image: AssetImage(
-                                    'assets/images/logo-pateint.png'),
-                                height: 40,
-                              ),
-                              Text(
-                                'Patient',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontFamily: 'Pacifico',
-                                  fontSize: 15,
-                                  height: .9,
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            width: 20,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
               const SizedBox(
                 height: 90,
               ),
@@ -256,42 +221,40 @@ class _SelectDateState extends State<SelectDate> {
                       if (formKey.currentState!.validate()) {
                         isLoading = true;
                         setState(() {});
-                        await MoreClass().datesMeasurement(
+                        await MoreClass().datesMeasurementSuger(
                             firstTime:
                                 _FirstTimeOfDay.format(context).toString(),
                             secondTime:
                                 _SecondTimeOfDay.format(context).toString());
 
-                        Navigator.pushNamed(context, EnterMeasurements.id);
+                        Navigator.pushNamed(context, EnterMeasurementsSuger.id);
                         isLoading = false;
                         setState(() {});
                       }
                     },
-                    child: Expanded(
-                      child: Container(
-                        height: 50,
-                        width: 150,
-                        decoration: BoxDecoration(
-                            border: Border.all(),
-                            boxShadow: const [
-                              BoxShadow(
-                                color: Colors.grey,
-                                spreadRadius: 0,
-                                blurRadius: 4,
-                                offset:
-                                    Offset(0, 4), // changes position of shadow
-                              ),
-                            ],
-                            color: const Color(0xff69B5AB),
-                            borderRadius: BorderRadius.circular(10)),
-                        child: const Center(
-                          child: Text('Save',
-                              style: TextStyle(
-                                fontFamily: 'alata',
-                                fontSize: 25,
-                                color: Colors.black,
-                              )),
-                        ),
+                    child: Container(
+                      height: 50,
+                      width: 135,
+                      decoration: BoxDecoration(
+                          border: Border.all(),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Colors.grey,
+                              spreadRadius: 0,
+                              blurRadius: 4,
+                              offset:
+                                  Offset(0, 4), // changes position of shadow
+                            ),
+                          ],
+                          color: const Color(0xff69B5AB),
+                          borderRadius: BorderRadius.circular(10)),
+                      child: const Center(
+                        child: Text('Save',
+                            style: TextStyle(
+                              fontFamily: 'alata',
+                              fontSize: 25,
+                              color: Colors.black,
+                            )),
                       ),
                     ),
                   ),
@@ -303,7 +266,7 @@ class _SelectDateState extends State<SelectDate> {
                       onTap: () {
                         isLoading = true;
                         setState(() {});
-                        Navigator.pushNamed(context, EnterMeasurements.id);
+                        Navigator.pushNamed(context, EnterMeasurementsSuger.id);
                         isLoading = false;
                         setState(() {});
                       },

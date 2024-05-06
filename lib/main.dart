@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/components/HomeNav_Bar.dart';
+import 'package:ihealth_monitor/components/calender.dart';
 import 'package:ihealth_monitor/components/splash_screen.dart';
 import 'package:ihealth_monitor/firebase_options.dart';
 import 'package:ihealth_monitor/screens/Doctor/Account%20details.dart';
@@ -15,7 +16,8 @@ import 'package:ihealth_monitor/screens/Doctor/Dpmore%20deteils.dart';
 import 'package:ihealth_monitor/screens/Doctor/Home.dart';
 import 'package:ihealth_monitor/screens/Doctor/Requests%20received.dart';
 import 'package:ihealth_monitor/screens/Patient/Add%20address.dart';
-import 'package:ihealth_monitor/screens/Patient/Enter%20measurements.dart';
+import 'package:ihealth_monitor/screens/Patient/add_screen.dart';
+import 'package:ihealth_monitor/screens/Patient/enter_measurements_Pressure.dart';
 import 'package:ihealth_monitor/screens/Patient/Measuring%20devices.dart';
 import 'package:ihealth_monitor/screens/Patient/add_Followers.dart';
 import 'package:ihealth_monitor/screens/Patient/choose%20Type.dart';
@@ -25,7 +27,10 @@ import 'package:ihealth_monitor/screens/Patient/HomeNav_Bar_patient.dart';
 import 'package:ihealth_monitor/screens/Patient/Sign%20in%20Patient%20.dart';
 import 'package:ihealth_monitor/screens/Patient/clinic.dart';
 import 'package:ihealth_monitor/screens/Patient/creat%20patient.dart';
-import 'package:ihealth_monitor/screens/Patient/select%20date.dart';
+import 'package:ihealth_monitor/screens/Patient/notifications_patient.dart';
+import 'package:ihealth_monitor/screens/Patient/select_date_Pressure.dart';
+import 'package:ihealth_monitor/screens/Patient/select_date_suger.dart';
+import 'package:ihealth_monitor/screens/Patient/settings_patient.dart';
 import 'package:ihealth_monitor/screens/Patient/sign%20up%20Patient.dart';
 import 'package:ihealth_monitor/screens/Patient/verify%20patient.dart';
 import 'package:ihealth_monitor/screens/Shadow/Add%20patients%20shadow.dart';
@@ -48,8 +53,11 @@ import 'package:ihealth_monitor/screens/Doctor/settings.dart';
 import 'package:ihealth_monitor/screens/Doctor/sign%20in%20doctor.dart';
 import 'package:ihealth_monitor/screens/Doctor/sign%20up.dart';
 import 'package:ihealth_monitor/screens/Doctor/verifyPassword.dart';
+import 'package:ihealth_monitor/screens/Patient/Enter_measurements_suger.dart';
 
 void main() async {
+  
+  
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const IHealthMonitor());
@@ -79,11 +87,7 @@ class _IHealthMonitorState extends State<IHealthMonitor> {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(fontFamily: 'alata'
-        
-        
-        ),
-        
+        theme: ThemeData(fontFamily: 'alata'),
         routes: {
           ChooseScreen.id: (context) => const ChooseScreen(),
           signIn.id: (context) => const signIn(),
@@ -124,12 +128,19 @@ class _IHealthMonitorState extends State<IHealthMonitor> {
           HomePatients.id: (context) => const HomePatients(),
           HomeNavBarPatient.id: (context) => const HomeNavBarPatient(),
           ChooseType.id: (context) => const ChooseType(),
-          SelectDate.id: (context) => const SelectDate(),
-          EnterMeasurements.id: (context) => const EnterMeasurements(),
+          SelectDateSuger.id: (context) => const SelectDateSuger(),
+          EnterMeasurementsPressure.id: (context) =>
+              const EnterMeasurementsPressure(),
+          EnterMeasurementsSuger.id: (context) =>
+              const EnterMeasurementsSuger(),
           PharmacyScreen.id: (context) => const PharmacyScreen(),
-          AddFollowers.id: (context) =>  const AddFollowers(),
-          ClinicScreen.id:(context) => const ClinicScreen(),
-         
+          AddFollowers.id: (context) => const AddFollowers(),
+          ClinicScreen.id: (context) => const ClinicScreen(),
+          SelectDateBlood.id: (context) => const SelectDateBlood(),
+          AddDoctors.id: (context) => const AddDoctors(),
+          notificationsPatient.id: (context) => const notificationsPatient(),
+          SettingsPatient.id: (context) => const SettingsPatient(),
+          Calendar.id:(context) =>  Calendar(),
         },
         home: const SplashScreen());
   }

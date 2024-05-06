@@ -1,12 +1,12 @@
 // ignore_for_file: unused_field, use_build_context_synchronously
 
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/components/button.dart';
-import 'package:ihealth_monitor/helper/ShowSnackBar.dart';
 import 'package:ihealth_monitor/helper/class.dart';
+import 'package:ihealth_monitor/helper/userProfile.dart';
+import 'package:ihealth_monitor/screens/Patient/HomeNav_Bar_patient.dart';
+import 'package:ihealth_monitor/screens/Patient/patient_const.dart';
 import 'package:ihealth_monitor/screens/utils/config.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -19,6 +19,13 @@ class ClinicScreen extends StatefulWidget {
 }
 
 class _ClinicScreenState extends State<ClinicScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    UserProfile().patientModel;
+  }
+
   //declaration
   CalendarFormat _format = CalendarFormat.month;
   DateTime _focusDay = DateTime.now();
@@ -36,6 +43,7 @@ class _ClinicScreenState extends State<ClinicScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xff69B5AB),
         title: const Row(
           children: [
             Spacer(
@@ -57,6 +65,9 @@ class _ClinicScreenState extends State<ClinicScreen> {
         SliverToBoxAdapter(
           child: Column(
             children: [
+              SizedBox(
+                height: 20,
+              ),
               Row(
                 children: [
                   const SizedBox(
@@ -199,84 +210,95 @@ class _ClinicScreenState extends State<ClinicScreen> {
               ),
         SliverToBoxAdapter(
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 80),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 40),
             child: Button(
-              width: double.infinity,
-              title: 'Make Appointment',
-              onPressed: () async {
-                if (_currentIndex == 0) {
-                  setState(() {
-                    selectedDay =
-                        '${_currentDay.day}/${_currentDay.month} : 9:00 AM';
-                  });
-                } else if (_currentIndex == 1) {
-                  setState(() {
-                    selectedDay =
-                        '${_currentDay.day}/${_currentDay.month} : 10:00 AM';
-                  });
-                } else if (_currentIndex == 2) {
-                  setState(() {
-                    selectedDay =
-                        '${_currentDay.day}/${_currentDay.month} : 11:00 AM';
-                  });
-                } else if (_currentIndex == 3) {
-                  setState(() {
-                    selectedDay =
-                        '${_currentDay.day}/${_currentDay.month} : 12:00 PM';
-                  });
-                } else if (_currentIndex == 4) {
-                  setState(() {
-                    selectedDay =
-                        '${_currentDay.day}/${_currentDay.month} : 13:00 PM';
-                  });
-                } else if (_currentIndex == 5) {
-                  setState(() {
-                    selectedDay =
-                        '${_currentDay.day}/${_currentDay.month} : 14:00 PM';
-                  });
-                } else if (_currentIndex == 6) {
-                  setState(() {
-                    selectedDay =
-                        '${_currentDay.day}/${_currentDay.month} : 15:00 PM';
-                  });
-                } else if (_currentIndex == 7) {
-                  setState(() {
-                    selectedDay =
-                        '${_currentDay.day}/${_currentDay.month} : 16:00 PM';
-                  });
-                } else if (_currentIndex == 8) {
-                  setState(() {
-                    selectedDay =
-                        '${_currentDay.day}/${_currentDay.month} : 17:00 PM';
-                  });
-                } else if (_currentIndex == 9) {
-                  setState(() {
-                    selectedDay =
-                        '${_currentDay.day}/${_currentDay.month} : 18:00 PM';
-                  });
-                } else if (_currentIndex == 10) {
-                  setState(() {
-                    selectedDay =
-                        '${_currentDay.day}/${_currentDay.month} : 19:00 PM';
-                  });
-                }
-                try {
+                width: double.infinity,
+                title: 'Make Appointment',
+                onPressed: () async {
+                  if (_currentIndex == 0) {
+                    setState(() {
+                      selectedDay =
+                          '${_currentDay.day}/${_currentDay.month} : 9:00 AM';
+                    });
+                  } else if (_currentIndex == 1) {
+                    setState(() {
+                      selectedDay =
+                          '${_currentDay.day}/${_currentDay.month} : 10:00 AM';
+                    });
+                  } else if (_currentIndex == 2) {
+                    setState(() {
+                      selectedDay =
+                          '${_currentDay.day}/${_currentDay.month} : 11:00 AM';
+                    });
+                  } else if (_currentIndex == 3) {
+                    setState(() {
+                      selectedDay =
+                          '${_currentDay.day}/${_currentDay.month} : 12:00 PM';
+                    });
+                  } else if (_currentIndex == 4) {
+                    setState(() {
+                      selectedDay =
+                          '${_currentDay.day}/${_currentDay.month} : 13:00 PM';
+                    });
+                  } else if (_currentIndex == 5) {
+                    setState(() {
+                      selectedDay =
+                          '${_currentDay.day}/${_currentDay.month} : 14:00 PM';
+                    });
+                  } else if (_currentIndex == 6) {
+                    setState(() {
+                      selectedDay =
+                          '${_currentDay.day}/${_currentDay.month} : 15:00 PM';
+                    });
+                  } else if (_currentIndex == 7) {
+                    setState(() {
+                      selectedDay =
+                          '${_currentDay.day}/${_currentDay.month} : 16:00 PM';
+                    });
+                  } else if (_currentIndex == 8) {
+                    setState(() {
+                      selectedDay =
+                          '${_currentDay.day}/${_currentDay.month} : 17:00 PM';
+                    });
+                  } else if (_currentIndex == 9) {
+                    setState(() {
+                      selectedDay =
+                          '${_currentDay.day}/${_currentDay.month} : 18:00 PM';
+                    });
+                  } else if (_currentIndex == 10) {
+                    setState(() {
+                      selectedDay =
+                          '${_currentDay.day}/${_currentDay.month} : 19:00 PM';
+                    });
+                  }
+
                   await MoreClass().bookingTime(
                       bookingTime: '${DateTime.now()}',
                       bookingDate: selectedDay.toString(),
-                      doctorName: drName!);
-                } catch (e) {
+                      doctorName: drName!,
+                      fullname: PatientConst.name,
+                      age: PatientConst.age,
+                      email: PatientConst.email,
+                      phoneNumber: PatientConst.phoneNumber,
+                      userName: PatientConst.userName,
+                      gender: PatientConst.gender,
+                      area: AddressConst.Area,
+                      apartmentNumber: AddressConst.ApartmentNumber,
+                      floorNumber: AddressConst.FloorNumber,
+                      streetName: AddressConst.StreetName,
+                      landlineNumber: AddressConst.LandlineNumber,
+                      buildingName: AddressConst.BuildingName);
                   AwesomeDialog(
                     context: context,
-                    dialogType: DialogType.info,
+                    dialogType: DialogType.success,
                     animType: AnimType.rightSlide,
-                    title: 'Warning',
-                    desc: 'Choose a doctor',
-                    btnOkOnPress: () {},
+                    title: 'Success',
+                    desc: 'The request has been completed',
+                    btnOkOnPress: () {
+                      Navigator.pushNamed(context, HomeNavBarPatient.id);
+                    },
                   ).show();
-                }
-              },
-            ),
+                }),
           ),
         ),
       ]),

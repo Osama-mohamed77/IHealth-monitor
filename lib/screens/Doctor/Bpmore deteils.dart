@@ -6,9 +6,19 @@ import 'package:ihealth_monitor/components/date.dart';
 import 'package:ihealth_monitor/components/days.dart';
 import 'package:ihealth_monitor/components/wait.dart';
 
-class moreBloodPressureDetails extends StatelessWidget {
+class moreBloodPressureDetails extends StatefulWidget {
   const moreBloodPressureDetails({super.key});
   static String id = 'moreBloodPressureDetails';
+
+  @override
+  State<moreBloodPressureDetails> createState() => _moreBloodPressureDetailsState();
+}
+
+class _moreBloodPressureDetailsState extends State<moreBloodPressureDetails> {
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

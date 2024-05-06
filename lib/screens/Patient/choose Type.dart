@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously, file_names, prefer_final_fields, unused_field
 import 'package:flutter/material.dart';
-import 'package:ihealth_monitor/screens/Patient/select%20date.dart';
+import 'package:ihealth_monitor/screens/Patient/select_date_Pressure.dart';
+import 'package:ihealth_monitor/screens/Patient/select_date_suger.dart';
 
 class ChooseType extends StatefulWidget {
   const ChooseType({super.key});
@@ -16,62 +17,28 @@ class _ChooseTypeState extends State<ChooseType> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color(0xff69B5AB),
+        title: const Row(
+          children: [
+            Spacer(
+              flex: 1,
+            ),
+            Text('Enter measurements',
+                style: TextStyle(
+                  fontFamily: 'alata',
+                  fontSize: 25,
+                  color: Colors.black,
+                )),
+            Spacer(
+              flex: 2,
+            ),
+          ],
+        ),
+      ),
       backgroundColor: const Color(0xffF0F0F0),
       body: ListView(
         children: [
-          Container(
-            decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(30),
-                    bottomRight: Radius.circular(30)),
-                color: Color(0xff69B5AB)),
-            height: 74,
-            width: 360,
-            child: const Padding(
-              padding: EdgeInsets.only(top: 10),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Spacer(
-                        flex: 1,
-                      ),
-                      Text('Enter measurements',
-                          style: TextStyle(
-                            fontFamily: 'alata',
-                            fontSize: 25,
-                            color: Colors.black,
-                          )),
-                      Expanded(
-                          child: SizedBox(
-                        width: 0,
-                      )),
-                      Column(
-                        children: [
-                          Image(
-                            image: AssetImage('assets/images/logo-pateint.png'),
-                            height: 40,
-                          ),
-                          Text(
-                            'Patient',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: 'Pacifico',
-                              fontSize: 15,
-                              height: .9,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
           const SizedBox(
             height: 90,
           ),
@@ -94,7 +61,7 @@ class _ChooseTypeState extends State<ChooseType> {
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, SelectDate.id);
+                    Navigator.pushNamed(context, SelectDateSuger.id);
                   },
                   child: Container(
                     height: 55,
@@ -126,18 +93,23 @@ class _ChooseTypeState extends State<ChooseType> {
                 width: 70,
               ),
               Expanded(
-                child: Container(
-                  height: 55,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: const Color(0xff69B5AB)),
-                  child: const Center(
-                    child: Text('Pressure measurements',
-                        style: TextStyle(
-                          fontFamily: 'alata',
-                          fontSize: 18,
-                          color: Colors.black,
-                        )),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, SelectDateBlood.id);
+                  },
+                  child: Container(
+                    height: 55,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: const Color(0xff69B5AB)),
+                    child: const Center(
+                      child: Text('Pressure measurements',
+                          style: TextStyle(
+                            fontFamily: 'alata',
+                            fontSize: 18,
+                            color: Colors.black,
+                          )),
+                    ),
                   ),
                 ),
               ),

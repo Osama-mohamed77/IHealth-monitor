@@ -2,10 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:ihealth_monitor/screens/Doctor/Add%20patients.dart';
-import 'package:ihealth_monitor/screens/Doctor/notifications.dart';
 import 'package:ihealth_monitor/screens/Doctor/settings.dart';
 import 'package:ihealth_monitor/screens/Patient/Home%20Patient.dart';
+import 'package:ihealth_monitor/screens/Patient/add_screen.dart';
+import 'package:ihealth_monitor/screens/Patient/notifications_patient.dart';
+import 'package:ihealth_monitor/screens/Patient/settings_patient.dart';
 
 class HomeNavBarPatient extends StatefulWidget {
   const HomeNavBarPatient({super.key});
@@ -18,9 +19,9 @@ class _HomeNavBarPatientState extends State<HomeNavBarPatient> {
   int _currenIndex = 0;
   final List<Widget> listoption = <Widget>[
     const HomePatients(),
-    const AddPatients(),
-    const notifications(),
-    const SettingsScreen()
+    const AddDoctors(),
+    const notificationsPatient(),
+    const SettingsPatient()
   ];
   @override
   Widget build(BuildContext context) {

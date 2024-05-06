@@ -1,10 +1,11 @@
 // ignore_for_file: use_build_context_synchronously, camel_case_types, unused_local_variable, file_names
 
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/components/textformfield.dart';
-import 'package:ihealth_monitor/helper/ShowSnackBar.dart';
+import 'package:ihealth_monitor/helper/userProfile.dart';
 import 'package:ihealth_monitor/screens/Patient/Forget%20patient.dart';
 import 'package:ihealth_monitor/screens/Patient/HomeNav_Bar_patient.dart';
 import 'package:ihealth_monitor/screens/Patient/sign%20up%20Patient.dart';
@@ -145,6 +146,7 @@ class _signUpState extends State<signInPatient> {
                         setState(() {});
                         try {
                           await signInUser();
+
                           Navigator.pushNamed(context, HomeNavBarPatient.id);
                         } on FirebaseAuthException catch (e) {
                           if (e.code == 'user-not-found') {
@@ -166,9 +168,10 @@ class _signUpState extends State<signInPatient> {
                               btnOkOnPress: () {},
                             ).show();
                           }
-                        } catch (e) {
-                          ShowSnackBar(context, 'Error');
                         }
+                        //  catch (e) {
+                        //   ShowSnackBar(context, e.toString());
+                        // }
                         isLoding = false;
                         setState(() {});
                       }
@@ -231,6 +234,8 @@ class _signUpState extends State<signInPatient> {
 
   Future<void> signInUser() async {
     UserCredential user = await FirebaseAuth.instance
-        .signInWithEmailAndPassword(email: email.text, password: password.text);
+        .signInWithEmailAndPassword(email: email.text, password: password.text)
+        .whenComplete(() => UserProfile().getPatienProfile())
+        .whenComplete(() => UserAddress().getPatienAddress());
   }
 }
