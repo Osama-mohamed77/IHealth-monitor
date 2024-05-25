@@ -1,9 +1,9 @@
 // ignore_for_file: use_build_context_synchronously, file_names, prefer_final_fields, unused_field, non_constant_identifier_names, unused_element
 
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/helper/class.dart';
 import 'package:ihealth_monitor/screens/Patient/enter_measurements_Pressure.dart';
-import 'package:ihealth_monitor/screens/Patient/enter_measurements_suger.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class SelectDateBlood extends StatefulWidget {
@@ -25,7 +25,7 @@ class _SelectDateBloodState extends State<SelectDateBlood> {
       setState(() {
         _FirstTimeOfDay = value!;
       });
-    });
+    }).onError((error, stackTrace) => null);
   }
 
   TimeOfDay _SecondTimeOfDay = const TimeOfDay(hour: 00, minute: 00);
@@ -36,6 +36,23 @@ class _SelectDateBloodState extends State<SelectDateBlood> {
         _SecondTimeOfDay = value!;
       });
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    AwesomeNotifications().initialize(null, [
+      NotificationChannel(
+        channelGroupKey: 'basic_channel_group',
+        channelKey: 'basic_channel',
+        channelName: 'Basic Notification',
+        channelDescription: 'Test notification channel',
+      ),
+    ], channelGroups: [
+      NotificationChannelGroup(
+          channelGroupKey: 'basic_channel_group',
+          channelGroupName: 'Basic Group'),
+    ]);
   }
 
   @override
@@ -157,18 +174,26 @@ class _SelectDateBloodState extends State<SelectDateBlood> {
                   ),
                   GestureDetector(
                     onTap: () async {
-                      if (formKey.currentState!.validate()) {
-                        isLoading = true;
-                        setState(() {});
-                        await MoreClass().datesMeasurementPressure(
-                          firstTime: _FirstTimeOfDay.format(context).toString(),
-                        );
+                      // final now = DateTime.now();
 
-                        Navigator.pushNamed(
-                            context, EnterMeasurementsPressure.id);
-                        isLoading = false;
-                        setState(() {});
-                      }
+                      // final scheduledTime = now.add(const Duration(seconds: 7));
+
+                      await scheduleNotification(
+                          1,
+                          'Blood Pressure Reminder',
+                          'It\'s time to take your blood pressure reading.',
+                          _FirstTimeOfDay);
+
+                      isLoading = true;
+                      setState(() {});
+                      await MoreClass().datesMeasurementPressure(
+                        firstTime: _FirstTimeOfDay.format(context).toString(),
+                      );
+
+                      Navigator.pushNamed(
+                          context, EnterMeasurementsPressure.id);
+                      isLoading = false;
+                      setState(() {});
                     },
                     child: Container(
                       height: 50,
@@ -247,4 +272,30 @@ class _SelectDateBloodState extends State<SelectDateBlood> {
       ),
     );
   }
+}
+
+Future<void> scheduleNotification(
+    int id, String title, String body, TimeOfDay scheduledTime) async {
+  final notificationContent = NotificationContent(
+    id: id,
+    channelKey: 'basic_channel', // Ensure it matches your channel
+    title: title,
+    body: body,
+  );
+
+  // final now = DateTime.now();
+  // final secondsUntilScheduledTime = scheduledTime.difference(now).inSeconds;
+
+  final timeZone = await AwesomeNotifications().getLocalTimeZoneIdentifier();
+
+  final schedule = NotificationInterval(
+    interval: const Duration(days: 1).inSeconds, // Use calculated difference
+    repeats: true,
+    timeZone: timeZone,
+  );
+
+  await AwesomeNotifications().createNotification(
+    content: notificationContent,
+    schedule: schedule,
+  );
 }

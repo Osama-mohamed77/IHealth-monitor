@@ -1,174 +1,12 @@
-// ignore_for_file: library_private_types_in_public_api, camel_case_types
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:ihealth_monitor/screens/Doctor/Bpmore%20deteils.dart';
-import 'package:ihealth_monitor/screens/Doctor/Dpmore%20deteils.dart';
-
-class diabeticsPatients extends StatefulWidget {
-  static String id = 'BloodPressurePatients';
-  const diabeticsPatients({super.key});
-
-  @override
-  _diabeticsPatientsState createState() => _diabeticsPatientsState();
-}
-
-class _diabeticsPatientsState extends State<diabeticsPatients> {
-  List<Map<String, dynamic>> patients = [];
-
-  @override
-  void initState() {
-    super.initState();
-    _fetchData();
-  }
-
-  Future<void> _fetchData() async {
-    FirebaseFirestore firestore = FirebaseFirestore.instance;
-    CollectionReference patientsRef = firestore.collection('Patients');
-
-    QuerySnapshot querySnapshot = await patientsRef.get();
-
-    patients = querySnapshot.docs
-        .map((doc) => doc.data() as Map<String, dynamic>)
-        .toList();
-    setState(() {});
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Row(
-          children: [
-            Spacer(
-              flex: 1,
-            ),
-            Text('Diabetics Patients'),
-            Spacer(
-              flex: 2,
-            ),
-          ],
-        ),
-      ),
-      body: ListView.builder(
-        itemCount: patients.length,
-        itemBuilder: (context, index) {
-          Map<String, dynamic> patient = patients[index];
-
-          return Column(
-            children: [
-              const SizedBox(
-                height: 30,
-              ),
-              Row(
-                children: [
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, moreDeteilsDiabetics.id);
-                      },
-                      child: Container(
-                        width: 322,
-                        height: 47,
-                        decoration: const BoxDecoration(
-                          color: Color(0xffCEDBCD),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(10),
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color(0x3f000000),
-                              offset: Offset(0, 4),
-                              blurRadius: 2,
-                            ),
-                            BoxShadow(
-                              color: Color(0x3f000000),
-                              offset: Offset(0, 4),
-                              blurRadius: 2,
-                            ),
-                          ],
-                        ),
-                        child: Row(
-                          children: [
-                            const SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              '${patient['FullName']}, ${patient['age']}, ${patient['gender']}',
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                fontFamily: 'alata',
-                                fontSize: 15,
-                              ),
-                            ),
-                            if (patient['disease'] == 'blood,suger')
-                              const Row(
-                                children: [
-                                  Icon(
-                                    Icons.bloodtype,
-                                    color: Color.fromARGB(255, 234, 34, 19),
-                                  ),
-                                  Icon(
-                                    Icons.monitor_heart,
-                                    color: Color.fromARGB(255, 234, 34, 19),
-                                  ),
-                                ],
-                              ),
-                            if (patient['disease'] == 'blood')
-                              const Icon(
-                                Icons.bloodtype,
-                                color: Color.fromARGB(255, 234, 34, 19),
-                              ),
-                            const Expanded(
-                              child: SizedBox(
-                                width: 20,
-                              ),
-                            ),
-                            const Icon(
-                              Icons.error_outline_sharp,
-                              color: Colors.black,
-                            ),
-                            const SizedBox(
-                              width: 20,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  )
-                ],
-              ),
-            ],
-          );
-        },
-      ),
-    );
-  }
-}
-
-
-
-// ListTile(
-//             title: Text(patient['FullName']),
-//             subtitle: Text('${patient['age']} ${patient['gender']}'),
-//           );
-
-
-
 // // ignore_for_file: camel_case_types, file_names
 
 // import 'package:flutter/material.dart';
-// import 'package:ihealth_monitor/screens/Doctor/Dpmore%20deteils.dart';
+// import 'package:ihealth_monitor/screens/Doctor/blood_pressure_patients.dart';
+// import 'package:ihealth_monitor/screens/Doctor/Bpmore%20deteils.dart';
 
-// class DiabeticsScreen extends StatelessWidget {
-//   const DiabeticsScreen({super.key});
-//   static String id = 'DiabeticsScreen';
+// class bloodPressure extends StatelessWidget {
+//   const bloodPressure({super.key});
+//   static String id = 'bloodPressure';
 //   @override
 //   Widget build(BuildContext context) {
 //     return Scaffold(
@@ -202,7 +40,7 @@ class _diabeticsPatientsState extends State<diabeticsPatients> {
 //               child: Row(
 //                 children: [
 //                   const SizedBox(
-//                     width: 10,
+//                     width: 5,
 //                   ),
 //                   GestureDetector(
 //                     onTap: () {
@@ -217,10 +55,10 @@ class _diabeticsPatientsState extends State<diabeticsPatients> {
 //                     flex: 1,
 //                   ),
 //                   const Text(
-//                     'Diabetics',
+//                     'Blood pressure patients',
 //                     style: TextStyle(
 //                         fontFamily: 'Alata',
-//                         fontSize: 25,
+//                         fontSize: 23,
 //                         color: Color(0xff000000),
 //                         height: -.2),
 //                   ),
@@ -262,7 +100,7 @@ class _diabeticsPatientsState extends State<diabeticsPatients> {
 //               Expanded(
 //                 child: GestureDetector(
 //                   onTap: () {
-//                     Navigator.pushNamed(context, moreDeteilsDiabetics.id);
+//                     Navigator.pushNamed(context, moreBloodPressureDetails.id);
 //                   },
 //                   child: Container(
 //                     width: 322,
@@ -291,7 +129,7 @@ class _diabeticsPatientsState extends State<diabeticsPatients> {
 //                           width: 20,
 //                         ),
 //                         Text(
-//                           'Kmal ahmed,40 M',
+//                           'Abdallah ahmed,50 M',
 //                           textAlign: TextAlign.center,
 //                           style: TextStyle(
 //                             fontFamily: 'alata',
@@ -299,7 +137,7 @@ class _diabeticsPatientsState extends State<diabeticsPatients> {
 //                           ),
 //                         ),
 //                         Icon(
-//                           Icons.bloodtype,
+//                           Icons.monitor_heart,
 //                           color: Color.fromARGB(255, 234, 34, 19),
 //                         ),
 //                         Expanded(
@@ -368,8 +206,76 @@ class _diabeticsPatientsState extends State<diabeticsPatients> {
 //                         ),
 //                       ),
 //                       Icon(
+//                         Icons.monitor_heart,
+//                         color: Color.fromARGB(255, 234, 34, 19),
+//                       ),
+//                       Icon(
 //                         Icons.bloodtype,
 //                         color: Color.fromARGB(255, 234, 34, 19),
+//                       ),
+//                       Expanded(
+//                         child: SizedBox(
+//                           width: 20,
+//                         ),
+//                       ),
+//                       Icon(
+//                         Icons.error_outline_sharp,
+//                         color: Colors.black,
+//                       ),
+//                       SizedBox(
+//                         width: 20,
+//                       ),
+//                     ],
+//                   ),
+//                 ),
+//               ),
+//               const SizedBox(
+//                 width: 15,
+//               ),
+//             ],
+//           ),
+//           const SizedBox(
+//             height: 25,
+//           ),
+//           Row(
+//             children: [
+//               const SizedBox(
+//                 width: 15,
+//               ),
+//               Expanded(
+//                 child: Container(
+//                   width: 322,
+//                   height: 47,
+//                   decoration: const BoxDecoration(
+//                     color: Color(0xffCEDBCD),
+//                     borderRadius: BorderRadius.all(
+//                       Radius.circular(10),
+//                     ),
+//                     boxShadow: [
+//                       BoxShadow(
+//                         color: Color(0x3f000000),
+//                         offset: Offset(0, 4),
+//                         blurRadius: 2,
+//                       ),
+//                       BoxShadow(
+//                         color: Color(0x3f000000),
+//                         offset: Offset(0, 4),
+//                         blurRadius: 2,
+//                       ),
+//                     ],
+//                   ),
+//                   child: const Row(
+//                     children: [
+//                       SizedBox(
+//                         width: 20,
+//                       ),
+//                       Text(
+//                         'Adham mohamed,40 M',
+//                         textAlign: TextAlign.center,
+//                         style: TextStyle(
+//                           fontFamily: 'alata',
+//                           fontSize: 15,
+//                         ),
 //                       ),
 //                       Icon(
 //                         Icons.monitor_heart,
@@ -432,12 +338,16 @@ class _diabeticsPatientsState extends State<diabeticsPatients> {
 //                         width: 20,
 //                       ),
 //                       Text(
-//                         'Fady mohamed,40 M',
+//                         'Ahmed mohamed,30 M',
 //                         textAlign: TextAlign.center,
 //                         style: TextStyle(
 //                           fontFamily: 'alata',
 //                           fontSize: 15,
 //                         ),
+//                       ),
+//                       Icon(
+//                         Icons.monitor_heart,
+//                         color: Color.fromARGB(255, 234, 34, 19),
 //                       ),
 //                       Icon(
 //                         Icons.bloodtype,
@@ -500,16 +410,12 @@ class _diabeticsPatientsState extends State<diabeticsPatients> {
 //                         width: 20,
 //                       ),
 //                       Text(
-//                         'Asmaa mohamed,30 F',
+//                         'Rina samir,40 F',
 //                         textAlign: TextAlign.center,
 //                         style: TextStyle(
 //                           fontFamily: 'alata',
 //                           fontSize: 15,
 //                         ),
-//                       ),
-//                       Icon(
-//                         Icons.bloodtype,
-//                         color: Color.fromARGB(255, 234, 34, 19),
 //                       ),
 //                       Icon(
 //                         Icons.monitor_heart,
@@ -572,7 +478,7 @@ class _diabeticsPatientsState extends State<diabeticsPatients> {
 //                         width: 20,
 //                       ),
 //                       Text(
-//                         'Mazin samir,40 M',
+//                         'Mariam samwel,40 F',
 //                         textAlign: TextAlign.center,
 //                         style: TextStyle(
 //                           fontFamily: 'alata',
@@ -580,75 +486,7 @@ class _diabeticsPatientsState extends State<diabeticsPatients> {
 //                         ),
 //                       ),
 //                       Icon(
-//                         Icons.bloodtype,
-//                         color: Color.fromARGB(255, 234, 34, 19),
-//                       ),
-//                       Expanded(
-//                         child: SizedBox(
-//                           width: 20,
-//                         ),
-//                       ),
-//                       Icon(
-//                         Icons.error_outline_sharp,
-//                         color: Colors.black,
-//                       ),
-//                       SizedBox(
-//                         width: 20,
-//                       ),
-//                     ],
-//                   ),
-//                 ),
-//               ),
-//               const SizedBox(
-//                 width: 15,
-//               ),
-//             ],
-//           ),
-//           const SizedBox(
-//             height: 25,
-//           ),
-//           Row(
-//             children: [
-//               const SizedBox(
-//                 width: 15,
-//               ),
-//               Expanded(
-//                 child: Container(
-//                   width: 322,
-//                   height: 47,
-//                   decoration: const BoxDecoration(
-//                     color: Color(0xffCEDBCD),
-//                     borderRadius: BorderRadius.all(
-//                       Radius.circular(10),
-//                     ),
-//                     boxShadow: [
-//                       BoxShadow(
-//                         color: Color(0x3f000000),
-//                         offset: Offset(0, 4),
-//                         blurRadius: 2,
-//                       ),
-//                       BoxShadow(
-//                         color: Color(0x3f000000),
-//                         offset: Offset(0, 4),
-//                         blurRadius: 2,
-//                       ),
-//                     ],
-//                   ),
-//                   child: const Row(
-//                     children: [
-//                       SizedBox(
-//                         width: 20,
-//                       ),
-//                       Text(
-//                         'Samar osama,40 F',
-//                         textAlign: TextAlign.center,
-//                         style: TextStyle(
-//                           fontFamily: 'alata',
-//                           fontSize: 15,
-//                         ),
-//                       ),
-//                       Icon(
-//                         Icons.bloodtype,
+//                         Icons.monitor_heart,
 //                         color: Color.fromARGB(255, 234, 34, 19),
 //                       ),
 //                       Expanded(
@@ -716,77 +554,9 @@ class _diabeticsPatientsState extends State<diabeticsPatients> {
 //                         ),
 //                       ),
 //                       Icon(
-//                         Icons.bloodtype,
-//                         color: Color.fromARGB(255, 234, 34, 19),
-//                       ),
-//                       Icon(
 //                         Icons.monitor_heart,
 //                         color: Color.fromARGB(255, 234, 34, 19),
 //                       ),
-//                       Expanded(
-//                         child: SizedBox(
-//                           width: 20,
-//                         ),
-//                       ),
-//                       Icon(
-//                         Icons.error_outline_sharp,
-//                         color: Colors.black,
-//                       ),
-//                       SizedBox(
-//                         width: 20,
-//                       ),
-//                     ],
-//                   ),
-//                 ),
-//               ),
-//               const SizedBox(
-//                 width: 15,
-//               ),
-//             ],
-//           ),
-//           const SizedBox(
-//             height: 25,
-//           ),
-//           Row(
-//             children: [
-//               const SizedBox(
-//                 width: 15,
-//               ),
-//               Expanded(
-//                 child: Container(
-//                   width: 322,
-//                   height: 47,
-//                   decoration: const BoxDecoration(
-//                     color: Color(0xffCEDBCD),
-//                     borderRadius: BorderRadius.all(
-//                       Radius.circular(10),
-//                     ),
-//                     boxShadow: [
-//                       BoxShadow(
-//                         color: Color(0x3f000000),
-//                         offset: Offset(0, 4),
-//                         blurRadius: 2,
-//                       ),
-//                       BoxShadow(
-//                         color: Color(0x3f000000),
-//                         offset: Offset(0, 4),
-//                         blurRadius: 2,
-//                       ),
-//                     ],
-//                   ),
-//                   child: const Row(
-//                     children: [
-//                       SizedBox(
-//                         width: 20,
-//                       ),
-//                       Text(
-//                         'Ahmed azzam,40 M',
-//                         textAlign: TextAlign.center,
-//                         style: TextStyle(
-//                           fontFamily: 'alata',
-//                           fontSize: 15,
-//                         ),
-//                       ),
 //                       Icon(
 //                         Icons.bloodtype,
 //                         color: Color.fromARGB(255, 234, 34, 19),
@@ -821,6 +591,79 @@ class _diabeticsPatientsState extends State<diabeticsPatients> {
 //                 width: 15,
 //               ),
 //               Expanded(
+//                 child: GestureDetector(
+//                   onTap: () {
+//                     Navigator.pushNamed(context, BloodPressurePatients.id);
+//                   },
+//                   child: Container(
+//                     width: 322,
+//                     height: 47,
+//                     decoration: const BoxDecoration(
+//                       color: Color(0xffCEDBCD),
+//                       borderRadius: BorderRadius.all(
+//                         Radius.circular(10),
+//                       ),
+//                       boxShadow: [
+//                         BoxShadow(
+//                           color: Color(0x3f000000),
+//                           offset: Offset(0, 4),
+//                           blurRadius: 2,
+//                         ),
+//                         BoxShadow(
+//                           color: Color(0x3f000000),
+//                           offset: Offset(0, 4),
+//                           blurRadius: 2,
+//                         ),
+//                       ],
+//                     ),
+//                     child: const Row(
+//                       children: [
+//                         SizedBox(
+//                           width: 20,
+//                         ),
+//                         Text(
+//                           'Yahya azzam,35 M',
+//                           textAlign: TextAlign.center,
+//                           style: TextStyle(
+//                             fontFamily: 'alata',
+//                             fontSize: 15,
+//                           ),
+//                         ),
+//                         Icon(
+//                           Icons.monitor_heart,
+//                           color: Color.fromARGB(255, 234, 34, 19),
+//                         ),
+//                         Expanded(
+//                           child: SizedBox(
+//                             width: 20,
+//                           ),
+//                         ),
+//                         Icon(
+//                           Icons.error_outline_sharp,
+//                           color: Colors.black,
+//                         ),
+//                         SizedBox(
+//                           width: 20,
+//                         ),
+//                       ],
+//                     ),
+//                   ),
+//                 ),
+//               ),
+//               const SizedBox(
+//                 width: 15,
+//               ),
+//             ],
+//           ),
+//           const SizedBox(
+//             height: 25,
+//           ),
+//           Row(
+//             children: [
+//               const SizedBox(
+//                 width: 15,
+//               ),
+//               Expanded(
 //                 child: Container(
 //                   width: 322,
 //                   height: 47,
@@ -848,7 +691,7 @@ class _diabeticsPatientsState extends State<diabeticsPatients> {
 //                         width: 20,
 //                       ),
 //                       Text(
-//                         'Ahmed fady,40 M',
+//                         'Alaa Abdallah 22 F',
 //                         textAlign: TextAlign.center,
 //                         style: TextStyle(
 //                           fontFamily: 'alata',
@@ -856,7 +699,7 @@ class _diabeticsPatientsState extends State<diabeticsPatients> {
 //                         ),
 //                       ),
 //                       Icon(
-//                         Icons.bloodtype,
+//                         Icons.monitor_heart,
 //                         color: Color.fromARGB(255, 234, 34, 19),
 //                       ),
 //                       Expanded(

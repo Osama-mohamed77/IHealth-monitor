@@ -11,15 +11,16 @@ class MoreClass {
   final _auth = FirebaseAuth.instance;
   // final today =
   //     DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
-  final today = DateFormat('yyy,M,d').format(DateTime.now());
+  final today = DateFormat('yyyy,M,d').format(DateTime.now());
 
-  Future<void> addPatient(
-      {required String fullname,
-      required String userName,
-      required String age,
-      required String phoneNumer,
-      required String email,
-      required String gender}) async {
+  Future<void> addPatient({
+    required String fullname,
+    required String userName,
+    required String age,
+    required String phoneNumer,
+    required String email,
+    required String gender,
+  }) async {
     await _fireStore
         .collection('Patients')
         .doc(_auth.currentUser!.uid)
@@ -143,24 +144,99 @@ class MoreClass {
     required String age,
     required String phoneNumer,
     required String gender,
+    required String token,
   }) async {
     UserCredential user = await FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: password)
         .whenComplete(() {
       return MoreClass().addPatient(
-          fullname: fullname,
-          userName: userName,
-          age: age,
-          phoneNumer: phoneNumer,
-          email: email,
-          gender: gender);
+        fullname: fullname,
+        userName: userName,
+        age: age,
+        phoneNumer: phoneNumer,
+        email: email,
+        gender: gender,
+      );
     });
   }
 
-  Future<void> bookingTime({
+  Future<void> bookingClinic(
+      {required String bookingTime,
+      required String bookingDate,
+      required String doctorName,
+      required String fullname,
+      required String age,
+      required String email,
+      required String userName,
+      required String phoneNumber,
+      required String gender,
+      required String area,
+      required String streetName,
+      required String apartmentNumber,
+      required String buildingName,
+      required String floorNumber,
+      required String landlineNumber,
+      required String doctorID}) async {
+    await _fireStore.collection('reservation').doc(_auth.currentUser!.uid).set({
+      'id': _auth.currentUser!.uid,
+      'time': bookingTime,
+      'bookingDate': bookingDate,
+      'doctorName': doctorName,
+      'FullName': fullname,
+      'age': age,
+      'email': email,
+      'userName': userName,
+      'phoneNumber': phoneNumber,
+      'gender': gender,
+      'Area': area,
+      'StreetName': streetName,
+      'ApartmentNumber': apartmentNumber,
+      'BuildingName': buildingName,
+      'FloorNumber': floorNumber,
+      'LandlineNumber': landlineNumber,
+      'doctorID': doctorID
+    });
+  }
+
+  Future<void> orderDevice(
+      {required String fullname,
+      required String age,
+      required String email,
+      required String userName,
+      required String phoneNumber,
+      required String gender,
+      required String area,
+      required String streetName,
+      required String apartmentNumber,
+      required String buildingName,
+      required String floorNumber,
+      required String landlineNumber,
+      required String date,
+      required String pharmacyName,
+      required String deviceType}) async {
+    await _fireStore.collection('OrderList').doc(_auth.currentUser!.uid).set({
+      'id': _auth.currentUser!.uid,
+      'pharmacyName': pharmacyName,
+      'Date': date,
+      'FullName': fullname,
+      'age': age,
+      'email': email,
+      'userName': userName,
+      'phoneNumber': phoneNumber,
+      'gender': gender,
+      'Area': area,
+      'StreetName': streetName,
+      'ApartmentNumber': apartmentNumber,
+      'BuildingName': buildingName,
+      'FloorNumber': floorNumber,
+      'LandlineNumber': landlineNumber,
+      'deviceType': deviceType
+    });
+  }
+
+  Future<void> bookingLab({
     required String bookingTime,
     required String bookingDate,
-    required String doctorName,
     required String fullname,
     required String age,
     required String email,
@@ -174,11 +250,13 @@ class MoreClass {
     required String floorNumber,
     required String landlineNumber,
   }) async {
-    await _fireStore.collection('reservation').doc(_auth.currentUser!.uid).set({
+    await _fireStore
+        .collection('reservation lab')
+        .doc(_auth.currentUser!.uid)
+        .set({
       'id': _auth.currentUser!.uid,
       'time': bookingTime,
       'bookingDate': bookingDate,
-      'doctorName': doctorName,
       'FullName': fullname,
       'age': age,
       'email': email,

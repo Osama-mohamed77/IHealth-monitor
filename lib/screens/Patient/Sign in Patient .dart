@@ -1,10 +1,10 @@
 // ignore_for_file: use_build_context_synchronously, camel_case_types, unused_local_variable, file_names
 
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/components/textformfield.dart';
+import 'package:ihealth_monitor/helper/ShowSnackBar.dart';
 import 'package:ihealth_monitor/helper/userProfile.dart';
 import 'package:ihealth_monitor/screens/Patient/Forget%20patient.dart';
 import 'package:ihealth_monitor/screens/Patient/HomeNav_Bar_patient.dart';
@@ -169,9 +169,9 @@ class _signUpState extends State<signInPatient> {
                             ).show();
                           }
                         }
-                        //  catch (e) {
-                        //   ShowSnackBar(context, e.toString());
-                        // }
+                         catch (e) {
+                          ShowSnackBar(context, e.toString());
+                        }
                         isLoding = false;
                         setState(() {});
                       }

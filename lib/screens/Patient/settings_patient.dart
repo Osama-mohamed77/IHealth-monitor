@@ -4,9 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:ihealth_monitor/components/colors.dart';
-import 'package:ihealth_monitor/screens/Doctor/Account%20details.dart';
-import 'package:ihealth_monitor/screens/Doctor/patients%20list.dart';
-import 'package:ihealth_monitor/screens/Doctor/sign%20in%20doctor.dart';
+import 'package:ihealth_monitor/screens/Patient/Sign%20in%20Patient%20.dart';
 
 class SettingsPatient extends StatefulWidget {
   const SettingsPatient({super.key});
@@ -154,119 +152,42 @@ class _SettingsPatientState extends State<SettingsPatient> {
                   width: 13,
                 ),
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, AccountDetails.id);
-                    },
-                    child: Container(
-                      height: 70,
-                      width: 0,
-                      decoration: const BoxDecoration(
-                          color: Color(0xff69B5AB),
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              topRight: Radius.circular(20))),
-                      child: const Row(
-                        children: [
-                          SizedBox(
-                            width: 15,
-                          ),
-                          Icon(
-                            Icons.person,
-                            color: Color(0xff17366F),
-                            size: 35,
-                          ),
-                          Spacer(
-                            flex: 1,
-                          ),
-                          Text(
-                            'Account details',
-                            style: TextStyle(
-                              fontFamily: 'Alata',
-                              fontSize: 23,
-                              color: Color(0xff000000),
-                            ),
-                          ),
-                          Spacer(
-                            flex: 1,
-                          ),
-                          SizedBox(
-                            width: 60,
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  width: 13,
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                const SizedBox(
-                  width: 13,
-                ),
-                Expanded(
                   child: Container(
-                    height: 1,
+                    height: 70,
                     width: 0,
                     decoration: const BoxDecoration(
-                      color: Color.fromARGB(255, 67, 63, 63),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  width: 13,
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                const SizedBox(
-                  width: 13,
-                ),
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, patientsList.id);
-                    },
-                    child: Container(
-                      height: 70,
-                      width: 0,
-                      decoration: const BoxDecoration(
                         color: Color(0xff69B5AB),
-                      ),
-                      child: const Row(
-                        children: [
-                          SizedBox(
-                            width: 15,
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20))),
+                    child: const Row(
+                      children: [
+                        SizedBox(
+                          width: 15,
+                        ),
+                        Icon(
+                          Icons.person,
+                          color: Color(0xff17366F),
+                          size: 35,
+                        ),
+                        Spacer(
+                          flex: 1,
+                        ),
+                        Text(
+                          'Account details',
+                          style: TextStyle(
+                            fontFamily: 'Alata',
+                            fontSize: 23,
+                            color: Color(0xff000000),
                           ),
-                          Icon(
-                            Icons.people,
-                            color: Color(0xff17366F),
-                            size: 35,
-                          ),
-                          Spacer(
-                            flex: 1,
-                          ),
-                          Text(
-                            'My patients',
-                            style: TextStyle(
-                              fontFamily: 'Alata',
-                              fontSize: 23,
-                              color: Color(0xff000000),
-                            ),
-                          ),
-                          Spacer(
-                            flex: 1,
-                          ),
-                          SizedBox(
-                            width: 60,
-                          )
-                        ],
-                      ),
+                        ),
+                        Spacer(
+                          flex: 1,
+                        ),
+                        SizedBox(
+                          width: 60,
+                        )
+                      ],
                     ),
                   ),
                 ),
@@ -373,7 +294,7 @@ class _SettingsPatientState extends State<SettingsPatient> {
                     onTap: () async {
                       await FirebaseAuth.instance.signOut();
                       Navigator.pushNamedAndRemoveUntil(
-                          context, signIn.id, (route) => false);
+                          context, signInPatient.id, (route) => false);
                     },
                     child: Container(
                       height: 70,

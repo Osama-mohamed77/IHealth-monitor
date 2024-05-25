@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:ihealth_monitor/helper/measurement_model.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -13,42 +12,203 @@ class Calendar extends StatefulWidget {
 }
 
 class _CalendarState extends State<Calendar> {
-  Map<DateTime, dynamic> customNumbers = {};
-  List<Measurementmodel> mesurmentList = [];
+  // List<Measurementmodel> mesurmentList = [];
 
-  Future fetchDataFromFirestore() async {
+  // 1/5
+  Map<DateTime, dynamic> customNumbers1 = {};
+  Future<void> oneMay() async {
     var numbersCollection = await FirebaseFirestore.instance
         .collection('Patients')
         .doc('6CRVQ2LC6OX1GhRso45Z4iM4Lev2')
         .collection('Pressure Measurement')
         .doc('measurements dates')
         .collection('measurements')
+        .doc('2024,5,1')
         .get();
 
     Map<DateTime, dynamic> tempCustomNumbers = {};
-    final result = numbersCollection.docs
-        .map((e) => Measurementmodel.fromMap(e.data()))
-        .toList();
-    mesurmentList = result;
 
-    for (var doc in mesurmentList) {
-      // DateTime date = DateTime(2024, 5, 22);
-      // if(doc.id == DateTime())
-      DateTime date = DateTime.parse(doc.date);
-      dynamic number = doc.measurement;
+    if (numbersCollection.exists &&
+        numbersCollection.data()!['measurement'] is String) {
+      DateTime date = DateTime(2024, 5, 1);
+      dynamic number = numbersCollection.data()!['measurement'];
 
       tempCustomNumbers[date] = number;
+      setState(() {
+        customNumbers1 = tempCustomNumbers;
+      });
     }
+  }
 
-    setState(() {
-      customNumbers = tempCustomNumbers;
-    });
+  // 2/5
+  Map<DateTime, dynamic> customNumbers2 = {};
+
+  Future<void> twoMay() async {
+    var numbersCollection = await FirebaseFirestore.instance
+        .collection('Patients')
+        .doc('6CRVQ2LC6OX1GhRso45Z4iM4Lev2')
+        .collection('Pressure Measurement')
+        .doc('measurements dates')
+        .collection('measurements')
+        .doc('2024,5,2')
+        .get();
+
+    Map<DateTime, dynamic> tempCustomNumbers = {};
+
+    if (numbersCollection.exists &&
+        numbersCollection.data()!['measurement'] is String) {
+      DateTime date = DateTime(2024, 5, 2);
+      dynamic number = numbersCollection.data()!['measurement'];
+
+      tempCustomNumbers[date] = number;
+      setState(() {
+        customNumbers2 = tempCustomNumbers;
+      });
+    }
+  }
+
+  // 3/5
+  Map<DateTime, dynamic> customNumbers3 = {};
+
+  Future<void> threeMay() async {
+    var numbersCollection = await FirebaseFirestore.instance
+        .collection('Patients')
+        .doc('6CRVQ2LC6OX1GhRso45Z4iM4Lev2')
+        .collection('Pressure Measurement')
+        .doc('measurements dates')
+        .collection('measurements')
+        .doc('2024,5,3')
+        .get();
+
+    Map<DateTime, dynamic> tempCustomNumbers = {};
+
+    if (numbersCollection.exists &&
+        numbersCollection.data()!['measurement'] is String) {
+      DateTime date = DateTime(2024, 5, 3);
+      dynamic number = numbersCollection.data()!['measurement'];
+
+      tempCustomNumbers[date] = number;
+      setState(() {
+        customNumbers3 = tempCustomNumbers;
+      });
+    }
+  }
+
+  // 4/5
+
+  Map<DateTime, dynamic> customNumbers4 = {};
+  Future<void> fourMay() async {
+    var numbersCollection = await FirebaseFirestore.instance
+        .collection('Patients')
+        .doc('6CRVQ2LC6OX1GhRso45Z4iM4Lev2')
+        .collection('Pressure Measurement')
+        .doc('measurements dates')
+        .collection('measurements')
+        .doc('2024,5,4')
+        .get();
+
+    Map<DateTime, dynamic> tempCustomNumbers = {};
+
+    if (numbersCollection.exists &&
+        numbersCollection.data()!['measurement'] is String) {
+      DateTime date = DateTime(2024, 5, 4);
+      dynamic number = numbersCollection.data()!['measurement'];
+
+      tempCustomNumbers[date] = number;
+      setState(() {
+        customNumbers4 = tempCustomNumbers;
+      });
+    }
+  }
+
+  // 5/5
+  Map<DateTime, dynamic> customNumbers5 = {};
+  Future<void> fiveMay() async {
+    var numbersCollection = await FirebaseFirestore.instance
+        .collection('Patients')
+        .doc('6CRVQ2LC6OX1GhRso45Z4iM4Lev2')
+        .collection('Pressure Measurement')
+        .doc('measurements dates')
+        .collection('measurements')
+        .doc('2024,5,5')
+        .get();
+
+    Map<DateTime, dynamic> tempCustomNumbers = {};
+
+    if (numbersCollection.exists &&
+        numbersCollection.data()!['measurement'] is String) {
+      DateTime date = DateTime(2024, 5, 5);
+      dynamic number = numbersCollection.data()!['measurement'];
+
+      tempCustomNumbers[date] = number;
+      setState(() {
+        customNumbers5 = tempCustomNumbers;
+      });
+    }
+  }
+
+  // 6/5
+  Map<DateTime, dynamic> customNumbers6 = {};
+  Future<void> sixMay() async {
+    var numbersCollection = await FirebaseFirestore.instance
+        .collection('Patients')
+        .doc('6CRVQ2LC6OX1GhRso45Z4iM4Lev2')
+        .collection('Pressure Measurement')
+        .doc('measurements dates')
+        .collection('measurements')
+        .doc('2024,5,6')
+        .get();
+
+    Map<DateTime, dynamic> tempCustomNumbers = {};
+
+    if (numbersCollection.exists &&
+        numbersCollection.data()!['measurement'] is String) {
+      DateTime date = DateTime(2024, 5, 6);
+      dynamic number = numbersCollection.data()!['measurement'];
+
+      tempCustomNumbers[date] = number;
+      setState(() {
+        customNumbers6 = tempCustomNumbers;
+      });
+    }
+  }
+
+  // 7/5
+  Map<DateTime, dynamic> customNumbers7 = {};
+  Future<void> sevenMay() async {
+    var numbersCollection = await FirebaseFirestore.instance
+        .collection('Patients')
+        .doc('6CRVQ2LC6OX1GhRso45Z4iM4Lev2')
+        .collection('Pressure Measurement')
+        .doc('measurements dates')
+        .collection('measurements')
+        .doc('2024,5,7')
+        .get();
+
+    Map<DateTime, dynamic> tempCustomNumbers = {};
+
+    if (numbersCollection.exists &&
+        numbersCollection.data()!['measurement'] is String) {
+      DateTime date = DateTime(2024, 5, 7);
+      dynamic number = numbersCollection.data()!['measurement'];
+
+      tempCustomNumbers[date] = number;
+      setState(() {
+        customNumbers7 = tempCustomNumbers;
+      });
+    }
   }
 
   @override
   void initState() {
     super.initState();
-    fetchDataFromFirestore();
+    oneMay();
+    twoMay();
+    threeMay();
+    fourMay();
+    fiveMay();
+    sixMay();
+    sevenMay();
   }
 
   @override
@@ -57,60 +217,184 @@ class _CalendarState extends State<Calendar> {
       body: ListView(
         children: [
           Container(
-            height: 500,
-            decoration: BoxDecoration(border: Border.all()),
-            child: SfCalendar(
-              view: CalendarView.month,
-              monthViewSettings: const MonthViewSettings(dayFormat: 'EEE'),
-              monthCellBuilder:
-                  (BuildContext context, MonthCellDetails details) {
-                final currentDate = DateTime(
-                    details.date.year, details.date.month, details.date.day);
-                final customNumber = customNumbers[currentDate];
-                return Stack(
-                  children: [
-                    Positioned.fill(
-                      child: Center(
-                        child: Text(
-                          details.date.day.toString(),
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                    if (customNumber != null)
-                      Positioned(
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
+            margin: const EdgeInsets.symmetric(
+              horizontal: 20,
+            ),
+            height: 400,
+            decoration: BoxDecoration(
+              border: Border.all(),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: SfCalendar(
+                view: CalendarView.month,
+                monthViewSettings: const MonthViewSettings(dayFormat: 'EEE'),
+                monthCellBuilder:
+                    (BuildContext context, MonthCellDetails details) {
+                  final currentDate = DateTime(
+                      details.date.year, details.date.month, details.date.day);
+                  final customNumber1 = customNumbers1[currentDate];
+                  final customNumber2 = customNumbers2[currentDate];
+                  final customNumber3 = customNumbers3[currentDate];
+                  final customNumber4 = customNumbers4[currentDate];
+                  final customNumber5 = customNumbers5[currentDate];
+                  final customNumber6 = customNumbers6[currentDate];
+                  final customNumber7 = customNumbers7[currentDate];
+                  return Stack(
+                    children: [
+                      Positioned.fill(
                         child: Center(
                           child: Text(
-                            customNumber.toString(),
+                            details.date.day.toString(),
                             style: const TextStyle(
-                              color: Colors.blue,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
                       ),
-                    if (customNumber == null)
-                      const Positioned(
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        child: Center(
-                          child: Text(
-                            '_',
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Colors.black,
+
+                      ///1
+                      if (customNumber1 != null)
+                        Positioned(
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          child: Center(
+                            child: Text(
+                              customNumber1.toString(),
+                              style: const TextStyle(
+                                fontSize: 11,
+                                color: Colors.blue,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                  ],
-                );
-              },
+                      ////2
+                      if (customNumber2 != null)
+                        Positioned(
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          child: Center(
+                            child: Text(
+                              customNumber2.toString(),
+                              style: const TextStyle(
+                                fontSize: 11,
+                                color: Colors.blue,
+                              ),
+                            ),
+                          ),
+                        ),
+
+                      ////3
+                      if (customNumber3 != null)
+                        Positioned(
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          child: Center(
+                            child: Text(
+                              customNumber3.toString(),
+                              style: const TextStyle(
+                                fontSize: 11,
+                                color: Colors.blue,
+                              ),
+                            ),
+                          ),
+                        ),
+
+                      ////4
+                      if (customNumber4 != null)
+                        Positioned(
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          child: Center(
+                            child: Text(
+                              customNumber4.toString(),
+                              style: const TextStyle(
+                                fontSize: 11,
+                                color: Colors.blue,
+                              ),
+                            ),
+                          ),
+                        ),
+
+                      ////5
+                      if (customNumber5 != null)
+                        Positioned(
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          child: Center(
+                            child: Text(
+                              customNumber5.toString(),
+                              style: const TextStyle(
+                                fontSize: 11,
+                                color: Colors.blue,
+                              ),
+                            ),
+                          ),
+                        ),
+
+                      ////6
+                      if (customNumber6 != null)
+                        Positioned(
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          child: Center(
+                            child: Text(
+                              customNumber6.toString(),
+                              style: const TextStyle(
+                                fontSize: 11,
+                                color: Colors.blue,
+                              ),
+                            ),
+                          ),
+                        ),
+
+                      ////7
+                      if (customNumber7 != null)
+                        Positioned(
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          child: Center(
+                            child: Text(
+                              customNumber7.toString(),
+                              style: const TextStyle(
+                                fontSize: 11,
+                                color: Colors.blue,
+                              ),
+                            ),
+                          ),
+                        ),
+                      if (customNumber1 == null &&
+                          customNumber2 == null &&
+                          customNumber3 == null &&
+                          customNumber4 == null &&
+                          customNumber5 == null &&
+                          customNumber6 == null &&
+                          customNumber7 == null)
+                        const Positioned(
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          child: Center(
+                            child: Text(
+                              '_',
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
+                  );
+                },
+              ),
             ),
           ),
         ],

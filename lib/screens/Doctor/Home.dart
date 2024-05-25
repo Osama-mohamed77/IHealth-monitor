@@ -1,8 +1,8 @@
 // ignore_for_file: use_build_context_synchronously, file_names, prefer_final_fields, unused_field
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:ihealth_monitor/components/calender.dart';
-import 'package:ihealth_monitor/screens/Doctor/Blood%20pressure%20patients.dart';
+import 'package:ihealth_monitor/screens/Doctor/blood_pressure_patients.dart';
+import 'package:ihealth_monitor/helper/blood_test.dart';
 import 'package:ihealth_monitor/screens/Doctor/Diabetics%20screen.dart';
 
 class HomeDoctor extends StatefulWidget {
@@ -130,7 +130,7 @@ class _HomeDoctorState extends State<HomeDoctor> {
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, bloodPressure.id);
+                    Navigator.pushNamed(context, BloodPressurePatients.id);
                   },
                   child: Container(
                     decoration: const BoxDecoration(
@@ -193,7 +193,7 @@ class _HomeDoctorState extends State<HomeDoctor> {
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, DiabeticsScreen.id);
+                    Navigator.pushNamed(context, diabeticsPatients.id);
                   },
                   child: Container(
                     decoration: const BoxDecoration(
@@ -253,15 +253,15 @@ class _HomeDoctorState extends State<HomeDoctor> {
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, Calendar.id);
-                    // AwesomeDialog(
-                    //   context: context,
-                    //   dialogType: DialogType.info,
-                    //   animType: AnimType.rightSlide,
-                    //   title: 'Wait',
-                    //   desc: 'This service will be added soon',
-                    //   btnOkOnPress: () {},
-                    // ).show();
+                    // Navigator.pushNamed(context, Calendar.id);
+                    AwesomeDialog(
+                      context: context,
+                      dialogType: DialogType.info,
+                      animType: AnimType.rightSlide,
+                      title: 'Wait',
+                      desc: 'This service will be added soon',
+                      btnOkOnPress: () {},
+                    ).show();
                   },
                   child: Container(
                     decoration: const BoxDecoration(

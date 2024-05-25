@@ -10,18 +10,16 @@ import 'package:ihealth_monitor/screens/Patient/patient_const.dart';
 import 'package:ihealth_monitor/screens/utils/config.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-class ClinicScreen extends StatefulWidget {
-  const ClinicScreen({Key? key}) : super(key: key);
-  static String id = 'ClinicScreen';
+class LabScreen extends StatefulWidget {
+  const LabScreen({Key? key}) : super(key: key);
+  static String id = 'LabScreen';
 
   @override
-  State<ClinicScreen> createState() => _ClinicScreenState();
+  State<LabScreen> createState() => _LabScreenState();
 }
 
-class _ClinicScreenState extends State<ClinicScreen> {
-  String idOsama = 'u8HrQvTdJRgtUBJ3sbFEPQ4mZry2';
-  String idAdham = '01IAoYOUuvVloj1CUV4EQb6fXaF2';
-  String idEslam = 'TtZtdwkMUrN7APbeyZaLEYhHt8R2';
+class _LabScreenState extends State<LabScreen> {
+ 
   String entryId = '';
   @override
   void initState() {
@@ -39,7 +37,6 @@ class _ClinicScreenState extends State<ClinicScreen> {
   bool _dateSelected = false;
   bool _timeSelected = false;
   String? selectedDay;
-  String? drName;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +50,7 @@ class _ClinicScreenState extends State<ClinicScreen> {
             Spacer(
               flex: 1,
             ),
-            Text('Clinic',
+            Text('Laboratory',
                 style: TextStyle(
                   fontFamily: 'alata',
                   fontSize: 30,
@@ -71,74 +68,6 @@ class _ClinicScreenState extends State<ClinicScreen> {
             children: [
               const SizedBox(
                 height: 20,
-              ),
-              Row(
-                children: [
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  const Text(
-                    'Choose a doctor',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: const Color(0xffFBFBFB),
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                              color: const Color.fromARGB(255, 93, 92, 92))),
-                      height: 45,
-                      width: 0,
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 5, left: 5),
-                        child: DropdownButton<String>(
-                          value: drName,
-                          icon: const Padding(
-                            padding: EdgeInsets.only(left: 5),
-                            child: Icon(
-                              Icons.arrow_drop_down,
-                              size: 30,
-                            ),
-                          ),
-                          style: const TextStyle(
-                              color: Color.fromARGB(255, 73, 71, 71),
-                              fontFamily: 'alata',
-                              fontSize: 13),
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              drName = newValue!;
-                            });
-                          },
-                          items: const [
-                            DropdownMenuItem<String>(
-                              value: 'Dr.osama mohamed',
-                              child: Text('Dr.osama mohamed'),
-                            ),
-                            DropdownMenuItem<String>(
-                              value: 'Dr.eslam mohamed',
-                              child: Text('Dr.eslam mohamed'),
-                            ),
-                            DropdownMenuItem<String>(
-                              value: 'Dr.Adham mohamed',
-                              child: Text('Dr.Adham mohamed'),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                ],
               ),
               _tableCalendar(),
               const Padding(
@@ -275,39 +204,23 @@ class _ClinicScreenState extends State<ClinicScreen> {
                           '${_currentDay.day}/${_currentDay.month}/${_currentDay.year} : 19:00 PM';
                     });
                   }
-                  if (drName == 'Dr.osama mohamed') {
-                    setState(() {
-                      entryId = idOsama;
-                    });
-                  }
-                  if (drName == 'Dr.Adham mohamed') {
-                    setState(() {
-                      entryId = idAdham;
-                    });
-                  }
-                  if (drName == 'Dr.eslam mohamed') {
-                    setState(() {
-                      entryId = idEslam;
-                    });
-                  }
 
-                  await MoreClass().bookingClinic(
-                      bookingTime: '${DateTime.now()}',
-                      bookingDate: selectedDay.toString(),
-                      doctorName: drName!,
-                      fullname: PatientConst.name,
-                      age: PatientConst.age,
-                      email: PatientConst.email,
-                      phoneNumber: PatientConst.phoneNumber,
-                      userName: PatientConst.userName,
-                      gender: PatientConst.gender,
-                      area: AddressConst.Area,
-                      apartmentNumber: AddressConst.ApartmentNumber,
-                      floorNumber: AddressConst.FloorNumber,
-                      streetName: AddressConst.StreetName,
-                      landlineNumber: AddressConst.LandlineNumber,
-                      buildingName: AddressConst.BuildingName,
-                      doctorID: entryId);
+                  await MoreClass().bookingLab(
+                    bookingTime: '${DateTime.now()}',
+                    bookingDate: selectedDay.toString(),
+                    fullname: PatientConst.name,
+                    age: PatientConst.age,
+                    email: PatientConst.email,
+                    phoneNumber: PatientConst.phoneNumber,
+                    userName: PatientConst.userName,
+                    gender: PatientConst.gender,
+                    area: AddressConst.Area,
+                    apartmentNumber: AddressConst.ApartmentNumber,
+                    floorNumber: AddressConst.FloorNumber,
+                    streetName: AddressConst.StreetName,
+                    landlineNumber: AddressConst.LandlineNumber,
+                    buildingName: AddressConst.BuildingName,
+                  );
                   AwesomeDialog(
                     context: context,
                     dialogType: DialogType.success,

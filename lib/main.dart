@@ -7,9 +7,12 @@ import 'package:ihealth_monitor/components/HomeNav_Bar.dart';
 import 'package:ihealth_monitor/components/calender.dart';
 import 'package:ihealth_monitor/components/splash_screen.dart';
 import 'package:ihealth_monitor/firebase_options.dart';
+import 'package:ihealth_monitor/helper/notification_service.dart';
+import 'package:ihealth_monitor/helper/notifications.dart';
+import 'package:ihealth_monitor/screens/Doctor/blood_pressure_patients.dart';
 import 'package:ihealth_monitor/screens/Doctor/Account%20details.dart';
 import 'package:ihealth_monitor/screens/Doctor/Add%20patients.dart';
-import 'package:ihealth_monitor/screens/Doctor/Blood%20pressure%20patients.dart';
+import 'package:ihealth_monitor/helper/blood_test.dart';
 import 'package:ihealth_monitor/screens/Doctor/Diabetics%20screen.dart';
 import 'package:ihealth_monitor/screens/Doctor/Bpmore%20deteils.dart';
 import 'package:ihealth_monitor/screens/Doctor/Dpmore%20deteils.dart';
@@ -27,11 +30,16 @@ import 'package:ihealth_monitor/screens/Patient/HomeNav_Bar_patient.dart';
 import 'package:ihealth_monitor/screens/Patient/Sign%20in%20Patient%20.dart';
 import 'package:ihealth_monitor/screens/Patient/clinic.dart';
 import 'package:ihealth_monitor/screens/Patient/creat%20patient.dart';
-import 'package:ihealth_monitor/screens/Patient/notifications_patient.dart';
+import 'package:ihealth_monitor/screens/Patient/lab.dart';
+import 'package:ihealth_monitor/screens/Patient/pharmacies/19011.dart';
+import 'package:ihealth_monitor/screens/Patient/pharmacies/El_Ezaby.dart';
+import 'package:ihealth_monitor/screens/Patient/pharmacies/Eltarshouby.dart';
+import 'package:ihealth_monitor/screens/Patient/pharmacies/misr_Pharmacy.dart';
 import 'package:ihealth_monitor/screens/Patient/select_date_Pressure.dart';
 import 'package:ihealth_monitor/screens/Patient/select_date_suger.dart';
 import 'package:ihealth_monitor/screens/Patient/settings_patient.dart';
 import 'package:ihealth_monitor/screens/Patient/sign%20up%20Patient.dart';
+import 'package:ihealth_monitor/screens/Patient/test_result.dart';
 import 'package:ihealth_monitor/screens/Patient/verify%20patient.dart';
 import 'package:ihealth_monitor/screens/Shadow/Add%20patients%20shadow.dart';
 import 'package:ihealth_monitor/screens/Shadow/Forget%20shadow.dart';
@@ -47,17 +55,35 @@ import 'package:ihealth_monitor/screens/Shadow/verify%20shadow.dart';
 import 'package:ihealth_monitor/screens/choose%20screen.dart';
 import 'package:ihealth_monitor/screens/Doctor/creat%20password.dart';
 import 'package:ihealth_monitor/screens/Doctor/forget%20password.dart';
-import 'package:ihealth_monitor/screens/Doctor/notifications.dart';
 import 'package:ihealth_monitor/screens/Doctor/patients%20list.dart';
 import 'package:ihealth_monitor/screens/Doctor/settings.dart';
 import 'package:ihealth_monitor/screens/Doctor/sign%20in%20doctor.dart';
 import 'package:ihealth_monitor/screens/Doctor/sign%20up.dart';
 import 'package:ihealth_monitor/screens/Doctor/verifyPassword.dart';
 import 'package:ihealth_monitor/screens/Patient/Enter_measurements_suger.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
 
 void main() async {
-  
-  
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await NotificationService.initializeNotification();
+  await AwesomeNotifications().initialize(null, [
+    NotificationChannel(
+      channelGroupKey: 'basic_channel_group',
+      channelKey: 'basic_channel',
+      channelName: 'Basic Notification',
+      channelDescription: 'Test notification channel',
+    )
+  ], channelGroups: [
+    NotificationChannelGroup(
+        channelGroupKey: 'basic_channel_group',
+        channelGroupName: 'Basic Group'),
+  ]);
+  bool isAllowedToSendNotification =
+      await AwesomeNotifications().isNotificationAllowed();
+  if (!isAllowedToSendNotification) {
+    AwesomeNotifications().requestPermissionToSendNotifications();
+  }
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const IHealthMonitor());
@@ -73,6 +99,14 @@ class IHealthMonitor extends StatefulWidget {
 class _IHealthMonitorState extends State<IHealthMonitor> {
   @override
   void initState() {
+    AwesomeNotifications().setListeners(
+        onActionReceivedMethod: NotificationController.onActionReceivedMethod,
+        onNotificationCreatedMethod:
+            NotificationController.onNotificationCreatedMethod,
+        onNotificationDisplayedMethod:
+            NotificationController.onNotificationDisplayedMethod,
+        onDismissActionReceivedMethod:
+            NotificationController.onDismissActionReceivedMethod);
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
       if (user == null) {
         print('----------------------User is currently signed out!');
@@ -94,17 +128,16 @@ class _IHealthMonitorState extends State<IHealthMonitor> {
           signUp.id: (context) => const signUp(),
           forgetPassword.id: (context) => const forgetPassword(),
           HomeDoctor.id: (context) => const HomeDoctor(),
-          bloodPressure.id: (context) => const bloodPressure(),
+          // bloodPressure.id: (context) => const bloodPressure(),
           moreBloodPressureDetails.id: (context) =>
               const moreBloodPressureDetails(),
-          DiabeticsScreen.id: (context) => const DiabeticsScreen(),
+          // DiabeticsScreen.id: (context) => const DiabeticsScreen(),
           moreDeteilsDiabetics.id: (context) => const moreDeteilsDiabetics(),
           AddPatients.id: (context) => const AddPatients(),
           RequestsReceived.id: (context) => const RequestsReceived(),
           SettingsScreen.id: (context) => const SettingsScreen(),
           AccountDetails.id: (context) => const AccountDetails(),
           HomeNavBarDoctor.id: (context) => const HomeNavBarDoctor(),
-          notifications.id: (context) => const notifications(),
           verifyPassword.id: (context) => const verifyPassword(),
           creatPassword.id: (context) => const creatPassword(),
           patientsList.id: (context) => const patientsList(),
@@ -138,9 +171,17 @@ class _IHealthMonitorState extends State<IHealthMonitor> {
           ClinicScreen.id: (context) => const ClinicScreen(),
           SelectDateBlood.id: (context) => const SelectDateBlood(),
           AddDoctors.id: (context) => const AddDoctors(),
-          notificationsPatient.id: (context) => const notificationsPatient(),
           SettingsPatient.id: (context) => const SettingsPatient(),
-          Calendar.id:(context) =>  Calendar(),
+          Calendar.id: (context) => const Calendar(),
+          AddPatientsShadow.id: (context) => const AddPatientsShadow(),
+          TestResults.id: (context) => const TestResults(),
+          ElEzaby.id: (context) => const ElEzaby(),
+          Misr.id: (context) => const Misr(),
+          NumbersPharmacy.id: (context) => const NumbersPharmacy(),
+          Eltarshouby.id: (context) => const Eltarshouby(),
+          LabScreen.id:(context) => const LabScreen(),
+          BloodPressurePatients.id:(context) => const BloodPressurePatients(),
+          diabeticsPatients.id:(context) => const diabeticsPatients(),
         },
         home: const SplashScreen());
   }

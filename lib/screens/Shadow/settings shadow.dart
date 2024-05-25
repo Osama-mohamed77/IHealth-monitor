@@ -3,9 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
-import 'package:ihealth_monitor/screens/Doctor/Account%20details.dart';
-import 'package:ihealth_monitor/screens/Doctor/patients%20list.dart';
-import 'package:ihealth_monitor/screens/Doctor/sign%20in%20doctor.dart';
+import 'package:ihealth_monitor/screens/Shadow/Sign%20in%20shadow.dart';
 
 // ignore: camel_case_types
 class SettingsShadow extends StatefulWidget {
@@ -29,7 +27,7 @@ class _SettingsShadowState extends State<SettingsShadow> {
               width: 0,
               height: 194,
               decoration: const BoxDecoration(
-                color: Color(0xffA7B3A6),
+                color: Color(0xffCFCCAE),
                 borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(20),
                     bottomRight: Radius.circular(20)),
@@ -154,119 +152,42 @@ class _SettingsShadowState extends State<SettingsShadow> {
                   width: 13,
                 ),
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, AccountDetails.id);
-                    },
-                    child: Container(
-                      height: 70,
-                      width: 0,
-                      decoration: const BoxDecoration(
-                          color: Color(0xffA7B3A6),
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              topRight: Radius.circular(20))),
-                      child: const Row(
-                        children: [
-                          SizedBox(
-                            width: 15,
-                          ),
-                          Icon(
-                            Icons.person,
-                            color: Color(0xff17366F),
-                            size: 35,
-                          ),
-                          Spacer(
-                            flex: 1,
-                          ),
-                          Text(
-                            'Account details',
-                            style: TextStyle(
-                              fontFamily: 'Alata',
-                              fontSize: 23,
-                              color: Color(0xff000000),
-                            ),
-                          ),
-                          Spacer(
-                            flex: 1,
-                          ),
-                          SizedBox(
-                            width: 60,
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  width: 13,
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                const SizedBox(
-                  width: 13,
-                ),
-                Expanded(
                   child: Container(
-                    height: 1,
+                    height: 70,
                     width: 0,
                     decoration: const BoxDecoration(
-                      color: Color.fromARGB(255, 67, 63, 63),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  width: 13,
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                const SizedBox(
-                  width: 13,
-                ),
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, patientsList.id);
-                    },
-                    child: Container(
-                      height: 70,
-                      width: 0,
-                      decoration: const BoxDecoration(
-                        color: Color(0xffA7B3A6),
-                      ),
-                      child: const Row(
-                        children: [
-                          SizedBox(
-                            width: 15,
+                        color: Color(0xffCFCCAE),
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20))),
+                    child: const Row(
+                      children: [
+                        SizedBox(
+                          width: 15,
+                        ),
+                        Icon(
+                          Icons.person,
+                          color: Color(0xff17366F),
+                          size: 35,
+                        ),
+                        Spacer(
+                          flex: 1,
+                        ),
+                        Text(
+                          'Account details',
+                          style: TextStyle(
+                            fontFamily: 'Alata',
+                            fontSize: 23,
+                            color: Color(0xff000000),
                           ),
-                          Icon(
-                            Icons.people,
-                            color: Color(0xff17366F),
-                            size: 35,
-                          ),
-                          Spacer(
-                            flex: 1,
-                          ),
-                          Text(
-                            'My patients',
-                            style: TextStyle(
-                              fontFamily: 'Alata',
-                              fontSize: 23,
-                              color: Color(0xff000000),
-                            ),
-                          ),
-                          Spacer(
-                            flex: 1,
-                          ),
-                          SizedBox(
-                            width: 60,
-                          )
-                        ],
-                      ),
+                        ),
+                        Spacer(
+                          flex: 1,
+                        ),
+                        SizedBox(
+                          width: 60,
+                        )
+                      ],
                     ),
                   ),
                 ),
@@ -304,7 +225,74 @@ class _SettingsShadowState extends State<SettingsShadow> {
                     height: 70,
                     width: 0,
                     decoration: const BoxDecoration(
-                      color: Color(0xffA7B3A6),
+                      color: Color(0xffCFCCAE),
+                    ),
+                    child: const Row(
+                      children: [
+                        SizedBox(
+                          width: 15,
+                        ),
+                        Icon(
+                          Icons.people,
+                          color: Color(0xff17366F),
+                          size: 35,
+                        ),
+                        Spacer(
+                          flex: 1,
+                        ),
+                        Text(
+                          'My patients',
+                          style: TextStyle(
+                            fontFamily: 'Alata',
+                            fontSize: 23,
+                            color: Color(0xff000000),
+                          ),
+                        ),
+                        Spacer(
+                          flex: 1,
+                        ),
+                        SizedBox(
+                          width: 60,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 13,
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                const SizedBox(
+                  width: 13,
+                ),
+                Expanded(
+                  child: Container(
+                    height: 1,
+                    width: 0,
+                    decoration: const BoxDecoration(
+                      color: Color.fromARGB(255, 67, 63, 63),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 13,
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                const SizedBox(
+                  width: 13,
+                ),
+                Expanded(
+                  child: Container(
+                    height: 70,
+                    width: 0,
+                    decoration: const BoxDecoration(
+                      color: Color(0xffCFCCAE),
                       borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(20),
                           bottomRight: Radius.circular(20)),
@@ -373,13 +361,13 @@ class _SettingsShadowState extends State<SettingsShadow> {
                     onTap: () async {
                       await FirebaseAuth.instance.signOut();
                       Navigator.pushNamedAndRemoveUntil(
-                          context, signIn.id, (route) => false);
+                          context, signInShadow.id, (route) => false);
                     },
                     child: Container(
                       height: 70,
                       width: 0,
                       decoration: const BoxDecoration(
-                        color: Color(0xffA7B3A6),
+                        color: Color(0xffCFCCAE),
                         borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(20),
                             bottomRight: Radius.circular(20)),

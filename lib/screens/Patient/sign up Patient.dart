@@ -327,7 +327,9 @@ class _signUpPatientState extends State<signUpPatient> {
                               userName: userName.text,
                               age: age.text,
                               phoneNumer: phoneNumer.text,
-                              gender: dropdownValue);
+                              gender: dropdownValue,
+                              token: ''
+                              );
 
                           Navigator.pushNamed(context, AddAddress.id);
 

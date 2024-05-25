@@ -9,75 +9,22 @@ class notificationsShadow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffF0F0F0),
-      body: ListView(children: [
-        Container(
-          width: 360,
-          height: 84,
-          decoration: const BoxDecoration(
-            color: Color(0xff92b28f),
-            borderRadius: BorderRadius.only(
-              bottomRight: Radius.circular(30),
-              bottomLeft: Radius.circular(30),
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Color(0x3f000000),
-                offset: Offset(0, 4),
-                blurRadius: 2,
-              ),
-              BoxShadow(
-                color: Color(0x3f000000),
-                offset: Offset(0, 4),
-                blurRadius: 2,
-              ),
-            ],
-          ),
-          child: const Padding(
-            padding: EdgeInsets.only(top: 10),
-            child: Row(
-              children: [
-                SizedBox(
-                  width: 40,
-                ),
-                Spacer(
-                  flex: 1,
-                ),
-                Text(
-                  'Notifications',
-                  style: TextStyle(
-                      fontFamily: 'Alata',
-                      fontSize: 25,
-                      color: Color(0xff000000),
-                      height: -.2),
-                ),
-                Spacer(
-                  flex: 1,
-                ),
-                Column(
-                  children: [
-                    Image(
-                      image: AssetImage('assets/images/logo_doctor_home.png'),
-                      height: 40,
-                    ),
-                    Text(
-                      'Doctor',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: 'Pacifico',
-                        fontSize: 14,
-                        height: 1,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  width: 10,
-                )
-              ],
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: const Color(0xffA9A360),
+        title: const Center(
+          child: Text(
+            'Notifications',
+            style: TextStyle(
+              fontFamily: 'alata',
+              fontSize: 25,
+              color: Colors.black,
             ),
           ),
         ),
+      ),
+      backgroundColor: const Color(0xffF0F0F0),
+      body: ListView(children: [
         const SizedBox(
           height: 30,
         ),
@@ -133,7 +80,7 @@ class notificationsShadow extends StatelessWidget {
             width: 322,
             height: 70,
             decoration: const BoxDecoration(
-              color: Color(0xffCEDBCD),
+              color: Color(0xffCFCCAE),
               borderRadius: BorderRadius.all(
                 Radius.circular(10),
               ),

@@ -1,6 +1,10 @@
 // ignore_for_file: library_private_types_in_public_api, file_names
 
 import 'package:flutter/material.dart';
+import 'package:ihealth_monitor/screens/Patient/pharmacies/19011.dart';
+import 'package:ihealth_monitor/screens/Patient/pharmacies/El_Ezaby.dart';
+import 'package:ihealth_monitor/screens/Patient/pharmacies/Eltarshouby.dart';
+import 'package:ihealth_monitor/screens/Patient/pharmacies/misr_Pharmacy.dart';
 
 class PharmacyModel {
   String? image;
@@ -114,19 +118,44 @@ class _PharmacyScreenState extends State<PharmacyScreen> {
             child: ListView.builder(
               itemCount: filteredPharmacies.length,
               itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  leading: Image.asset(
-                    filteredPharmacies[index].image!,
-                    width: 50,
-                    height: 50,
-                  ),
-                  title: Text(
-                    filteredPharmacies[index].name!,
-                    style: const TextStyle(fontFamily: 'alata', fontSize: 19),
-                  ),
-                  subtitle: Text(
-                    filteredPharmacies[index].appointments!,
-                    style: const TextStyle(fontFamily: 'alata', fontSize: 15),
+                return GestureDetector(
+                  onTap: () {
+                    if (index == 0) {
+                      Navigator.pushNamed(context, ElEzaby.id);
+                    }
+                    if (index == 1) {
+                      Navigator.pushNamed(context, Misr.id);
+                    }
+                    if (index == 2) {
+                      Navigator.pushNamed(context, NumbersPharmacy.id);
+                    }
+                    if (index == 3) {
+                      Navigator.pushNamed(context, Eltarshouby.id);
+                    }
+                  },
+                  child: Container(
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                    decoration: BoxDecoration(border: Border.all()),
+                    height: 100,
+                    width: 300,
+                    child: ListTile(
+                      leading: Image.asset(
+                        filteredPharmacies[index].image!,
+                        width: 70,
+                        height: 70,
+                      ),
+                      title: Text(
+                        filteredPharmacies[index].name!,
+                        style:
+                            const TextStyle(fontFamily: 'alata', fontSize: 19),
+                      ),
+                      subtitle: Text(
+                        filteredPharmacies[index].appointments!,
+                        style:
+                            const TextStyle(fontFamily: 'alata', fontSize: 15),
+                      ),
+                    ),
                   ),
                 );
               },

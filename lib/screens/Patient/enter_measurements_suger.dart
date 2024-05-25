@@ -1,10 +1,12 @@
 // ignore_for_file: use_build_context_synchronously, file_names, prefer_final_fields, unused_field, non_constant_identifier_names, unused_element, unrelated_type_equality_checks, unused_local_variable
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ihealth_monitor/helper/class.dart';
+import 'package:ihealth_monitor/screens/Patient/HomeNav_Bar_patient.dart';
 
 class EnterMeasurementsSuger extends StatefulWidget {
   const EnterMeasurementsSuger({super.key});
@@ -167,8 +169,20 @@ class _EnterMeasurementsSugerState extends State<EnterMeasurementsSuger> {
                 Center(
                   child: GestureDetector(
                     onTap: () async {
-                      await MoreClass().firstMeasurementSuger(
-                          firstMeasurement: firstMeasurement.text);
+                      if (firstMeasurement.text.isNotEmpty) {
+                        await MoreClass().firstMeasurementSuger(
+                            firstMeasurement: firstMeasurement.text);
+                        AwesomeDialog(
+                          context: context,
+                          dialogType: DialogType.success,
+                          animType: AnimType.rightSlide,
+                          title: 'Success',
+                          desc: 'The measurement has been saved',
+                          btnOkOnPress: () {
+                            Navigator.pushNamed(context, HomeNavBarPatient.id);
+                          },
+                        ).show();
+                      } else {}
                     },
                     child: Container(
                       height: 50,
@@ -242,13 +256,6 @@ class _EnterMeasurementsSugerState extends State<EnterMeasurementsSuger> {
                             ),
                             FilteringTextInputFormatter.digitsOnly
                           ],
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Enter your measurement';
-                            }
-
-                            return null;
-                          },
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10)),
@@ -270,9 +277,19 @@ class _EnterMeasurementsSugerState extends State<EnterMeasurementsSuger> {
                 Center(
                   child: GestureDetector(
                     onTap: () {
-                      if (formKey.currentState!.validate()) {
+                      if (secondMeasurement.text.isNotEmpty) {
                         MoreClass().secondMeasurementSuger(
                             secondMeasurement: secondMeasurement.text);
+                        AwesomeDialog(
+                          context: context,
+                          dialogType: DialogType.success,
+                          animType: AnimType.rightSlide,
+                          title: 'Success',
+                          desc: 'The measurement has been saved',
+                          btnOkOnPress: () {
+                            Navigator.pushNamed(context, HomeNavBarPatient.id);
+                          },
+                        ).show();
                       }
                     },
                     child: Container(

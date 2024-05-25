@@ -18,8 +18,8 @@ class _HomeNavBarShadowState extends State<HomeNavBarShadow> {
   int _currenIndex = 0;
   final List<Widget> listoption = <Widget>[
     const HomeShadow(),
-    const notificationsShadow(),
     const AddPatientsShadow(),
+    const notificationsShadow(),
     const SettingsShadow()
   ];
   @override
