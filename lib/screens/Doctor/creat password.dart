@@ -1,20 +1,17 @@
-// ignore_for_file: camel_case_types, file_names
-
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/screens/Doctor/sign%20in%20doctor.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class creatPassword extends StatefulWidget {
-  const creatPassword({super.key});
+class CreatPassword extends StatefulWidget {
+  const CreatPassword({super.key});
 
   static String id = 'creatPassword';
-  
 
   @override
-  State<creatPassword> createState() => _creatPasswordState();
+  State<CreatPassword> createState() => _CreatPasswordState();
 }
 
-class _creatPasswordState extends State<creatPassword> {
+class _CreatPasswordState extends State<CreatPassword> {
   TextEditingController password = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey();
   RegExp regexPassword =
@@ -148,7 +145,7 @@ class _creatPasswordState extends State<creatPassword> {
                       if (formKey.currentState!.validate()) {
                         isLoading = true;
                         setState(() {});
-                        Navigator.pushNamed(context, signIn.id);
+                        Navigator.pushNamed(context, SignIn.id);
                       }
                     },
                     child: Container(

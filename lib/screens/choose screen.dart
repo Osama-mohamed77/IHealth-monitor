@@ -1,11 +1,8 @@
-// ignore_for_file: file_names
-
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/screens/Doctor/sign%20in%20doctor.dart';
 import 'package:ihealth_monitor/screens/Patient/Sign%20in%20Patient%20.dart';
 import 'package:ihealth_monitor/screens/Shadow/Sign%20in%20shadow.dart';
 
-// ignore: camel_case_types
 class ChooseScreen extends StatelessWidget {
   const ChooseScreen({super.key});
   static String id = 'ChooseScreen';
@@ -31,7 +28,7 @@ class ChooseScreen extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, signInPatient.id);
+                Navigator.pushNamed(context, SignInPatient.id);
               },
               child: Container(
                 height: 70,
@@ -56,7 +53,7 @@ class ChooseScreen extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, signInShadow.id);
+                Navigator.pushNamed(context, SignInShadow.id);
               },
               child: Container(
                 height: 70,
@@ -81,7 +78,7 @@ class ChooseScreen extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, signIn.id);
+                Navigator.pushNamed(context, SignIn.id);
               },
               child: Container(
                 height: 70,

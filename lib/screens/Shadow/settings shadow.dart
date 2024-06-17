@@ -267,7 +267,7 @@ class _SettingsShadowState extends State<SettingsShadow> {
                 onTap: () async {
                   await FirebaseAuth.instance.signOut();
                   Navigator.pushNamedAndRemoveUntil(
-                      context, signInShadow.id, (route) => false);
+                      context, SignInShadow.id, (route) => false);
                 },
                 child: Container(
                   height: 70,

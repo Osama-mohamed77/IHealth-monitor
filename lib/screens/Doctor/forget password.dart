@@ -1,20 +1,18 @@
-// ignore_for_file: camel_case_types, file_names
-
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/screens/Doctor/verifyPassword.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class forgetPassword extends StatefulWidget {
-  const forgetPassword({super.key});
+class ForgetPassword extends StatefulWidget {
+  const ForgetPassword({super.key});
   static RegExp regexEmail = RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
   static String id = 'forgetPassword';
 
   @override
-  State<forgetPassword> createState() => _forgetPasswordState();
+  State<ForgetPassword> createState() => _ForgetPasswordState();
 }
 
-class _forgetPasswordState extends State<forgetPassword> {
+class _ForgetPasswordState extends State<ForgetPassword> {
   GlobalKey<FormState> formKey = GlobalKey();
   bool isLoading = false;
   @override
@@ -84,7 +82,7 @@ class _forgetPasswordState extends State<forgetPassword> {
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Enter Your Email';
-                        } else if (!forgetPassword.regexEmail.hasMatch(value)) {
+                        } else if (!ForgetPassword.regexEmail.hasMatch(value)) {
                           return 'Enter a valid Email';
                         }
                         return null;
@@ -107,7 +105,7 @@ class _forgetPasswordState extends State<forgetPassword> {
                       if (formKey.currentState!.validate()) {
                         isLoading = true;
                         setState(() {});
-                        Navigator.pushNamed(context, verifyPassword.id);
+                        Navigator.pushNamed(context, VerifyPassword.id);
                       }
                     },
                     child: Container(

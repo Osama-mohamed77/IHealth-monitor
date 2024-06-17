@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously, camel_case_types, unused_local_variable, file_names
-
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -12,15 +10,15 @@ import 'package:ihealth_monitor/screens/Patient/sign%20up%20Patient.dart';
 import 'package:ihealth_monitor/screens/choose%20screen.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class signInPatient extends StatefulWidget {
-  const signInPatient({super.key});
+class SignInPatient extends StatefulWidget {
+  const SignInPatient({super.key});
   static String id = 'signInPatient';
 
   @override
-  State<signInPatient> createState() => _signUpState();
+  State<SignInPatient> createState() => _SignUpState();
 }
 
-class _signUpState extends State<signInPatient> {
+class _SignUpState extends State<SignInPatient> {
   bool isLoding = false;
   RegExp regexEmail = RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
@@ -123,7 +121,7 @@ class _signUpState extends State<signInPatient> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, forgetPatient.id);
+                        Navigator.pushNamed(context, ForgetPatient.id);
                       },
                       child: const Text(
                         'Forget password?',
@@ -168,8 +166,7 @@ class _signUpState extends State<signInPatient> {
                               btnOkOnPress: () {},
                             ).show();
                           }
-                        }
-                         catch (e) {
+                        } catch (e) {
                           ShowSnackBar(context, e.toString());
                         }
                         isLoding = false;
@@ -213,7 +210,7 @@ class _signUpState extends State<signInPatient> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, signUpPatient.id);
+                        Navigator.pushNamed(context, SignUpPatient.id);
                       },
                       child: const Text(
                         'Sign up',
@@ -233,7 +230,7 @@ class _signUpState extends State<signInPatient> {
   }
 
   Future<void> signInUser() async {
-    UserCredential user = await FirebaseAuth.instance
+    FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email.text, password: password.text)
         .whenComplete(() => UserProfile().getPatienProfile())
         .whenComplete(() => UserAddress().getPatienAddress());

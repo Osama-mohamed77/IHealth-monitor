@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously, camel_case_types, unused_local_variable, file_names
-
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -11,15 +9,15 @@ import 'package:ihealth_monitor/screens/Doctor/sign%20up.dart';
 import 'package:ihealth_monitor/screens/choose%20screen.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class signIn extends StatefulWidget {
-  const signIn({super.key});
+class SignIn extends StatefulWidget {
+  const SignIn({super.key});
   static String id = 'signIn';
 
   @override
-  State<signIn> createState() => _signUpState();
+  State<SignIn> createState() => _SignUpState();
 }
 
-class _signUpState extends State<signIn> {
+class _SignUpState extends State<SignIn> {
   bool isLoding = false;
   RegExp regexEmail = RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
@@ -122,7 +120,7 @@ class _signUpState extends State<signIn> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, forgetPassword.id);
+                        Navigator.pushNamed(context, ForgetPassword.id);
                       },
                       child: const Text(
                         'Forget password?',
@@ -210,7 +208,7 @@ class _signUpState extends State<signIn> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, signUp.id);
+                        Navigator.pushNamed(context, SignUp.id);
                       },
                       child: const Text(
                         'Sign up',
@@ -230,7 +228,7 @@ class _signUpState extends State<signIn> {
   }
 
   Future<void> signInUser() async {
-    UserCredential user = await FirebaseAuth.instance
+       FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email.text, password: password.text);
   }
 }

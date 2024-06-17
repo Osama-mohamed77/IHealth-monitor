@@ -1,6 +1,5 @@
 import 'package:intl/intl.dart';
 
-//this basically is to convert date/day/time from calendar to string
 class DateConverted {
   static String getDate(DateTime date) {
     return DateFormat.yMd().format(date);

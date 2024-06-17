@@ -1,7 +1,7 @@
-// ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class CustomTextForm extends StatelessWidget {
   final String labelText;
   final TextEditingController mycontroller;

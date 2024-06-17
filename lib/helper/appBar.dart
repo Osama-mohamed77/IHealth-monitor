@@ -13,7 +13,7 @@ class logout extends StatelessWidget {
         onPressed: () async {
           await FirebaseAuth.instance.signOut();
           Navigator.pushNamedAndRemoveUntil(
-              context, signIn.id, (route) => false);
+              context, SignIn.id, (route) => false);
         },
         icon: const Icon(
           Icons.exit_to_app,

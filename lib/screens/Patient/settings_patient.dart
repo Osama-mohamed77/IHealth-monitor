@@ -1,7 +1,3 @@
-// // ignore_for_file: use_build_context_synchronously
-
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -91,21 +87,21 @@ class _SettingsPatientState extends State<SettingsPatient> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Choose an option'),
+          title: const Text('Choose an option'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               ListTile(
-                leading: Icon(Icons.photo),
-                title: Text('Select a new image'),
+                leading: const Icon(Icons.photo),
+                title: const Text('Select a new image'),
                 onTap: () {
                   Navigator.of(context).pop();
                   _pickImage();
                 },
               ),
               ListTile(
-                leading: Icon(Icons.delete),
-                title: Text('Delete current image'),
+                leading: const Icon(Icons.delete),
+                title: const Text('Delete current image'),
                 onTap: () {
                   Navigator.of(context).pop();
                   _deleteImage();
@@ -271,7 +267,7 @@ class _SettingsPatientState extends State<SettingsPatient> {
                 onTap: () async {
                   await FirebaseAuth.instance.signOut();
                   Navigator.pushNamedAndRemoveUntil(
-                      context, signInPatient.id, (route) => false);
+                      context, SignInPatient.id, (route) => false);
                 },
                 child: Container(
                   height: 70,

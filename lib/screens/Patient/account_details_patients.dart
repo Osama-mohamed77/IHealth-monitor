@@ -1,12 +1,9 @@
-// ignore_for_file: file_names, use_build_context_synchronously
-
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/screens/Patient/settings_patient.dart';
 
-// ignore: camel_case_types
 class AccountDetailsPatient extends StatefulWidget {
   const AccountDetailsPatient({super.key});
   static String id = 'AccountDetailsPatient';
@@ -220,10 +217,8 @@ Future<void> updateFullname({
       .collection('Patients')
       .doc(FirebaseAuth.instance.currentUser!.uid)
       .update({
-        'FullName': fullname,
-      })
-      .then((value) => print("User Added"))
-      .catchError((error) => print("Failed to add user: $error"));
+    'FullName': fullname,
+  }).catchError((error) => null);
 }
 
 Future<void> updatePhoneNumber({
@@ -233,10 +228,8 @@ Future<void> updatePhoneNumber({
       .collection('Patients')
       .doc(FirebaseAuth.instance.currentUser!.uid)
       .update({
-        'phoneNumber': phoneNumer,
-      })
-      .then((value) => print("User Added"))
-      .catchError((error) => print("Failed to add user: $error"));
+    'phoneNumber': phoneNumer,
+  }).catchError((error) => null);
 }
 
 Future<void> updateUsername({
@@ -246,8 +239,6 @@ Future<void> updateUsername({
       .collection('Patients')
       .doc(FirebaseAuth.instance.currentUser!.uid)
       .update({
-        'userName': userName,
-      })
-      .then((value) => print("User Added"))
-      .catchError((error) => print("Failed to add user: $error"));
+    'userName': userName,
+  }).catchError((error) => null);
 }

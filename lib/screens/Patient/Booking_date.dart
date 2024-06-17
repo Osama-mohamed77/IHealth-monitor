@@ -54,11 +54,9 @@ class _BookingDateState extends State<BookingDate> {
           iconClinic = Icon(emptyIconClinic);
           colorClinic = 0xffEB1818;
         });
-      } else {
-        print("Document does not exist");
-      }
+      } else {}
     } catch (e) {
-      print("Error fetching document: $e");
+      return;
     }
   }
 
@@ -75,11 +73,9 @@ class _BookingDateState extends State<BookingDate> {
           colorClinic = 0xff69B5AB;
           iconClinic = Icon(emptyIconClinic);
         });
-      } else {
-        print("Document does not exist");
-      }
+      } else {}
     } catch (e) {
-      print("Error fetching document: $e");
+      return;
     }
   }
   //Laboratory
@@ -113,11 +109,9 @@ class _BookingDateState extends State<BookingDate> {
           bookingDateLab = documentSnapshot['bookingDate'];
           labName = documentSnapshot['Lab name'];
         });
-      } else {
-        print("Document does not exist");
-      }
+      } else {}
     } catch (e) {
-      print("Error fetching document: $e");
+      return;
     }
   }
 
@@ -136,7 +130,7 @@ class _BookingDateState extends State<BookingDate> {
         });
       } else {}
     } catch (e) {
-      print("Error fetching document: $e");
+      return;
     }
   }
 //pharmacy
@@ -172,11 +166,9 @@ class _BookingDateState extends State<BookingDate> {
           PhaName = documentSnapshot['pharmacyName'];
           deviceType = documentSnapshot['deviceType'];
         });
-      } else {
-        print("Document does not exist");
-      }
+      } else {}
     } catch (e) {
-      print("Error fetching document: $e");
+      return;
     }
   }
 
@@ -195,7 +187,7 @@ class _BookingDateState extends State<BookingDate> {
         });
       } else {}
     } catch (e) {
-      print("Error fetching document: $e");
+      return;
     }
   }
 
@@ -606,10 +598,10 @@ Future<void> Notification(int id, String title, String body) async {
 //           doctorName = documentSnapshot['doctorName'];
 //         });
 //       } else {
-//         print("Document does not exist");
+//          
 //       }
 //     } catch (e) {
-//       print("Error fetching document: $e");
+//        
 //     }
 //   }
 
@@ -630,10 +622,10 @@ Future<void> Notification(int id, String title, String body) async {
 //         sugerNotification(
 //             5, 'appointment Reminder', 'Your request has been approved.');
 //       } else {
-//         print("Document does not exist");
+//          
 //       }
 //     } catch (e) {
-//       print("Error fetching document: $e");
+//        
 //     }
 //   }
 

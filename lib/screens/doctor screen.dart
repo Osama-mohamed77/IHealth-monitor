@@ -1,10 +1,7 @@
-// ignore_for_file: file_names
-
 import 'package:flutter/material.dart';
 
-// ignore: camel_case_types
-class doctorExplain extends StatelessWidget {
-  const doctorExplain({super.key});
+class DoctorExplain extends StatelessWidget {
+  const DoctorExplain({super.key});
 
   @override
   Widget build(BuildContext context) {

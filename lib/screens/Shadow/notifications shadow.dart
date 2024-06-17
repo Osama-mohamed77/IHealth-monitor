@@ -1,10 +1,8 @@
-// ignore_for_file: camel_case_types, file_names, non_constant_identifier_names
-
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/screens/Doctor/Dpmore%20deteils.dart';
 
-class notificationsShadow extends StatelessWidget {
-  const notificationsShadow({super.key});
+class NotificationsShadow extends StatelessWidget {
+  const NotificationsShadow({super.key});
   static String id = 'notifications';
   @override
   Widget build(BuildContext context) {
@@ -30,7 +28,7 @@ class notificationsShadow extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            Navigator.pushNamed(context, moreDeteilsDiabetics.id);
+            Navigator.pushNamed(context, MoreDeteilsDiabetics.id);
           },
           child: NotificationsTest(
               'Abdallah ahmed,  added new \nmeasurements today 15/April'),

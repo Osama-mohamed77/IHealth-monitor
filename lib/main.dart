@@ -1,13 +1,8 @@
-// ignore_for_file: avoid_print
-
 import 'dart:async';
-import 'dart:ui';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:ihealth_monitor/components/HomeNav_Bar.dart';
 import 'package:ihealth_monitor/components/calender.dart';
 import 'package:ihealth_monitor/components/splash_screen.dart';
@@ -125,11 +120,7 @@ class _IHealthMonitorState extends State<IHealthMonitor> {
             NotificationController.onDismissActionReceivedMethod);
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
       if (user == null) {
-        print('----------------------User is currently signed out!');
-      } else {
-        print('----------------------User is signed in!');
-        print(user.uid);
-      }
+      } else {}
     });
   }
 
@@ -159,9 +150,7 @@ class _IHealthMonitorState extends State<IHealthMonitor> {
       if (documentSnapshot.exists) {
         var data = documentSnapshot.data() as Map<String, dynamic>;
         var flag = data['flag'];
-        if (flag != null) {
-          print(flag);
-        }
+        if (flag != null) {}
 
         FirebaseAuth.instance.authStateChanges().listen((User? user) {
           if (user != null && user.uid == 'AKut52R1LzdDvBQfJAzJLEsQCsq2') {
@@ -177,7 +166,7 @@ class _IHealthMonitorState extends State<IHealthMonitor> {
         });
       }
     } catch (e) {
-      print('Error fetching data: $e');
+      return;
     }
   }
 
@@ -194,7 +183,6 @@ class _IHealthMonitorState extends State<IHealthMonitor> {
         setState(() {
           status = documentSnapshot['status'];
         });
-        print(status);
       }
       FirebaseAuth.instance.authStateChanges().listen((User? user) {
         if (user != null && user.uid == 'AKut52R1LzdDvBQfJAzJLEsQCsq2') {
@@ -209,7 +197,7 @@ class _IHealthMonitorState extends State<IHealthMonitor> {
         }
       });
     } catch (e) {
-      print("Error fetching document: $e");
+      return;
     }
   }
 
@@ -226,7 +214,6 @@ class _IHealthMonitorState extends State<IHealthMonitor> {
         setState(() {
           declined = documentSnapshot['declined'];
         });
-        print(declined);
       }
       FirebaseAuth.instance.authStateChanges().listen((User? user) {
         if (user != null && user.uid == 'AKut52R1LzdDvBQfJAzJLEsQCsq2') {
@@ -241,7 +228,7 @@ class _IHealthMonitorState extends State<IHealthMonitor> {
         }
       });
     } catch (e) {
-      print("Error fetching document: $e");
+      return;
     }
   }
 
@@ -258,7 +245,6 @@ class _IHealthMonitorState extends State<IHealthMonitor> {
         setState(() {
           status = documentSnapshot['status'];
         });
-        print(status);
       }
       FirebaseAuth.instance.authStateChanges().listen((User? user) {
         if (user != null && user.uid == 'AKut52R1LzdDvBQfJAzJLEsQCsq2') {
@@ -273,7 +259,7 @@ class _IHealthMonitorState extends State<IHealthMonitor> {
         }
       });
     } catch (e) {
-      print("Error fetching document: $e");
+      return;
     }
   }
 
@@ -290,7 +276,6 @@ class _IHealthMonitorState extends State<IHealthMonitor> {
         setState(() {
           status = documentSnapshot['status'];
         });
-        print(status);
       }
       FirebaseAuth.instance.authStateChanges().listen((User? user) {
         if (user != null && user.uid == 'AKut52R1LzdDvBQfJAzJLEsQCsq2') {
@@ -305,7 +290,7 @@ class _IHealthMonitorState extends State<IHealthMonitor> {
         }
       });
     } catch (e) {
-      print("Error fetching document: $e");
+      return;
     }
   }
 
@@ -329,37 +314,37 @@ class _IHealthMonitorState extends State<IHealthMonitor> {
         theme: ThemeData(fontFamily: 'alata'),
         routes: {
           ChooseScreen.id: (context) => const ChooseScreen(),
-          signIn.id: (context) => const signIn(),
-          signUp.id: (context) => const signUp(),
-          forgetPassword.id: (context) => const forgetPassword(),
+          SignIn.id: (context) => const SignIn(),
+          SignUp.id: (context) => const SignUp(),
+          ForgetPassword.id: (context) => const ForgetPassword(),
           HomeDoctor.id: (context) => const HomeDoctor(),
-          moreBloodPressureDetails.id: (context) =>
-              const moreBloodPressureDetails(),
-          moreDeteilsDiabetics.id: (context) => const moreDeteilsDiabetics(),
+          MoreBloodPressureDetails.id: (context) =>
+              const MoreBloodPressureDetails(),
+          MoreDeteilsDiabetics.id: (context) => const MoreDeteilsDiabetics(),
           AddDoctor.id: (context) => const AddDoctor(),
           RequestsReceived.id: (context) => const RequestsReceived(),
           SettingsScreen.id: (context) => const SettingsScreen(),
           AccountDetails.id: (context) => const AccountDetails(),
           HomeNavBarDoctor.id: (context) => const HomeNavBarDoctor(),
-          verifyPassword.id: (context) => const verifyPassword(),
-          creatPassword.id: (context) => const creatPassword(),
-          patientsList.id: (context) => const patientsList(),
-          signInShadow.id: (context) => const signInShadow(),
-          signUpShadow.id: (context) => const signUpShadow(),
-          forgetShadow.id: (context) => const forgetShadow(),
-          verifyShadow.id: (context) => const verifyShadow(),
-          creatShadow.id: (context) => const creatShadow(),
+          VerifyPassword.id: (context) => const VerifyPassword(),
+          CreatPassword.id: (context) => const CreatPassword(),
+          PatientsList.id: (context) => const PatientsList(),
+          SignInShadow.id: (context) => const SignInShadow(),
+          SignUpShadow.id: (context) => const SignUpShadow(),
+          ForgetShadow.id: (context) => const ForgetShadow(),
+          VerifyShadow.id: (context) => const VerifyShadow(),
+          CreatShadow.id: (context) => const CreatShadow(),
           HomeShadow.id: (context) => const HomeShadow(),
           HomeNavBarShadow.id: (context) => const HomeNavBarShadow(),
           AddPatientsShadow.id: (context) => const AddPatientsShadow(),
-          notificationsShadow.id: (context) => const notificationsShadow(),
+          NotificationsShadow.id: (context) => const NotificationsShadow(),
           SettingsShadow.id: (context) => const SettingsShadow(),
-          moreDeteilsShadow.id: (context) => const moreDeteilsShadow(),
-          signInPatient.id: (context) => const signInPatient(),
-          signUpPatient.id: (context) => const signUpPatient(),
-          forgetPatient.id: (context) => const forgetPatient(),
-          verifyPatient.id: (context) => const verifyPatient(),
-          creatPatient.id: (context) => const creatPatient(),
+          MoreDeteilsShadow.id: (context) => const MoreDeteilsShadow(),
+          SignInPatient.id: (context) => const SignInPatient(),
+          SignUpPatient.id: (context) => const SignUpPatient(),
+          ForgetPatient.id: (context) => const ForgetPatient(),
+          VerifyPatient.id: (context) => const VerifyPatient(),
+          CreatPatient.id: (context) => const CreatPatient(),
           AddAddress.id: (context) => const AddAddress(),
           HomePatients.id: (context) => const HomePatients(),
           HomeNavBarPatient.id: (context) => const HomeNavBarPatient(),
@@ -383,7 +368,7 @@ class _IHealthMonitorState extends State<IHealthMonitor> {
           Eltarshouby.id: (context) => const Eltarshouby(),
           RoyalScreen.id: (context) => const RoyalScreen(),
           BloodPressure.id: (context) => const BloodPressure(),
-          diabeticsPatients.id: (context) => const diabeticsPatients(),
+          DiabeticsPatients.id: (context) => const DiabeticsPatients(),
           BookingDate.id: (context) => const BookingDate(),
           ClinicScreen.id: (context) => const ClinicScreen(),
           HealthyClinic.id: (context) => const HealthyClinic(),

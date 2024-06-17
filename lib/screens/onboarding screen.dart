@@ -1,4 +1,3 @@
-// ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/screens/Connect%20services.dart';
@@ -25,7 +24,7 @@ class _ExplainScreensState extends State<ExplainScreens> {
           PageView(
             controller: _controller,
             children: const [
-              doctorExplain(),
+              DoctorExplain(),
               PatientExplain(),
               ShadowExplain(),
               ConnectExplain(),

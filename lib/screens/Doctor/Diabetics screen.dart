@@ -1,18 +1,16 @@
-// ignore_for_file: library_private_types_in_public_api, camel_case_types
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/screens/Doctor/Dpmore%20deteils.dart';
 
-class diabeticsPatients extends StatefulWidget {
+class DiabeticsPatients extends StatefulWidget {
   static String id = 'diabeticsPatients';
-  const diabeticsPatients({super.key});
+  const DiabeticsPatients({super.key});
 
   @override
-  _diabeticsPatientsState createState() => _diabeticsPatientsState();
+  _DiabeticsPatientsState createState() => _DiabeticsPatientsState();
 }
 
-class _diabeticsPatientsState extends State<diabeticsPatients> {
+class _DiabeticsPatientsState extends State<DiabeticsPatients> {
   List<Map<String, dynamic>> patients = [];
 
   @override
@@ -38,7 +36,7 @@ class _diabeticsPatientsState extends State<diabeticsPatients> {
     return Scaffold(
       backgroundColor: const Color(0xffF0F0F0),
       appBar: AppBar(
-        backgroundColor: Color(0xff92B28F),
+        backgroundColor: const Color(0xff92B28F),
         title: const Row(
           children: [
             Spacer(
@@ -69,7 +67,7 @@ class _diabeticsPatientsState extends State<diabeticsPatients> {
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, moreDeteilsDiabetics.id);
+                        Navigator.pushNamed(context, MoreDeteilsDiabetics.id);
                       },
                       child: Container(
                         width: 322,
@@ -162,8 +160,7 @@ class _diabeticsPatientsState extends State<diabeticsPatients> {
 
 
 
-// // ignore_for_file: camel_case_types, file_names
-
+//  
 // import 'package:flutter/material.dart';
 // import 'package:ihealth_monitor/screens/Doctor/Dpmore%20deteils.dart';
 

@@ -1,5 +1,3 @@
-// ignore_for_file: unused_field, use_build_context_synchronously
-
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/components/button.dart';
@@ -35,8 +33,6 @@ class _RoyalScreenState extends State<RoyalScreen> {
   DateTime _currentDay = DateTime.now();
   int? _currentIndex;
   bool _isWeekend = false;
-  bool _dateSelected = false;
-  bool _timeSelected = false;
   String? selectedDay;
 
   @override
@@ -110,7 +106,6 @@ class _RoyalScreenState extends State<RoyalScreen> {
                       onTap: () {
                         setState(() {
                           _currentIndex = index;
-                          _timeSelected = true;
                         });
                       },
                       child: Container(
@@ -270,12 +265,10 @@ class _RoyalScreenState extends State<RoyalScreen> {
         setState(() {
           _currentDay = selectedDay;
           _focusDay = focusedDay;
-          _dateSelected = true;
 
           //check if weekend is selected
           if (selectedDay.weekday == 5 || selectedDay.weekday == 6) {
             _isWeekend = true;
-            _timeSelected = false;
             _currentIndex = null;
           } else {
             _isWeekend = false;

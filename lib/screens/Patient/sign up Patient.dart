@@ -1,5 +1,3 @@
-// ignore_for_file: camel_case_types, file_names, unused_local_variable, use_build_context_synchronously, must_be_immutable, non_constant_identifier_names, unused_field, avoid_print, sized_box_for_whitespace
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,15 +6,15 @@ import 'package:ihealth_monitor/helper/class.dart';
 import 'package:ihealth_monitor/screens/Patient/Add%20address.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class signUpPatient extends StatefulWidget {
-  const signUpPatient({super.key});
+class SignUpPatient extends StatefulWidget {
+  const SignUpPatient({super.key});
   static String id = 'signUpPatient';
 
   @override
-  State<signUpPatient> createState() => _signUpPatientState();
+  State<SignUpPatient> createState() => _SignUpPatientState();
 }
 
-class _signUpPatientState extends State<signUpPatient> {
+class _SignUpPatientState extends State<SignUpPatient> {
   bool isLoading = false;
   String dropdownValue = 'Male';
   RegExp regexPassword =

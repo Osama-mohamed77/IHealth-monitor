@@ -1,10 +1,7 @@
-// ignore_for_file: file_names, use_build_context_synchronously
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-// ignore: camel_case_types
 class AccountDetails extends StatefulWidget {
   const AccountDetails({super.key});
   static String id = 'AccountDetails';
@@ -189,10 +186,8 @@ Future<void> updateFullname({
       .collection('Doctors')
       .doc(FirebaseAuth.instance.currentUser!.uid)
       .update({
-        'FullName': fullname,
-      })
-      .then((value) => print("User Added"))
-      .catchError((error) => print("Failed to add user: $error"));
+    'FullName': fullname,
+  }).catchError((error) => null);
 }
 
 Future<void> updatePhoneNumber({
@@ -202,10 +197,8 @@ Future<void> updatePhoneNumber({
       .collection('Doctors')
       .doc(FirebaseAuth.instance.currentUser!.uid)
       .update({
-        'phoneNumber': phoneNumer,
-      })
-      .then((value) => print("User Added"))
-      .catchError((error) => print("Failed to add user: $error"));
+    'phoneNumber': phoneNumer,
+  }).catchError((error) => null);
 }
 
 Future<void> updateUsername({
@@ -215,8 +208,6 @@ Future<void> updateUsername({
       .collection('Doctors')
       .doc(FirebaseAuth.instance.currentUser!.uid)
       .update({
-        'userName': userName,
-      })
-      .then((value) => print("User Added"))
-      .catchError((error) => print("Failed to add user: $error"));
+    'userName': userName,
+  }).catchError((error) => null);
 }

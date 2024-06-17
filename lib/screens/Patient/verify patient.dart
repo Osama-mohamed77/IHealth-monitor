@@ -1,21 +1,19 @@
-// ignore_for_file: camel_case_types, file_names
-
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/components/Oto.dart';
 import 'package:ihealth_monitor/screens/Patient/Forget%20patient.dart';
 import 'package:ihealth_monitor/screens/Patient/creat%20patient.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class verifyPatient extends StatefulWidget {
-  const verifyPatient({super.key});
+class VerifyPatient extends StatefulWidget {
+  const VerifyPatient({super.key});
 
   static String id = 'verifyPatient';
 
   @override
-  State<verifyPatient> createState() => _verifyPatientState();
+  State<VerifyPatient> createState() => _VerifyPatientState();
 }
 
-class _verifyPatientState extends State<verifyPatient> {
+class _VerifyPatientState extends State<VerifyPatient> {
   GlobalKey<FormState> formKey = GlobalKey();
   bool isLoading = false;
 
@@ -35,7 +33,7 @@ class _verifyPatientState extends State<verifyPatient> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, forgetPatient.id);
+                        Navigator.pushNamed(context, ForgetPatient.id);
                       },
                       child: const Icon(
                         Icons.arrow_back_sharp,
@@ -109,7 +107,7 @@ class _verifyPatientState extends State<verifyPatient> {
                       isLoading = true;
                       setState(() {});
                     }
-                    Navigator.pushNamed(context, creatPatient.id);
+                    Navigator.pushNamed(context, CreatPatient.id);
                   },
                   child: Container(
                     decoration: const BoxDecoration(

@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously, file_names, prefer_final_fields, unused_field, non_constant_identifier_names, unused_element
-
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/helper/class.dart';
@@ -15,7 +13,6 @@ class SelectDateBlood extends StatefulWidget {
 }
 
 class _SelectDateBloodState extends State<SelectDateBlood> {
-  int _page = 0;
   bool isLoading = false;
   TimeOfDay _FirstTimeOfDay = const TimeOfDay(hour: 00, minute: 00);
   GlobalKey<FormState> formKey = GlobalKey();
@@ -28,15 +25,7 @@ class _SelectDateBloodState extends State<SelectDateBlood> {
     }).onError((error, stackTrace) => null);
   }
 
-  TimeOfDay _SecondTimeOfDay = const TimeOfDay(hour: 00, minute: 00);
-  _ShowTimePickerSecond() async {
-    await showTimePicker(context: context, initialTime: TimeOfDay.now())
-        .then((value) {
-      setState(() {
-        _SecondTimeOfDay = value!;
-      });
-    });
-  }
+  
 
   @override
   void initState() {

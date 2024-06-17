@@ -1,18 +1,16 @@
-// ignore_for_file: camel_case_types, file_names, avoid_unnecessary_containers, unused_local_variable
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-class moreDeteilsShadow extends StatefulWidget {
-  const moreDeteilsShadow({super.key});
+class MoreDeteilsShadow extends StatefulWidget {
+  const MoreDeteilsShadow({super.key});
   static String id = 'moreDeteilsShadow';
 
   @override
-  State<moreDeteilsShadow> createState() => _moreDeteilsShadowState();
+  State<MoreDeteilsShadow> createState() => _MoreDeteilsShadowState();
 }
 
-class _moreDeteilsShadowState extends State<moreDeteilsShadow> {
+class _MoreDeteilsShadowState extends State<MoreDeteilsShadow> {
   ///Sugar Measurement
 
   // 1/5

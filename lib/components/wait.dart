@@ -1,9 +1,7 @@
-// ignore_for_file: camel_case_types
-
 import 'package:flutter/material.dart';
 
-class waitCont extends StatelessWidget {
-  const waitCont({
+class WaitCont extends StatelessWidget {
+  const WaitCont({
     super.key,
     this.color,
     this.date,

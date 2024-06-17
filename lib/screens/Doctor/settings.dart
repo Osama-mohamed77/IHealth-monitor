@@ -6,8 +6,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:ihealth_monitor/screens/Patient/Sign%20in%20Patient%20.dart';
-import 'package:ihealth_monitor/screens/Patient/account_details_patients.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -269,7 +267,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 onTap: () async {
                   await FirebaseAuth.instance.signOut();
                   Navigator.pushNamedAndRemoveUntil(
-                      context, signIn.id, (route) => false);
+                      context, SignIn.id, (route) => false);
                 },
                 child: Container(
                   height: 70,

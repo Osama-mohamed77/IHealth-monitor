@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously, file_names, prefer_final_fields, unused_field, non_constant_identifier_names, unused_element, unrelated_type_equality_checks, unused_local_variable
-
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -17,11 +15,9 @@ class EnterMeasurementsPressure extends StatefulWidget {
 }
 
 class _EnterMeasurementsPressureState extends State<EnterMeasurementsPressure> {
-  int _page = 0;
   TextEditingController firstMeasurement = TextEditingController();
   TextEditingController secondMeasurement = TextEditingController();
 
-  static RegExp numberRegExp = RegExp('[0-9]');
   GlobalKey<FormState> formKey = GlobalKey();
 
   List<QueryDocumentSnapshot> data = [];

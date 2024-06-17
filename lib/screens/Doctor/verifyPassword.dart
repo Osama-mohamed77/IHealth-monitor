@@ -1,11 +1,9 @@
-// ignore_for_file: camel_case_types, file_names
-
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/components/Oto.dart';
 import 'package:ihealth_monitor/screens/Doctor/creat%20password.dart';
 
-class verifyPassword extends StatelessWidget {
-  const verifyPassword({super.key});
+class VerifyPassword extends StatelessWidget {
+  const VerifyPassword({super.key});
 
   static String id = 'verifyPassword';
 
@@ -91,7 +89,7 @@ class verifyPassword extends StatelessWidget {
           Center(
             child: GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, creatPassword.id);
+                Navigator.pushNamed(context, CreatPassword.id);
               },
               child: Container(
                 decoration: const BoxDecoration(

@@ -1,37 +1,21 @@
-// ignore_for_file: camel_case_types, file_names, avoid_unnecessary_containers
-
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/components/HomeNav_Bar.dart';
 import 'package:ihealth_monitor/helper/class.dart';
-import 'package:ihealth_monitor/screens/Doctor/Home.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-class moreBloodPressureDetails extends StatefulWidget {
-  const moreBloodPressureDetails({super.key});
+class MoreBloodPressureDetails extends StatefulWidget {
+  const MoreBloodPressureDetails({super.key});
   static String id = 'moreBloodPressureDetails';
 
   @override
-  State<moreBloodPressureDetails> createState() =>
-      _moreBloodPressureDetailsState();
+  State<MoreBloodPressureDetails> createState() =>
+      _MoreBloodPressureDetailsState();
 }
 
-class _moreBloodPressureDetailsState extends State<moreBloodPressureDetails> {
-  // List<Map<String, dynamic>> patients = [];
-
-  // Future<void> _fetchData() async {
-  //   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  //   CollectionReference patientsRef = firestore.collection('Patients');
-
-  //   QuerySnapshot querySnapshot = await patientsRef.get();
-
-  //   patients = querySnapshot.docs
-  //       .map((doc) => doc.data() as Map<String, dynamic>)
-  //       .toList();
-  //   setState(() {});
-  // }
-
+class _MoreBloodPressureDetailsState extends State<MoreBloodPressureDetails> {
+ 
   // 1/5
   Map<DateTime, dynamic> customNumbers1 = {};
   Future<void> oneMay() async {

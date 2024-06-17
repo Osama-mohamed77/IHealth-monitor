@@ -1,20 +1,18 @@
-// ignore_for_file: camel_case_types, file_names
-
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/screens/Shadow/Sign%20in%20shadow.dart';
 import 'package:ihealth_monitor/screens/Shadow/verify%20shadow.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class creatShadow extends StatefulWidget {
-  const creatShadow({super.key});
+class CreatShadow extends StatefulWidget {
+  const CreatShadow({super.key});
 
   static String id = 'creatPassword';
 
   @override
-  State<creatShadow> createState() => _creatShadowState();
+  State<CreatShadow> createState() => _CreatShadowState();
 }
 
-class _creatShadowState extends State<creatShadow> {
+class _CreatShadowState extends State<CreatShadow> {
   TextEditingController password = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey();
   RegExp regexPassword =
@@ -37,7 +35,7 @@ class _creatShadowState extends State<creatShadow> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, verifyShadow.id);
+                          Navigator.pushNamed(context, VerifyShadow.id);
                         },
                         child: const Icon(
                           Icons.arrow_back_sharp,
@@ -148,7 +146,7 @@ class _creatShadowState extends State<creatShadow> {
                       if (formKey.currentState!.validate()) {
                         isLoading = true;
                         setState(() {});
-                        Navigator.pushNamed(context, signInShadow.id);
+                        Navigator.pushNamed(context, SignInShadow.id);
                       }
                     },
                     child: Container(

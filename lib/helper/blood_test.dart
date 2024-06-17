@@ -1,5 +1,4 @@
-// // ignore_for_file: camel_case_types, file_names
-
+//  
 // import 'package:flutter/material.dart';
 // import 'package:ihealth_monitor/screens/Doctor/blood_pressure_patients.dart';
 // import 'package:ihealth_monitor/screens/Doctor/Bpmore%20deteils.dart';

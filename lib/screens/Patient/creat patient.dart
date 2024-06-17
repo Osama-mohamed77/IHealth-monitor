@@ -1,20 +1,18 @@
-// ignore_for_file: camel_case_types, file_names
-
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/screens/Patient/Sign%20in%20Patient%20.dart';
 import 'package:ihealth_monitor/screens/Patient/verify%20patient.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class creatPatient extends StatefulWidget {
-  const creatPatient({super.key});
+class CreatPatient extends StatefulWidget {
+  const CreatPatient({super.key});
 
   static String id = 'creatPatient';
 
   @override
-  State<creatPatient> createState() => _creatPatientState();
+  State<CreatPatient> createState() => _CreatPatientState();
 }
 
-class _creatPatientState extends State<creatPatient> {
+class _CreatPatientState extends State<CreatPatient> {
   TextEditingController password = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey();
   RegExp regexPassword =
@@ -37,7 +35,7 @@ class _creatPatientState extends State<creatPatient> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, verifyPatient.id);
+                          Navigator.pushNamed(context, VerifyPatient.id);
                         },
                         child: const Icon(
                           Icons.arrow_back_sharp,
@@ -148,7 +146,7 @@ class _creatPatientState extends State<creatPatient> {
                       if (formKey.currentState!.validate()) {
                         isLoading = true;
                         setState(() {});
-                        Navigator.pushNamed(context, signInPatient.id);
+                        Navigator.pushNamed(context, SignInPatient.id);
                       }
                     },
                     child: Container(

@@ -1,5 +1,3 @@
-// ignore_for_file: camel_case_types, file_names, unused_local_variable, use_build_context_synchronously, must_be_immutable, non_constant_identifier_names, unused_field, avoid_print
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,15 +6,15 @@ import 'package:ihealth_monitor/helper/ShowSnackBar.dart';
 import 'package:ihealth_monitor/helper/class.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class signUp extends StatefulWidget {
-  const signUp({super.key});
+class SignUp extends StatefulWidget {
+  const SignUp({super.key});
   static String id = 'signUp';
 
   @override
-  State<signUp> createState() => _signUpState();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _signUpState extends State<signUp> {
+class _SignUpState extends State<SignUp> {
   bool isLoading = false;
 
   RegExp regexPassword =

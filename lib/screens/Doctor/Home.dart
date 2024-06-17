@@ -1,4 +1,3 @@
-// ignore_for_file: use_build_context_synchronously, file_names, prefer_final_fields, unused_field
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -217,7 +216,7 @@ class _HomeDoctorState extends State<HomeDoctor> {
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, diabeticsPatients.id);
+                    Navigator.pushNamed(context, DiabeticsPatients.id);
                   },
                   child: Container(
                     decoration: const BoxDecoration(

@@ -1,4 +1,3 @@
-// ignore_for_file: use_build_context_synchronously, file_names, prefer_final_fields, unused_field
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/screens/Patient/select_date_Pressure.dart';
 import 'package:ihealth_monitor/screens/Patient/select_date_suger.dart';
@@ -12,7 +11,6 @@ class ChooseType extends StatefulWidget {
 }
 
 class _ChooseTypeState extends State<ChooseType> {
-  int _page = 0;
 
   @override
   Widget build(BuildContext context) {

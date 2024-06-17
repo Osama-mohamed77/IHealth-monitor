@@ -1,4 +1,3 @@
-// ignore_for_file: use_build_context_synchronously, file_names, prefer_final_fields, unused_field
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -124,7 +123,7 @@ class _HomeShadowState extends State<HomeShadow> {
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, moreDeteilsShadow.id);
+                    Navigator.pushNamed(context, MoreDeteilsShadow.id);
                   },
                   child: Container(
                     width: 322,

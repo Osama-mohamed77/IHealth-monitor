@@ -1,21 +1,19 @@
-// ignore_for_file: camel_case_types, file_names
-
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/screens/Shadow/Sign%20in%20shadow.dart';
 import 'package:ihealth_monitor/screens/Shadow/verify%20shadow.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class forgetShadow extends StatefulWidget {
-  const forgetShadow({super.key});
+class ForgetShadow extends StatefulWidget {
+  const ForgetShadow({super.key});
   static RegExp regexEmail = RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
   static String id = 'forgetPassword';
 
   @override
-  State<forgetShadow> createState() => _forgetShadowState();
+  State<ForgetShadow> createState() => _ForgetShadowState();
 }
 
-class _forgetShadowState extends State<forgetShadow> {
+class _ForgetShadowState extends State<ForgetShadow> {
   GlobalKey<FormState> formKey = GlobalKey();
   bool isLoading = false;
   @override
@@ -34,7 +32,7 @@ class _forgetShadowState extends State<forgetShadow> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, signInShadow.id);
+                          Navigator.pushNamed(context, SignInShadow.id);
                         },
                         child: const Icon(
                           Icons.arrow_back_sharp,
@@ -85,7 +83,7 @@ class _forgetShadowState extends State<forgetShadow> {
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Enter Your Email';
-                        } else if (!forgetShadow.regexEmail.hasMatch(value)) {
+                        } else if (!ForgetShadow.regexEmail.hasMatch(value)) {
                           return 'Enter a valid Email';
                         }
                         return null;
@@ -108,7 +106,7 @@ class _forgetShadowState extends State<forgetShadow> {
                       if (formKey.currentState!.validate()) {
                         isLoading = true;
                         setState(() {});
-                        Navigator.pushNamed(context, verifyShadow.id);
+                        Navigator.pushNamed(context, VerifyShadow.id);
                       }
                     },
                     child: Container(

@@ -1,4 +1,3 @@
-// ignore_for_file: file_names, use_build_context_synchronously
 
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -6,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/screens/Shadow/settings%20shadow.dart';
 
-// ignore: camel_case_types
 class AccountDetailsShadow extends StatefulWidget {
   const AccountDetailsShadow({super.key});
   static String id = 'AccountDetailsShadow';
@@ -241,8 +239,7 @@ Future<void> updateFullname({
       .update({
         'FullName': fullname,
       })
-      .then((value) => print("User Added"))
-      .catchError((error) => print("Failed to add user: $error"));
+      .catchError((error) =>  null);
 }
 
 Future<void> updatePhoneNumber({
@@ -254,8 +251,8 @@ Future<void> updatePhoneNumber({
       .update({
         'phoneNumber': phoneNumer,
       })
-      .then((value) => print("User Added"))
-      .catchError((error) => print("Failed to add user: $error"));
+      
+      .catchError((error) => null);
 }
 
 Future<void> updateUsername({
@@ -267,6 +264,5 @@ Future<void> updateUsername({
       .update({
         'userName': userName,
       })
-      .then((value) => print("User Added"))
-      .catchError((error) => print("Failed to add user: $error"));
+      .catchError((error) =>  null);
 }

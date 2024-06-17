@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ihealth_monitor/screens/Patient/clinics/dawy_clinic.dart';
-import 'package:ihealth_monitor/screens/Patient/clinics/healthy_clinic.dart';
-import 'package:ihealth_monitor/screens/Patient/clinics/techno_clinic.dart';
 import 'package:ihealth_monitor/screens/Patient/lab/al%20Shams%20_Lab.dart';
 import 'package:ihealth_monitor/screens/Patient/lab/nile_lab.dart';
 import 'package:ihealth_monitor/screens/Patient/lab/royal_lab.dart';

@@ -1,5 +1,3 @@
-// ignore_for_file: camel_case_types, file_names, unused_local_variable, use_build_context_synchronously, must_be_immutable, non_constant_identifier_names, unused_field, avoid_print
-
 import 'package:flutter/material.dart';
 import 'package:flutter_gradient_app_bar/flutter_gradient_app_bar.dart';
 import 'package:ihealth_monitor/helper/class.dart';
@@ -19,9 +17,6 @@ class AddAddress extends StatefulWidget {
 class _AddAddressState extends State<AddAddress> {
   bool isLoading = false;
 
-  static RegExp nameRegExp = RegExp('[a-zA-Z]');
-  static RegExp numberRegExp = RegExp('[0-9]');
-  static RegExp usernameRegExp = RegExp(r'^[a-zA-Z0-9]+$');
   GlobalKey<FormState> formKey = GlobalKey();
   TextEditingController area = TextEditingController();
   TextEditingController streetName = TextEditingController();

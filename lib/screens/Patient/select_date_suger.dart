@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously, file_names, prefer_final_fields, unused_field, non_constant_identifier_names, unused_element
-
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/helper/class.dart';
@@ -15,7 +13,6 @@ class SelectDateSuger extends StatefulWidget {
 }
 
 class _SelectDateSugerState extends State<SelectDateSuger> {
-  int _page = 0;
   bool isLoading = false;
   TimeOfDay _FirstTimeOfDay = const TimeOfDay(hour: 00, minute: 00);
   GlobalKey<FormState> formKey = GlobalKey();
@@ -246,8 +243,6 @@ class _SelectDateSugerState extends State<SelectDateSuger> {
                             _FirstTimeOfDay);
                         //secound notification
 
-                      
-
                         isLoading = true;
                         setState(() {});
                         await MoreClass().datesMeasurementSuger(
@@ -259,10 +254,8 @@ class _SelectDateSugerState extends State<SelectDateSuger> {
                         Navigator.pushNamed(context, EnterMeasurementsSuger.id);
                         isLoading = false;
                         setState(() {});
-                      }
-                      
-                      else if (formKey.currentState!.validate()){
-                          await sugerNotification(
+                      } else if (formKey.currentState!.validate()) {
+                        await sugerNotification(
                             3,
                             'Diabetes Reminder',
                             'It\'s time to measure your second diabetes.',

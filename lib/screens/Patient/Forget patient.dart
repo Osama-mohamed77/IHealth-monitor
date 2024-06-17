@@ -1,21 +1,19 @@
-// ignore_for_file: camel_case_types, file_names
-
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/screens/Patient/Sign%20in%20Patient%20.dart';
 import 'package:ihealth_monitor/screens/Patient/verify%20patient.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class forgetPatient extends StatefulWidget {
-  const forgetPatient({super.key});
+class ForgetPatient extends StatefulWidget {
+  const ForgetPatient({super.key});
   static RegExp regexEmail = RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
   static String id = 'forgetPatient';
 
   @override
-  State<forgetPatient> createState() => _forgetPatientState();
+  State<ForgetPatient> createState() => _ForgetPatientState();
 }
 
-class _forgetPatientState extends State<forgetPatient> {
+class _ForgetPatientState extends State<ForgetPatient> {
   GlobalKey<FormState> formKey = GlobalKey();
   bool isLoading = false;
   @override
@@ -34,7 +32,7 @@ class _forgetPatientState extends State<forgetPatient> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, signInPatient.id);
+                          Navigator.pushNamed(context, SignInPatient.id);
                         },
                         child: const Icon(
                           Icons.arrow_back_sharp,
@@ -85,7 +83,7 @@ class _forgetPatientState extends State<forgetPatient> {
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Enter Your Email';
-                        } else if (!forgetPatient.regexEmail.hasMatch(value)) {
+                        } else if (!ForgetPatient.regexEmail.hasMatch(value)) {
                           return 'Enter a valid Email';
                         }
                         return null;
@@ -108,7 +106,7 @@ class _forgetPatientState extends State<forgetPatient> {
                       if (formKey.currentState!.validate()) {
                         isLoading = true;
                         setState(() {});
-                        Navigator.pushNamed(context, verifyPatient.id);
+                        Navigator.pushNamed(context, VerifyPatient.id);
                       }
                     },
                     child: Container(

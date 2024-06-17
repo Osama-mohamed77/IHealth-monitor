@@ -1,5 +1,3 @@
-// ignore_for_file: unused_field, use_build_context_synchronously
-
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/components/button.dart';
@@ -38,8 +36,6 @@ class _DawyClinicState extends State<DawyClinic> {
   DateTime _currentDay = DateTime.now();
   int? _currentIndex;
   bool _isWeekend = false;
-  bool _dateSelected = false;
-  bool _timeSelected = false;
   String? selectedDay;
   String? drName;
 
@@ -182,7 +178,6 @@ class _DawyClinicState extends State<DawyClinic> {
                       onTap: () {
                         setState(() {
                           _currentIndex = index;
-                          _timeSelected = true;
                         });
                       },
                       child: Container(
@@ -312,7 +307,8 @@ class _DawyClinicState extends State<DawyClinic> {
                           streetName: AddressConst.StreetName,
                           landlineNumber: AddressConst.LandlineNumber,
                           buildingName: AddressConst.BuildingName,
-                          doctorID: entryId, status: 'true');
+                          doctorID: entryId,
+                          status: 'true');
                       await MoreClass().sendBookingToPatient(
                           bookingDate: selectedDay.toString(),
                           bookingTime: '${DateTime.now()}',
@@ -365,12 +361,10 @@ class _DawyClinicState extends State<DawyClinic> {
         setState(() {
           _currentDay = selectedDay;
           _focusDay = focusedDay;
-          _dateSelected = true;
 
           //check if weekend is selected
           if (selectedDay.weekday == 5 || selectedDay.weekday == 6) {
             _isWeekend = true;
-            _timeSelected = false;
             _currentIndex = null;
           } else {
             _isWeekend = false;

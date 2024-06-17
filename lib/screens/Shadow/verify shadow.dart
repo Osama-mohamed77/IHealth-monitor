@@ -1,21 +1,19 @@
-// ignore_for_file: camel_case_types, file_names
-
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/components/Oto.dart';
 import 'package:ihealth_monitor/screens/Shadow/Forget%20shadow.dart';
 import 'package:ihealth_monitor/screens/Shadow/creat%20shadow.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class verifyShadow extends StatefulWidget {
-  const verifyShadow({super.key});
+class VerifyShadow extends StatefulWidget {
+  const VerifyShadow({super.key});
 
   static String id = 'verifyPassword';
 
   @override
-  State<verifyShadow> createState() => _verifyShadowState();
+  State<VerifyShadow> createState() => _VerifyShadowState();
 }
 
-class _verifyShadowState extends State<verifyShadow> {
+class _VerifyShadowState extends State<VerifyShadow> {
   GlobalKey<FormState> formKey = GlobalKey();
   bool isLoading = false;
 
@@ -35,7 +33,7 @@ class _verifyShadowState extends State<verifyShadow> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, forgetShadow.id);
+                        Navigator.pushNamed(context, ForgetShadow.id);
                       },
                       child: const Icon(
                         Icons.arrow_back_sharp,
@@ -109,7 +107,7 @@ class _verifyShadowState extends State<verifyShadow> {
                       isLoading = true;
                       setState(() {});
                     }
-                    Navigator.pushNamed(context, creatShadow.id);
+                    Navigator.pushNamed(context, CreatShadow.id);
                   },
                   child: Container(
                     decoration: const BoxDecoration(

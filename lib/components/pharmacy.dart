@@ -1,9 +1,7 @@
-// ignore_for_file: file_names, camel_case_types
-
 import 'package:flutter/material.dart';
 
-class pharmacyModel extends StatelessWidget {
-  const pharmacyModel(
+class PharmacyModel extends StatelessWidget {
+  const PharmacyModel(
       {super.key, this.image, this.name, this.area, this.appointments});
 
   final String? image;

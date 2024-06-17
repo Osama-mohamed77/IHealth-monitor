@@ -1,6 +1,5 @@
 // ignore_for_file: avoid_print, unused_local_variable
 
-import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -35,8 +34,7 @@ class MoreClass {
           'email': email,
           'gender': gender,
         })
-        .then((value) => print("User Added"))
-        .catchError((error) => print("Failed to add user: $error"));
+        .catchError((error) =>  null);
   }
 
   Future<void> addAddress(
@@ -58,8 +56,7 @@ class MoreClass {
           'LandlineNumber': landlineNumber,
         })
         .whenComplete(() => UserProfile().getPatienProfile())
-        .then((value) => print("User Added"))
-        .catchError((error) => print("Failed to add user: $error"));
+        .catchError((error) =>  null);
   }
 
   ////Suger
@@ -75,8 +72,7 @@ class MoreClass {
         .set({
           'first': firstMeasurement,
         })
-        .then((value) => print("User Added"))
-        .catchError((error) => print("Failed to add user: $error"));
+        .catchError((error) =>  null);
   }
 
   Future<void> secondMeasurementSuger(
@@ -89,8 +85,7 @@ class MoreClass {
         .collection('measurements')
         .doc(today.toString())
         .update({'secound': secondMeasurement})
-        .then((value) => print("User Added"))
-        .catchError((error) => print("Failed to add user: $error"));
+        .catchError((error) =>  null);
   }
 
   Future<void> datesMeasurementSuger(
@@ -104,8 +99,7 @@ class MoreClass {
           'The first date for entering measurements': firstTime,
           'The second date for entering measurements': secondTime,
         })
-        .then((value) => print("User Added"))
-        .catchError((error) => print("Failed to add user: $error"));
+        .catchError((error) =>  null);
   }
 
   ////Pressure
@@ -119,8 +113,7 @@ class MoreClass {
         .set({
           'date measurements': firstTime,
         })
-        .then((value) => print("User Added"))
-        .catchError((error) => print("Failed to add user: $error"));
+        .catchError((error) =>  null);
   }
 
   Future<void> measurementPressure({required String firstMeasurement}) async {
@@ -134,8 +127,7 @@ class MoreClass {
         .collection('measurements')
         .doc(today)
         .set(measurementmodel.toMap())
-        .then((value) => print("User Added"))
-        .catchError((error) => print("Failed to add user: $error"));
+        .catchError((error) =>  null);
   }
 
   Future<void> signUpPatients({
@@ -313,8 +305,7 @@ class MoreClass {
           'phoneNumber': phoneNumer,
           'email': email,
         })
-        .then((value) => print("User Added"))
-        .catchError((error) => print("Failed to add user: $error"));
+        .catchError((error) =>  null);
   }
 
   Future<void> signUpDoctor({
@@ -341,7 +332,7 @@ class MoreClass {
         .collection('Patients')
         .doc('AKut52R1LzdDvBQfJAzJLEsQCsq2')
         .update({'flag': flag}).catchError(
-            (error) => print("Failed to add user: $error"));
+            (error) =>  null);
   }
 
   Future<void> FalseFlag({required String flag}) async {
@@ -349,7 +340,7 @@ class MoreClass {
         .collection('Patients')
         .doc('AKut52R1LzdDvBQfJAzJLEsQCsq2')
         .update({'flag': flag}).catchError(
-            (error) => print("Failed to add user: $error"));
+            (error) =>  null);
   }
 
   //shadow
@@ -370,8 +361,7 @@ class MoreClass {
           'phoneNumber': phoneNumer,
           'email': email,
         })
-        .then((value) => print("User Added"))
-        .catchError((error) => print("Failed to add user: $error"));
+        .catchError((error) =>  null);
   }
 
   Future<void> signUpShadow({
@@ -415,5 +405,5 @@ class MoreClass {
 //         '${DateTime.now().day}': firstMeasurement,
 //       })
 //       .then((value) => print("User Added"))
-//       .catchError((error) => print("Failed to add user: $error"));
+//       .catchError((error) =>  
 // }

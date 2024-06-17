@@ -1,9 +1,7 @@
-// ignore_for_file: camel_case_types
-
 import 'package:flutter/material.dart';
 
-class dateCont extends StatelessWidget {
-  const dateCont({super.key, this.color, this.date, this.measurement});
+class DateCont extends StatelessWidget {
+  const DateCont({super.key, this.color, this.date, this.measurement});
   final Color? color;
   final String? date;
   final String? measurement;

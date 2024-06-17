@@ -1,18 +1,16 @@
-// ignore_for_file: camel_case_types, file_names, avoid_unnecessary_containers
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-class moreDeteilsDiabetics extends StatefulWidget {
-  const moreDeteilsDiabetics({super.key});
+class MoreDeteilsDiabetics extends StatefulWidget {
+  const MoreDeteilsDiabetics({super.key});
   static String id = 'moreDeteilsDiabetics';
 
   @override
-  State<moreDeteilsDiabetics> createState() => _moreDeteilsDiabeticsState();
+  State<MoreDeteilsDiabetics> createState() => _MoreDeteilsDiabeticsState();
 }
 
-class _moreDeteilsDiabeticsState extends State<moreDeteilsDiabetics> {
+class _MoreDeteilsDiabeticsState extends State<MoreDeteilsDiabetics> {
   // 1/5
   Map<DateTime, dynamic> customNumbers1 = {};
   Future<void> oneMay() async {

@@ -1,5 +1,3 @@
-// ignore_for_file: file_names
-
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:ihealth_monitor/screens/Shadow/Add%20patients%20shadow.dart';
@@ -19,7 +17,7 @@ class _HomeNavBarShadowState extends State<HomeNavBarShadow> {
   final List<Widget> listoption = <Widget>[
     const HomeShadow(),
     const AddPatientsShadow(),
-    const notificationsShadow(),
+    const NotificationsShadow(),
     const SettingsShadow()
   ];
   @override
