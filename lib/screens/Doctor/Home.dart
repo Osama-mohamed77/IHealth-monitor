@@ -1,8 +1,9 @@
 // ignore_for_file: use_build_context_synchronously, file_names, prefer_final_fields, unused_field
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/screens/Doctor/blood_pressure_patients.dart';
-import 'package:ihealth_monitor/helper/blood_test.dart';
 import 'package:ihealth_monitor/screens/Doctor/Diabetics%20screen.dart';
 
 class HomeDoctor extends StatefulWidget {
@@ -14,7 +15,30 @@ class HomeDoctor extends StatefulWidget {
 }
 
 class _HomeDoctorState extends State<HomeDoctor> {
-  int _page = 0;
+  String username = '';
+  Future<void> fetchData() async {
+    try {
+      DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
+          .collection('Doctors')
+          .doc(FirebaseAuth
+              .instance.currentUser!.uid) // Use the correct document ID here
+          .get();
+
+      if (documentSnapshot.exists) {
+        setState(() {
+          username = documentSnapshot['userName'];
+        });
+      } else {}
+    } catch (e) {
+      return;
+    }
+  }
+
+  @override
+  void initState() {
+    fetchData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,26 +54,26 @@ class _HomeDoctorState extends State<HomeDoctor> {
                 color: Color(0xff92B28F)),
             height: 214,
             width: 360,
-            child: const Padding(
-              padding: EdgeInsets.only(top: 10),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 10),
               child: Column(
                 children: [
                   Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 20,
                       ),
-                      Text('Hi,Osama777',
-                          style: TextStyle(
+                      Text('Hi,$username',
+                          style: const TextStyle(
                             fontFamily: 'alata',
                             fontSize: 30,
                             color: Colors.black,
                           )),
-                      Expanded(
+                      const Expanded(
                           child: SizedBox(
                         width: 0,
                       )),
-                      Column(
+                      const Column(
                         children: [
                           Image(
                             image: AssetImage(
@@ -67,12 +91,12 @@ class _HomeDoctorState extends State<HomeDoctor> {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 20,
                       ),
                     ],
                   ),
-                  Row(
+                  const Row(
                     children: [
                       SizedBox(
                         width: 22,
@@ -85,10 +109,10 @@ class _HomeDoctorState extends State<HomeDoctor> {
                           )),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 40,
                   ),
-                  Row(
+                  const Row(
                     children: [
                       SizedBox(
                         width: 20,
@@ -130,7 +154,7 @@ class _HomeDoctorState extends State<HomeDoctor> {
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, BloodPressurePatients.id);
+                    Navigator.pushNamed(context, BloodPressure.id);
                   },
                   child: Container(
                     decoration: const BoxDecoration(

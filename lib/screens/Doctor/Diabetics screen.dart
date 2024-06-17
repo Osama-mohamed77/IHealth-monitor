@@ -2,11 +2,10 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:ihealth_monitor/screens/Doctor/Bpmore%20deteils.dart';
 import 'package:ihealth_monitor/screens/Doctor/Dpmore%20deteils.dart';
 
 class diabeticsPatients extends StatefulWidget {
-  static String id = 'BloodPressurePatients';
+  static String id = 'diabeticsPatients';
   const diabeticsPatients({super.key});
 
   @override
@@ -37,7 +36,9 @@ class _diabeticsPatientsState extends State<diabeticsPatients> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xffF0F0F0),
       appBar: AppBar(
+        backgroundColor: Color(0xff92B28F),
         title: const Row(
           children: [
             Spacer(

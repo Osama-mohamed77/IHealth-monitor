@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ihealth_monitor/helper/ShowSnackBar.dart';
+import 'package:ihealth_monitor/helper/class.dart';
 import 'package:ihealth_monitor/screens/Shadow/Home%20Nav%20Bar.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
@@ -252,10 +253,17 @@ class _signUpShadowState extends State<signUpShadow> {
                         isLoading = true;
                         setState(() {});
                         try {
-                          await signUpUser();
-                          ShowSnackBar(context, 'Success');
-                          Navigator.pushNamed(context, HomeNavBarShadow.id);
-                          addUser();
+                        await  MoreClass().signUpShadow(
+                            email: email.text,
+                            password: password.text,
+                            fullname: fullName.text,
+                            userName: userName.text,
+                            phoneNumer: PhoneNumer.text,
+                          );
+
+                        await  Navigator.pushNamed(context, HomeNavBarShadow.id);
+
+                          // addUser();
                         } on FirebaseAuthException catch (ex) {
                           if (ex.code == 'weak-password') {
                             ShowSnackBar(context, 'Weak password');
@@ -323,11 +331,5 @@ class _signUpShadowState extends State<signUpShadow> {
         ),
       ),
     );
-  }
-
-  Future<void> signUpUser() async {
-    UserCredential user = await FirebaseAuth.instance
-        .createUserWithEmailAndPassword(
-            email: email.text, password: password.text);
   }
 }

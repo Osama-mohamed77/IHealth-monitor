@@ -1,8 +1,11 @@
 // ignore_for_file: file_names
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:ihealth_monitor/helper/ShowSnackBar.dart';
 import 'package:ihealth_monitor/helper/class.dart';
-import 'package:ihealth_monitor/screens/Patient/patient_const.dart';
+import 'package:ihealth_monitor/helper/patient_const.dart';
+import 'package:ihealth_monitor/screens/Patient/HomeNav_Bar_patient.dart';
 
 class Eltarshouby extends StatefulWidget {
   static String id = 'Eltarshouby';
@@ -22,19 +25,25 @@ class _EltarshoubyState extends State<Eltarshouby> {
       setState(() {
         _selectTime = value!;
       });
-    }).onError((error, stackTrace) => null);
+    }).onError((error, stackTrace) => cancelled());
   }
 
-  String typeDevice = 'The type is not specified';
+  String TypeDevice = 'The type is not specified';
   blood() async {
     setState(() {
-      typeDevice = 'Blood pressure monitor';
+      TypeDevice = 'Blood pressure monitor';
     });
   }
 
   suger() async {
     setState(() {
-      typeDevice = 'Sugar glucose monitor';
+      TypeDevice = 'Sugar glucose monitor';
+    });
+  }
+
+  cancelled() {
+    setState(() {
+      TypeDevice = 'The type is not specified';
     });
   }
 
@@ -88,12 +97,12 @@ class _EltarshoubyState extends State<Eltarshouby> {
                 ),
                 const Center(
                   child: Text(
-                    'Eltarshouby pharmacy',
+                    'Eltarshouby \npharmacy',
                     style: TextStyle(fontFamily: 'alata', fontSize: 25),
                   ),
                 ),
                 const Spacer(
-                  flex: 1,
+                  flex: 3,
                 )
               ],
             ),
@@ -101,7 +110,7 @@ class _EltarshoubyState extends State<Eltarshouby> {
             Stack(
               children: [
                 Container(
-                  height: 130,
+                  height: 150,
                   width: 500,
                   margin: const EdgeInsets.symmetric(horizontal: 20),
                   decoration: BoxDecoration(
@@ -118,9 +127,6 @@ class _EltarshoubyState extends State<Eltarshouby> {
                 ),
                 Column(
                   children: [
-                    const SizedBox(
-                      height: 10,
-                    ),
                     ListTile(
                         leading: Image.asset(
                           'assets/images/blood.jpg',
@@ -286,7 +292,7 @@ class _EltarshoubyState extends State<Eltarshouby> {
                   width: 5,
                 ),
                 Text(
-                  typeDevice,
+                  TypeDevice,
                   style: const TextStyle(
                       color: Color(0xff69B5AB),
                       fontFamily: 'alata',
@@ -334,22 +340,37 @@ class _EltarshoubyState extends State<Eltarshouby> {
                 Expanded(
                   child: GestureDetector(
                     onTap: () {
-                      MoreClass().orderDevice(
-                          pharmacyName: pharmacyName,
-                          fullname: PatientConst.name,
-                          age: PatientConst.age,
-                          email: PatientConst.email,
-                          phoneNumber: PatientConst.phoneNumber,
-                          userName: PatientConst.userName,
-                          gender: PatientConst.gender,
-                          area: AddressConst.Area,
-                          apartmentNumber: AddressConst.ApartmentNumber,
-                          floorNumber: AddressConst.FloorNumber,
-                          streetName: AddressConst.StreetName,
-                          landlineNumber: AddressConst.LandlineNumber,
-                          buildingName: AddressConst.BuildingName,
-                          date: _selectTime.format(context),
-                          deviceType: typeDevice);
+                      if (TypeDevice != 'The type is not specified') {
+                        MoreClass().orderDevice(
+                            pharmacyName: pharmacyName,
+                            fullname: PatientConst.name,
+                            age: PatientConst.age,
+                            email: PatientConst.email,
+                            phoneNumber: PatientConst.phoneNumber,
+                            userName: PatientConst.userName,
+                            gender: PatientConst.gender,
+                            area: AddressConst.Area,
+                            apartmentNumber: AddressConst.ApartmentNumber,
+                            floorNumber: AddressConst.FloorNumber,
+                            streetName: AddressConst.StreetName,
+                            landlineNumber: AddressConst.LandlineNumber,
+                            buildingName: AddressConst.BuildingName,
+                            date: _selectTime.format(context),
+                            deviceType: TypeDevice,
+                            status: 'true');
+                        AwesomeDialog(
+                          context: context,
+                          dialogType: DialogType.success,
+                          animType: AnimType.rightSlide,
+                          title: 'Success',
+                          desc: 'The request has been completed',
+                          btnOkOnPress: () {
+                            Navigator.pushNamed(context, HomeNavBarPatient.id);
+                          },
+                        ).show();
+                      } else {
+                        ShowSnackBar(context, 'Select device type');
+                      }
                     },
                     child: Container(
                       height: 40,

@@ -1,4 +1,6 @@
 // ignore_for_file: use_build_context_synchronously, file_names, prefer_final_fields, unused_field
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/screens/Shadow/more%20details.dart';
 
@@ -11,6 +13,31 @@ class HomeShadow extends StatefulWidget {
 }
 
 class _HomeShadowState extends State<HomeShadow> {
+  String username = '';
+  Future<void> fetchData() async {
+    try {
+      DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
+          .collection('Shadow')
+          .doc(FirebaseAuth
+              .instance.currentUser!.uid) // Use the correct document ID here
+          .get();
+
+      if (documentSnapshot.exists) {
+        setState(() {
+          username = documentSnapshot['userName'];
+        });
+      } else {}
+    } catch (e) {
+      return;
+    }
+  }
+
+  @override
+  void initState() {
+    fetchData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,26 +52,26 @@ class _HomeShadowState extends State<HomeShadow> {
                 color: Color(0xffA9A360)),
             height: 150,
             width: 300,
-            child: const Padding(
-              padding: EdgeInsets.only(top: 10),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 10),
               child: Column(
                 children: [
                   Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 20,
                       ),
-                      Text('Hi,Ahmed777',
-                          style: TextStyle(
+                      Text('Hi,$username',
+                          style: const TextStyle(
                             fontFamily: 'alata',
                             fontSize: 30,
                             color: Colors.black,
                           )),
-                      Expanded(
+                      const Expanded(
                           child: SizedBox(
                         width: 0,
                       )),
-                      Column(
+                      const Column(
                         children: [
                           Image(
                             image: AssetImage('assets/images/Logo shadow.png'),
@@ -61,12 +88,12 @@ class _HomeShadowState extends State<HomeShadow> {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 20,
                       ),
                     ],
                   ),
-                  Row(
+                  const Row(
                     children: [
                       SizedBox(
                         width: 22,
@@ -79,7 +106,7 @@ class _HomeShadowState extends State<HomeShadow> {
                           )),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 40,
                   ),
                 ],

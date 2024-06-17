@@ -237,19 +237,16 @@ class _SelectDateSugerState extends State<SelectDateSuger> {
                   GestureDetector(
                     onTap: () async {
                       //first notification
+
                       if (formKey.currentState!.validate()) {
                         await sugerNotification(
                             2,
                             'Diabetes Reminder',
-                            'It\'s time to measure your diabetes.',
+                            'It\'s time to measure your first diabetes.',
                             _FirstTimeOfDay);
                         //secound notification
 
-                        await sugerNotification(
-                            3,
-                            'Blood Pressure Reminder',
-                            'It\'s time to measure your diabetes.',
-                            _SecondTimeOfDay);
+                      
 
                         isLoading = true;
                         setState(() {});
@@ -262,6 +259,14 @@ class _SelectDateSugerState extends State<SelectDateSuger> {
                         Navigator.pushNamed(context, EnterMeasurementsSuger.id);
                         isLoading = false;
                         setState(() {});
+                      }
+                      
+                      else if (formKey.currentState!.validate()){
+                          await sugerNotification(
+                            3,
+                            'Diabetes Reminder',
+                            'It\'s time to measure your second diabetes.',
+                            _SecondTimeOfDay);
                       }
                     },
                     child: Container(
@@ -357,8 +362,8 @@ Future<void> sugerNotification(
   final timeZone = await AwesomeNotifications().getLocalTimeZoneIdentifier();
 
   final schedule = NotificationInterval(
-    interval: const Duration(days: 1).inSeconds, // Use calculated difference
-    repeats: true,
+    interval: 10,
+    repeats: false,
     timeZone: timeZone,
   );
 

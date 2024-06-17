@@ -164,9 +164,6 @@ class _SelectDateBloodState extends State<SelectDateBlood> {
               const SizedBox(
                 height: 30,
               ),
-              const SizedBox(
-                width: 20,
-              ),
               Row(
                 children: [
                   const SizedBox(
@@ -175,7 +172,6 @@ class _SelectDateBloodState extends State<SelectDateBlood> {
                   GestureDetector(
                     onTap: () async {
                       // final now = DateTime.now();
-
                       // final scheduledTime = now.add(const Duration(seconds: 7));
 
                       await scheduleNotification(
@@ -289,8 +285,8 @@ Future<void> scheduleNotification(
   final timeZone = await AwesomeNotifications().getLocalTimeZoneIdentifier();
 
   final schedule = NotificationInterval(
-    interval: const Duration(days: 1).inSeconds, // Use calculated difference
-    repeats: true,
+    interval: 10, // Use calculated difference
+    repeats: false,
     timeZone: timeZone,
   );
 

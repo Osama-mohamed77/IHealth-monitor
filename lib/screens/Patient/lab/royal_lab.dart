@@ -3,23 +3,24 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/components/button.dart';
+import 'package:ihealth_monitor/helper/ShowSnackBar.dart';
 import 'package:ihealth_monitor/helper/class.dart';
 import 'package:ihealth_monitor/helper/userProfile.dart';
 import 'package:ihealth_monitor/screens/Patient/HomeNav_Bar_patient.dart';
-import 'package:ihealth_monitor/screens/Patient/patient_const.dart';
+import 'package:ihealth_monitor/helper/patient_const.dart';
 import 'package:ihealth_monitor/screens/utils/config.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-class LabScreen extends StatefulWidget {
-  const LabScreen({Key? key}) : super(key: key);
-  static String id = 'LabScreen';
+class RoyalScreen extends StatefulWidget {
+  const RoyalScreen({Key? key}) : super(key: key);
+  static String id = 'RoyalScreen';
 
   @override
-  State<LabScreen> createState() => _LabScreenState();
+  State<RoyalScreen> createState() => _RoyalScreenState();
 }
 
-class _LabScreenState extends State<LabScreen> {
- 
+class _RoyalScreenState extends State<RoyalScreen> {
+  String LabName = 'Royal lab';
   String entryId = '';
   @override
   void initState() {
@@ -45,18 +46,18 @@ class _LabScreenState extends State<LabScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xff69B5AB),
-        title: const Row(
+        title: Row(
           children: [
-            Spacer(
+            const Spacer(
               flex: 1,
             ),
-            Text('Laboratory',
-                style: TextStyle(
+            Text(LabName,
+                style: const TextStyle(
                   fontFamily: 'alata',
                   fontSize: 30,
                   color: Colors.black,
                 )),
-            Spacer(
+            const Spacer(
               flex: 2,
             ),
           ],
@@ -205,32 +206,38 @@ class _LabScreenState extends State<LabScreen> {
                     });
                   }
 
-                  await MoreClass().bookingLab(
-                    bookingTime: '${DateTime.now()}',
-                    bookingDate: selectedDay.toString(),
-                    fullname: PatientConst.name,
-                    age: PatientConst.age,
-                    email: PatientConst.email,
-                    phoneNumber: PatientConst.phoneNumber,
-                    userName: PatientConst.userName,
-                    gender: PatientConst.gender,
-                    area: AddressConst.Area,
-                    apartmentNumber: AddressConst.ApartmentNumber,
-                    floorNumber: AddressConst.FloorNumber,
-                    streetName: AddressConst.StreetName,
-                    landlineNumber: AddressConst.LandlineNumber,
-                    buildingName: AddressConst.BuildingName,
-                  );
-                  AwesomeDialog(
-                    context: context,
-                    dialogType: DialogType.success,
-                    animType: AnimType.rightSlide,
-                    title: 'Success',
-                    desc: 'The request has been completed',
-                    btnOkOnPress: () {
-                      Navigator.pushNamed(context, HomeNavBarPatient.id);
-                    },
-                  ).show();
+                  if (selectedDay != null) {
+                    await MoreClass().bookingLab(
+                      labName: LabName,
+                      bookingTime: '${DateTime.now()}',
+                      bookingDate: selectedDay.toString(),
+                      fullname: PatientConst.name,
+                      age: PatientConst.age,
+                      email: PatientConst.email,
+                      phoneNumber: PatientConst.phoneNumber,
+                      userName: PatientConst.userName,
+                      gender: PatientConst.gender,
+                      area: AddressConst.Area,
+                      apartmentNumber: AddressConst.ApartmentNumber,
+                      floorNumber: AddressConst.FloorNumber,
+                      streetName: AddressConst.StreetName,
+                      landlineNumber: AddressConst.LandlineNumber,
+                      buildingName: AddressConst.BuildingName,
+                      status: 'true',
+                    );
+                    AwesomeDialog(
+                      context: context,
+                      dialogType: DialogType.success,
+                      animType: AnimType.rightSlide,
+                      title: 'Success',
+                      desc: 'The request has been completed',
+                      btnOkOnPress: () {
+                        Navigator.pushNamed(context, HomeNavBarPatient.id);
+                      },
+                    ).show();
+                  } else {
+                    ShowSnackBar(context, 'Enter all data');
+                  }
                 }),
           ),
         ),

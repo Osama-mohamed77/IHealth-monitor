@@ -1,19 +1,22 @@
 // ignore_for_file: file_names, use_build_context_synchronously
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:ihealth_monitor/screens/Patient/settings_patient.dart';
 
 // ignore: camel_case_types
-class AccountDetails extends StatefulWidget {
-  const AccountDetails({super.key});
-  static String id = 'AccountDetails';
+class AccountDetailsPatient extends StatefulWidget {
+  const AccountDetailsPatient({super.key});
+  static String id = 'AccountDetailsPatient';
 
   @override
-  State<AccountDetails> createState() => _AccountDetailsState();
+  State<AccountDetailsPatient> createState() => _AccountDetailsPatientState();
 }
 
-class _AccountDetailsState extends State<AccountDetails> {
+class _AccountDetailsPatientState extends State<AccountDetailsPatient> {
+  int color = 0xff69B5AB;
   String fullName = '';
   String userName = '';
   String email = '';
@@ -21,7 +24,7 @@ class _AccountDetailsState extends State<AccountDetails> {
   Future<void> fetchData() async {
     try {
       DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
-          .collection('Doctors')
+          .collection('Patients')
           .doc(FirebaseAuth
               .instance.currentUser!.uid) // Use the correct document ID here
           .get();
@@ -49,11 +52,12 @@ class _AccountDetailsState extends State<AccountDetails> {
   TextEditingController UserNameController = TextEditingController();
   TextEditingController PhoneNumberController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xff92B28F),
+        backgroundColor: Color(color),
         title: const Row(
           children: [
             Spacer(
@@ -145,21 +149,48 @@ class _AccountDetailsState extends State<AccountDetails> {
                         if (fullNameController.text != '') {
                           await updateFullname(
                               fullname: fullNameController.text);
-                        } else {}
+                          AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.success,
+                            animType: AnimType.rightSlide,
+                            title: 'Success',
+                            btnOkOnPress: () {
+                              Navigator.pushNamed(context, SettingsPatient.id);
+                            },
+                          ).show();
+                        }
                         if (PhoneNumberController.text != '') {
                           await updatePhoneNumber(
                               phoneNumer: PhoneNumberController.text);
-                        } else {}
+                          AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.success,
+                            animType: AnimType.rightSlide,
+                            title: 'Success',
+                            btnOkOnPress: () {
+                              Navigator.pushNamed(context, SettingsPatient.id);
+                            },
+                          ).show();
+                        }
                         if (UserNameController.text != '') {
                           await updateUsername(
                               userName: UserNameController.text);
-                        } else {}
+                          AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.success,
+                            animType: AnimType.rightSlide,
+                            title: 'Success',
+                            btnOkOnPress: () {
+                              Navigator.pushNamed(context, SettingsPatient.id);
+                            },
+                          ).show();
+                        }
                       },
                       child: Container(
                         height: 50,
                         width: 150,
                         decoration: BoxDecoration(
-                            color: const Color(0xff92B28F),
+                            color: Color(color),
                             borderRadius: BorderRadius.circular(25)),
                         child: const Center(
                           child: Text('SAVE',
@@ -186,7 +217,7 @@ Future<void> updateFullname({
   required String fullname,
 }) async {
   await FirebaseFirestore.instance
-      .collection('Doctors')
+      .collection('Patients')
       .doc(FirebaseAuth.instance.currentUser!.uid)
       .update({
         'FullName': fullname,
@@ -199,7 +230,7 @@ Future<void> updatePhoneNumber({
   required String phoneNumer,
 }) async {
   await FirebaseFirestore.instance
-      .collection('Doctors')
+      .collection('Patients')
       .doc(FirebaseAuth.instance.currentUser!.uid)
       .update({
         'phoneNumber': phoneNumer,
@@ -212,7 +243,7 @@ Future<void> updateUsername({
   required String userName,
 }) async {
   await FirebaseFirestore.instance
-      .collection('Doctors')
+      .collection('Patients')
       .doc(FirebaseAuth.instance.currentUser!.uid)
       .update({
         'userName': userName,

@@ -320,7 +320,7 @@ class _signUpPatientState extends State<signUpPatient> {
                         isLoading = true;
                         setState(() {});
                         try {
-                          MoreClass().signUpUser(
+                          MoreClass().signUpPatients(
                               email: email.text,
                               password: password.text,
                               fullname: fullName.text,
@@ -328,8 +328,7 @@ class _signUpPatientState extends State<signUpPatient> {
                               age: age.text,
                               phoneNumer: phoneNumer.text,
                               gender: dropdownValue,
-                              token: ''
-                              );
+                              token: '');
 
                           Navigator.pushNamed(context, AddAddress.id);
 

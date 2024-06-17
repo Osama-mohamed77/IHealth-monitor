@@ -2,7 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:ihealth_monitor/screens/Patient/patient_const.dart';
+import 'package:ihealth_monitor/helper/patient_const.dart';
 
 class UserProfile {
   PatientModel patientModel = PatientModel();

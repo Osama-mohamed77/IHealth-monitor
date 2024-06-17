@@ -1,8 +1,11 @@
 // ignore_for_file: file_names, non_constant_identifier_names, unused_field
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:ihealth_monitor/helper/ShowSnackBar.dart';
 import 'package:ihealth_monitor/helper/class.dart';
-import 'package:ihealth_monitor/screens/Patient/patient_const.dart';
+import 'package:ihealth_monitor/helper/patient_const.dart';
+import 'package:ihealth_monitor/screens/Patient/HomeNav_Bar_patient.dart';
 
 class ElEzaby extends StatefulWidget {
   static String id = 'ElEzaby';
@@ -22,7 +25,7 @@ class _ElEzabyState extends State<ElEzaby> {
       setState(() {
         _selectTime = value!;
       });
-    }).onError((error, stackTrace) => null);
+    }).onError((error, stackTrace) => cancelled());
   }
 
   String TypeDevice = 'The type is not specified';
@@ -35,6 +38,12 @@ class _ElEzabyState extends State<ElEzaby> {
   Suger() async {
     setState(() {
       TypeDevice = 'Sugar glucose monitor';
+    });
+  }
+
+  cancelled() {
+    setState(() {
+      TypeDevice = 'The type is not specified';
     });
   }
 
@@ -68,8 +77,8 @@ class _ElEzabyState extends State<ElEzaby> {
                   flex: 1,
                 ),
                 Container(
-                  height: 130,
-                  width: 130,
+                  height: 110,
+                  width: 110,
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey),
                     borderRadius: BorderRadius.circular(100),
@@ -79,7 +88,7 @@ class _ElEzabyState extends State<ElEzaby> {
                     radius: 50,
                     child: Image.asset(
                       'assets/images/ezapy.png',
-                      height: 87,
+                      height: 70,
                     ),
                   ),
                 ),
@@ -93,7 +102,7 @@ class _ElEzabyState extends State<ElEzaby> {
                   ),
                 ),
                 const Spacer(
-                  flex: 1,
+                  flex: 2,
                 )
               ],
             ),
@@ -101,7 +110,7 @@ class _ElEzabyState extends State<ElEzaby> {
             Stack(
               children: [
                 Container(
-                  height: 130,
+                  height: 150,
                   width: 500,
                   margin: const EdgeInsets.symmetric(horizontal: 20),
                   decoration: BoxDecoration(
@@ -119,7 +128,7 @@ class _ElEzabyState extends State<ElEzaby> {
                 Column(
                   children: [
                     const SizedBox(
-                      height: 10,
+                      height: 0,
                     ),
                     ListTile(
                         leading: Image.asset(
@@ -334,22 +343,37 @@ class _ElEzabyState extends State<ElEzaby> {
                 Expanded(
                   child: GestureDetector(
                     onTap: () {
-                      MoreClass().orderDevice(
-                          pharmacyName: pharmacyName,
-                          fullname: PatientConst.name,
-                          age: PatientConst.age,
-                          email: PatientConst.email,
-                          phoneNumber: PatientConst.phoneNumber,
-                          userName: PatientConst.userName,
-                          gender: PatientConst.gender,
-                          area: AddressConst.Area,
-                          apartmentNumber: AddressConst.ApartmentNumber,
-                          floorNumber: AddressConst.FloorNumber,
-                          streetName: AddressConst.StreetName,
-                          landlineNumber: AddressConst.LandlineNumber,
-                          buildingName: AddressConst.BuildingName,
-                          date: _selectTime.format(context),
-                          deviceType: TypeDevice);
+                      if (TypeDevice != 'The type is not specified') {
+                        MoreClass().orderDevice(
+                            pharmacyName: pharmacyName,
+                            fullname: PatientConst.name,
+                            age: PatientConst.age,
+                            email: PatientConst.email,
+                            phoneNumber: PatientConst.phoneNumber,
+                            userName: PatientConst.userName,
+                            gender: PatientConst.gender,
+                            area: AddressConst.Area,
+                            apartmentNumber: AddressConst.ApartmentNumber,
+                            floorNumber: AddressConst.FloorNumber,
+                            streetName: AddressConst.StreetName,
+                            landlineNumber: AddressConst.LandlineNumber,
+                            buildingName: AddressConst.BuildingName,
+                            date: _selectTime.format(context),
+                            deviceType: TypeDevice,
+                            status: 'true');
+                        AwesomeDialog(
+                          context: context,
+                          dialogType: DialogType.success,
+                          animType: AnimType.rightSlide,
+                          title: 'Success',
+                          desc: 'The request has been completed',
+                          btnOkOnPress: () {
+                            Navigator.pushNamed(context, HomeNavBarPatient.id);
+                          },
+                        ).show();
+                      } else {
+                        ShowSnackBar(context, 'Select device type');
+                      }
                     },
                     child: Container(
                       height: 40,

@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:ihealth_monitor/screens/Doctor/Add%20patients.dart';
+import 'package:ihealth_monitor/screens/Doctor/Add_doctor.dart';
 import 'package:ihealth_monitor/screens/Doctor/Home.dart';
 import 'package:ihealth_monitor/screens/Doctor/settings.dart';
 
@@ -17,8 +17,7 @@ class _HomeNavBarDoctorState extends State<HomeNavBarDoctor> {
   int _currenIndex = 0;
   final List<Widget> listoption = <Widget>[
     const HomeDoctor(),
-    const AddPatients(),
-   
+    const AddDoctor(),
     const SettingsScreen()
   ];
   @override
@@ -52,7 +51,6 @@ class _HomeNavBarDoctorState extends State<HomeNavBarDoctor> {
                 icon: Icons.person_add_alt_1,
                 text: 'add ',
               ),
-            
               GButton(
                 icon: Icons.settings,
                 text: 'Settings',

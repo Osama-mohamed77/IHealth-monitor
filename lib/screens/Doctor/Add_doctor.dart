@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/screens/Doctor/Requests%20received.dart';
 
-class AddPatients extends StatelessWidget {
-  const AddPatients({super.key});
+class AddDoctor extends StatelessWidget {
+  const AddDoctor({super.key});
   static String id = 'AddPatients';
   @override
   Widget build(BuildContext context) {

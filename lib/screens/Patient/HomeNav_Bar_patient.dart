@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:ihealth_monitor/screens/Patient/Home%20Patient.dart';
-import 'package:ihealth_monitor/screens/Patient/add_screen.dart';
+import 'package:ihealth_monitor/screens/Patient/add_Followers.dart';
 import 'package:ihealth_monitor/screens/Patient/notifications_patient.dart';
 import 'package:ihealth_monitor/screens/Patient/settings_patient.dart';
 
@@ -18,8 +18,8 @@ class _HomeNavBarPatientState extends State<HomeNavBarPatient> {
   int _currenIndex = 0;
   final List<Widget> listoption = <Widget>[
     const HomePatients(),
-    const AddDoctors(),
-     const NotificationsPatient(),
+    const AddFollowers(),
+    const NotificationsPatient(),
     const SettingsPatient()
   ];
   @override

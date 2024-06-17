@@ -276,6 +276,7 @@ class _moreDeteilsShadowState extends State<moreDeteilsShadow> {
       });
     }
   }
+
   // 17/5
   Map<DateTime, dynamic> customNumbers17 = {};
   Future<void> seventeenMay() async {
@@ -302,7 +303,31 @@ class _moreDeteilsShadowState extends State<moreDeteilsShadow> {
     }
   }
 
-  
+  // 6/6
+  Map<DateTime, dynamic> customNumbers66 = {};
+  Future<void> sixJune() async {
+    var numbersCollection = await FirebaseFirestore.instance
+        .collection('Patients')
+        .doc('6CRVQ2LC6OX1GhRso45Z4iM4Lev2')
+        .collection('Sugar Measurement')
+        .doc('measurements dates')
+        .collection('measurements')
+        .doc('2024,6,6')
+        .get();
+
+    Map<DateTime, dynamic> tempCustomNumbers = {};
+
+    if (numbersCollection.exists &&
+        numbersCollection.data()!['first'] is String) {
+      DateTime date = DateTime(2024, 6, 6);
+      dynamic number = numbersCollection.data()!['first'];
+
+      tempCustomNumbers[date] = number;
+      setState(() {
+        customNumbers66 = tempCustomNumbers;
+      });
+    }
+  }
 
   @override
   void initState() {
@@ -317,6 +342,7 @@ class _moreDeteilsShadowState extends State<moreDeteilsShadow> {
     eightMay();
     nineMay();
     tenMay();
+    sixJune();
     seventeenMay();
     oneMayPressure();
     twoMayPressure();
@@ -329,6 +355,7 @@ class _moreDeteilsShadowState extends State<moreDeteilsShadow> {
     nineMayPressure();
     tenMayPressure();
     seventeenMayPressure();
+    sixJunePressure();
   }
 
   ////Pressure Measurement
@@ -595,6 +622,7 @@ class _moreDeteilsShadowState extends State<moreDeteilsShadow> {
       });
     }
   }
+
   // 17/5
   Map<DateTime, dynamic> day17 = {};
   Future<void> seventeenMayPressure() async {
@@ -616,7 +644,33 @@ class _moreDeteilsShadowState extends State<moreDeteilsShadow> {
 
       tempCustomNumbers[date] = number;
       setState(() {
-        customNumbers17 = tempCustomNumbers;
+        day17 = tempCustomNumbers;
+      });
+    }
+  }
+
+  // 6/6
+  Map<DateTime, dynamic> day66 = {};
+  Future<void> sixJunePressure() async {
+    var numbersCollection = await FirebaseFirestore.instance
+        .collection('Patients')
+        .doc('6CRVQ2LC6OX1GhRso45Z4iM4Lev2')
+        .collection('Pressure Measurement')
+        .doc('measurements dates')
+        .collection('measurements')
+        .doc('2024,6,6')
+        .get();
+
+    Map<DateTime, dynamic> tempCustomNumbers = {};
+
+    if (numbersCollection.exists &&
+        numbersCollection.data()!['measurement'] is String) {
+      DateTime date = DateTime(2024, 6, 6);
+      dynamic number = numbersCollection.data()!['measurement'];
+
+      tempCustomNumbers[date] = number;
+      setState(() {
+        day66 = tempCustomNumbers;
       });
     }
   }
@@ -624,85 +678,27 @@ class _moreDeteilsShadowState extends State<moreDeteilsShadow> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          title: const Row(
+            children: [
+              Spacer(
+                flex: 1,
+              ),
+              Text('Mohamed abdallah',
+                  style: TextStyle(
+                    fontFamily: 'alata',
+                    fontSize: 25,
+                    color: Colors.black,
+                  )),
+              Spacer(
+                flex: 2,
+              ),
+            ],
+          ),
+        ),
         backgroundColor: const Color(0xffFFFEFB),
         body: ListView(
           children: [
-            Container(
-              width: 360,
-              height: 84,
-              decoration: const BoxDecoration(
-                color: Color(0xffA9A360),
-                borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(30),
-                  bottomLeft: Radius.circular(30),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Color(0x3f000000),
-                    offset: Offset(0, 4),
-                    blurRadius: 2,
-                  ),
-                  BoxShadow(
-                    color: Color(0x3f000000),
-                    offset: Offset(0, 4),
-                    blurRadius: 2,
-                  ),
-                ],
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 10),
-                child: Row(
-                  children: [
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Icon(
-                        Icons.arrow_back_sharp,
-                        size: 33,
-                      ),
-                    ),
-                    const Spacer(
-                      flex: 1,
-                    ),
-                    const Text(
-                      'Mohamed abdallah',
-                      style: TextStyle(
-                          fontFamily: 'Alata',
-                          fontSize: 25,
-                          color: Color(0xff000000),
-                          height: -.3),
-                    ),
-                    const Spacer(
-                      flex: 1,
-                    ),
-                    const Column(
-                      children: [
-                        Image(
-                          image: AssetImage('assets/images/Logo shadow.png'),
-                          height: 50,
-                        ),
-                        Text(
-                          'Shadow',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontFamily: 'Pacifico',
-                            fontSize: 14,
-                            height: 1,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    )
-                  ],
-                ),
-              ),
-            ),
             const SizedBox(
               height: 30,
             ),
@@ -752,6 +748,7 @@ class _moreDeteilsShadowState extends State<moreDeteilsShadow> {
                     final customNumber9 = customNumbers9[currentDate];
                     final customNumber10 = customNumbers10[currentDate];
                     final customNumber17 = customNumbers17[currentDate];
+                    final customNumber66 = customNumbers66[currentDate];
                     return Stack(
                       children: [
                         Positioned.fill(
@@ -930,7 +927,7 @@ class _moreDeteilsShadowState extends State<moreDeteilsShadow> {
                               ),
                             ),
                           ),
-                           ////17
+                        ////17
                         if (customNumber17 != null)
                           Positioned(
                             bottom: 0,
@@ -939,6 +936,23 @@ class _moreDeteilsShadowState extends State<moreDeteilsShadow> {
                             child: Center(
                               child: Text(
                                 customNumber17.toString(),
+                                style: const TextStyle(
+                                  fontSize: 11,
+                                  color: Colors.blue,
+                                ),
+                              ),
+                            ),
+                          ),
+
+                        ////6/6
+                        if (customNumber66 != null)
+                          Positioned(
+                            bottom: 0,
+                            left: 0,
+                            right: 0,
+                            child: Center(
+                              child: Text(
+                                customNumber66.toString(),
                                 style: const TextStyle(
                                   fontSize: 11,
                                   color: Colors.blue,
@@ -957,7 +971,8 @@ class _moreDeteilsShadowState extends State<moreDeteilsShadow> {
                             customNumber8 == null &&
                             customNumber9 == null &&
                             customNumber10 == null &&
-                            customNumber17 == null)
+                            customNumber17 == null &&
+                            customNumber66 == null)
                           const Positioned(
                             bottom: 0,
                             left: 0,
@@ -1027,6 +1042,7 @@ class _moreDeteilsShadowState extends State<moreDeteilsShadow> {
                     final dayNumber9 = day9[currentDate];
                     final dayNumber10 = day10[currentDate];
                     final dayNumber17 = day17[currentDate];
+                    final dayNumber66 = day66[currentDate];
 
                     return Stack(
                       children: [
@@ -1208,7 +1224,7 @@ class _moreDeteilsShadowState extends State<moreDeteilsShadow> {
                               ),
                             ),
                           ),
-                           ////17
+                        ////17
                         if (dayNumber17 != null)
                           Positioned(
                             bottom: 0,
@@ -1217,6 +1233,23 @@ class _moreDeteilsShadowState extends State<moreDeteilsShadow> {
                             child: Center(
                               child: Text(
                                 dayNumber17.toString(),
+                                style: const TextStyle(
+                                  fontSize: 11,
+                                  color: Colors.blue,
+                                ),
+                              ),
+                            ),
+                          ),
+
+                        ////6/6
+                        if (dayNumber66 != null)
+                          Positioned(
+                            bottom: 0,
+                            left: 0,
+                            right: 0,
+                            child: Center(
+                              child: Text(
+                                dayNumber66.toString(),
                                 style: const TextStyle(
                                   fontSize: 11,
                                   color: Colors.blue,
@@ -1235,7 +1268,8 @@ class _moreDeteilsShadowState extends State<moreDeteilsShadow> {
                             dayNumber8 == null &&
                             dayNumber9 == null &&
                             dayNumber10 == null &&
-                            dayNumber17 == null)
+                            dayNumber17 == null &&
+                            dayNumber66 == null)
                           const Positioned(
                             bottom: 0,
                             left: 0,

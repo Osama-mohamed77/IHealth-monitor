@@ -2,33 +2,6 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 
-Future<void> scheduleNotification(
-    int id, String title, String body, DateTime scheduledTime) async {
-  final notificationContent = NotificationContent(
-    id: id,
-    channelKey: 'basic_channel', // Ensure it matches your channel
-    title: title,
-    body: body,
-  );
-
-  final now = DateTime.now();
-  final secondsUntilScheduledTime = scheduledTime.difference(now).inSeconds;
-
-  final timeZone = await AwesomeNotifications().getLocalTimeZoneIdentifier();
-
-  final schedule = NotificationInterval(
-    interval: secondsUntilScheduledTime, // Use calculated difference
-    repeats: false,
-    timeZone: timeZone,
-  );
-
-
-  await AwesomeNotifications().createNotification(
-    content: notificationContent,
-    schedule: schedule,
-  );
-}
-
 class NotificationsPatient extends StatefulWidget {
   const NotificationsPatient({super.key});
 
@@ -37,6 +10,7 @@ class NotificationsPatient extends StatefulWidget {
 }
 
 class _NotificationsPatientState extends State<NotificationsPatient> {
+  @override
   @override
   void initState() {
     super.initState();
@@ -57,26 +31,17 @@ class _NotificationsPatientState extends State<NotificationsPatient> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Schedule Notifications'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () async {
-            // Get the current time
-            final now = DateTime.now();
-
-            final scheduledTime = now.add(const Duration(seconds: 10));
-
-            await scheduleNotification(
-                1, 'Reminder', 'Take your medication?', scheduledTime);
-          },
-          child: const Text('Schedule Notification'),
-        ),
-      ),
-    );
+        appBar: AppBar(
+      automaticallyImplyLeading: false,
+      title: Center(child: const Text('Schedule Notifications')),
+    ));
   }
 }
+
+
+
+
+
 
 // import 'package:awesome_notifications/awesome_notifications.dart';
 // import 'package:flutter/material.dart';

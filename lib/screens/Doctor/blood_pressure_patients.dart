@@ -4,15 +4,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/screens/Doctor/Bpmore%20deteils.dart';
 
-class BloodPressurePatients extends StatefulWidget {
-  static String id = 'BloodPressurePatients';
-  const BloodPressurePatients({super.key});
+class BloodPressure extends StatefulWidget {
+  static String id = 'BloodPressure';
+  const BloodPressure({super.key});
 
   @override
   _BloodPressurePatientsState createState() => _BloodPressurePatientsState();
 }
 
-class _BloodPressurePatientsState extends State<BloodPressurePatients> {
+class _BloodPressurePatientsState extends State<BloodPressure> {
   List<Map<String, dynamic>> patients = [];
 
   @override
@@ -36,8 +36,20 @@ class _BloodPressurePatientsState extends State<BloodPressurePatients> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xffF0F0F0),
       appBar: AppBar(
-        title: const Text('Blood Pressure Patients'),
+        backgroundColor: const Color(0xff92B28F),
+        title: const Row(
+          children: [
+            Spacer(
+              flex: 1,
+            ),
+            Text('Blood Pressure Patients'),
+            Spacer(
+              flex: 2,
+            ),
+          ],
+        ),
       ),
       body: ListView.builder(
         itemCount: patients.length,

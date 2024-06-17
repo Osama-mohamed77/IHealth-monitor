@@ -1,5 +1,7 @@
 // ignore_for_file: avoid_print, unused_local_variable
 
+import 'dart:ui';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ihealth_monitor/helper/measurement_model.dart';
@@ -136,7 +138,7 @@ class MoreClass {
         .catchError((error) => print("Failed to add user: $error"));
   }
 
-  Future<void> signUpUser({
+  Future<void> signUpPatients({
     required String email,
     required String password,
     required String fullname,
@@ -176,7 +178,9 @@ class MoreClass {
       required String buildingName,
       required String floorNumber,
       required String landlineNumber,
-      required String doctorID}) async {
+      required String doctorID,
+      required String clinicName,
+      required String status}) async {
     await _fireStore.collection('reservation').doc(_auth.currentUser!.uid).set({
       'id': _auth.currentUser!.uid,
       'time': bookingTime,
@@ -194,7 +198,21 @@ class MoreClass {
       'BuildingName': buildingName,
       'FloorNumber': floorNumber,
       'LandlineNumber': landlineNumber,
-      'doctorID': doctorID
+      'doctorID': doctorID,
+      'Clinic name': clinicName,
+      'status': status
+    });
+  }
+
+  Future<void> sendBookingToPatient({
+    required String bookingTime,
+    required String bookingDate,
+    required String doctorName,
+  }) async {
+    await _fireStore.collection('Patients').doc(_auth.currentUser!.uid).update({
+      'time': bookingTime,
+      'bookingDate': bookingDate,
+      'doctorName': doctorName,
     });
   }
 
@@ -213,7 +231,8 @@ class MoreClass {
       required String landlineNumber,
       required String date,
       required String pharmacyName,
-      required String deviceType}) async {
+      required String deviceType,
+      required String status}) async {
     await _fireStore.collection('OrderList').doc(_auth.currentUser!.uid).set({
       'id': _auth.currentUser!.uid,
       'pharmacyName': pharmacyName,
@@ -230,26 +249,28 @@ class MoreClass {
       'BuildingName': buildingName,
       'FloorNumber': floorNumber,
       'LandlineNumber': landlineNumber,
-      'deviceType': deviceType
+      'status': status,
+      'deviceType': deviceType,
     });
   }
 
-  Future<void> bookingLab({
-    required String bookingTime,
-    required String bookingDate,
-    required String fullname,
-    required String age,
-    required String email,
-    required String userName,
-    required String phoneNumber,
-    required String gender,
-    required String area,
-    required String streetName,
-    required String apartmentNumber,
-    required String buildingName,
-    required String floorNumber,
-    required String landlineNumber,
-  }) async {
+  Future<void> bookingLab(
+      {required String bookingTime,
+      required String bookingDate,
+      required String fullname,
+      required String age,
+      required String email,
+      required String userName,
+      required String phoneNumber,
+      required String gender,
+      required String area,
+      required String streetName,
+      required String apartmentNumber,
+      required String buildingName,
+      required String floorNumber,
+      required String landlineNumber,
+      required String labName,
+      required String status}) async {
     await _fireStore
         .collection('reservation lab')
         .doc(_auth.currentUser!.uid)
@@ -269,6 +290,8 @@ class MoreClass {
       'BuildingName': buildingName,
       'FloorNumber': floorNumber,
       'LandlineNumber': landlineNumber,
+      'Lab name': labName,
+      'status': status
     });
   }
 
@@ -312,7 +335,66 @@ class MoreClass {
       );
     });
   }
+
+  Future<void> TrueFlag({required String flag}) async {
+    await _fireStore
+        .collection('Patients')
+        .doc('AKut52R1LzdDvBQfJAzJLEsQCsq2')
+        .update({'flag': flag}).catchError(
+            (error) => print("Failed to add user: $error"));
+  }
+
+  Future<void> FalseFlag({required String flag}) async {
+    await _fireStore
+        .collection('Patients')
+        .doc('AKut52R1LzdDvBQfJAzJLEsQCsq2')
+        .update({'flag': flag}).catchError(
+            (error) => print("Failed to add user: $error"));
+  }
+
+  //shadow
+
+  Future<void> addShadow({
+    required String fullname,
+    required String userName,
+    required String phoneNumer,
+    required String email,
+  }) async {
+    await _fireStore
+        .collection('Shadow')
+        .doc(_auth.currentUser!.uid)
+        .set({
+          'id': _auth.currentUser!.uid,
+          'FullName': fullname,
+          'userName': userName,
+          'phoneNumber': phoneNumer,
+          'email': email,
+        })
+        .then((value) => print("User Added"))
+        .catchError((error) => print("Failed to add user: $error"));
+  }
+
+  Future<void> signUpShadow({
+    required String email,
+    required String password,
+    required String fullname,
+    required String userName,
+    required String phoneNumer,
+  }) async {
+    UserCredential user = await FirebaseAuth.instance
+        .createUserWithEmailAndPassword(email: email, password: password)
+        .whenComplete(() {
+      return MoreClass().addShadow(
+        fullname: fullname,
+        userName: userName,
+        phoneNumer: phoneNumer,
+        email: email,
+      );
+    });
+  }
 }
+
+
 
 
 
