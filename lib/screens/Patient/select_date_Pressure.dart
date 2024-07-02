@@ -2,7 +2,9 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/helper/class.dart';
 import 'package:ihealth_monitor/screens/Patient/enter_measurements_Pressure.dart';
+import 'package:ihealth_monitor/screens/Patient/notifications_patient.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:firebase_auth/firebase_auth.dart'; // Import FirebaseAuth
 
 class SelectDateBlood extends StatefulWidget {
   const SelectDateBlood({super.key});
@@ -16,6 +18,7 @@ class _SelectDateBloodState extends State<SelectDateBlood> {
   bool isLoading = false;
   TimeOfDay _FirstTimeOfDay = const TimeOfDay(hour: 00, minute: 00);
   GlobalKey<FormState> formKey = GlobalKey();
+
   _ShowTimePickerFirst() async {
     await showTimePicker(context: context, initialTime: TimeOfDay.now())
         .then((value) {
@@ -24,8 +27,6 @@ class _SelectDateBloodState extends State<SelectDateBlood> {
       });
     }).onError((error, stackTrace) => null);
   }
-
-  
 
   @override
   void initState() {
@@ -58,10 +59,10 @@ class _SelectDateBloodState extends State<SelectDateBlood> {
                 Spacer(
                   flex: 1,
                 ),
-                Text('Enter measurements',
+                Text('Pressure measurements',
                     style: TextStyle(
                       fontFamily: 'alata',
-                      fontSize: 25,
+                      fontSize: 23,
                       color: Colors.black,
                     )),
                 Spacer(
@@ -160,14 +161,15 @@ class _SelectDateBloodState extends State<SelectDateBlood> {
                   ),
                   GestureDetector(
                     onTap: () async {
-                      // final now = DateTime.now();
-                      // final scheduledTime = now.add(const Duration(seconds: 7));
-
-                      await scheduleNotification(
-                          1,
-                          'Blood Pressure Reminder',
-                          'It\'s time to take your blood pressure reading.',
-                          _FirstTimeOfDay);
+                      User? currentUser = FirebaseAuth.instance.currentUser;
+                      if (currentUser != null) {
+                        await scheduleNotification(
+                            currentUser.uid,
+                            1,
+                            'Blood Pressure Reminder',
+                            'It\'s time to take your blood pressure reading.',
+                            _FirstTimeOfDay);
+                      }
 
                       isLoading = true;
                       setState(() {});
@@ -259,22 +261,19 @@ class _SelectDateBloodState extends State<SelectDateBlood> {
   }
 }
 
-Future<void> scheduleNotification(
-    int id, String title, String body, TimeOfDay scheduledTime) async {
+Future<void> scheduleNotification(String userId, int id, String title,
+    String body, TimeOfDay scheduledTime) async {
   final notificationContent = NotificationContent(
     id: id,
-    channelKey: 'basic_channel', // Ensure it matches your channel
+    channelKey: 'basic_channel',
     title: title,
     body: body,
   );
 
-  // final now = DateTime.now();
-  // final secondsUntilScheduledTime = scheduledTime.difference(now).inSeconds;
-
   final timeZone = await AwesomeNotifications().getLocalTimeZoneIdentifier();
 
   final schedule = NotificationInterval(
-    interval: 10, // Use calculated difference
+    interval: 10,
     repeats: false,
     timeZone: timeZone,
   );
@@ -283,4 +282,5 @@ Future<void> scheduleNotification(
     content: notificationContent,
     schedule: schedule,
   );
+  await NotificationManager.saveNotification(userId, id, title, body);
 }

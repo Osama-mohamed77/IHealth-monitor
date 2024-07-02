@@ -68,6 +68,7 @@ dependencies:
   gap: ^3.0.1
   badges: ^3.1.2
   cached_network_image: ^3.3.1
+  firebase_database: ^10.5.7
   # image_downloader: ^0.31.0
 
 dev_dependencies:

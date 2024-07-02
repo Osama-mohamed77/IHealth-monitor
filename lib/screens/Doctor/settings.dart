@@ -9,7 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
-  static String id = 'SettingsPatient';
+  static String id = 'SettingsScreen';
 
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
@@ -57,20 +57,27 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   Future<void> _saveImage(String imagePath) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String userId = FirebaseAuth.instance.currentUser!.uid;
-    await prefs.setString('profile_image_$userId', imagePath);
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String userId = FirebaseAuth.instance.currentUser!.uid;
+      await prefs.setString('profile_image_$userId', imagePath);
+    } catch (e) {
+      return;
+    }
   }
 
   Future<void> _loadImage() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String userId = FirebaseAuth.instance.currentUser!.uid;
-    String? imagePath = prefs.getString('profile_image_$userId');
-    if (imagePath != null) {
-      setState(() {
-        _image = File(imagePath);
-      });
-    }
+    User? currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser != null) {
+      String userId = currentUser.uid;
+      String? imagePath = prefs.getString('profile_image_$userId');
+      if (imagePath != null) {
+        setState(() {
+          _image = File(imagePath);
+        });
+      }
+    } else {}
   }
 
   Future<void> _deleteImage() async {

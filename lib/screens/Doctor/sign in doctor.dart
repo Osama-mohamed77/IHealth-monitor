@@ -1,7 +1,8 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:ihealth_monitor/components/HomeNav_Bar.dart';
+import 'package:ihealth_monitor/screens/Doctor/HomeNav_Bar.dart';
 import 'package:ihealth_monitor/components/textformfield.dart';
 import 'package:ihealth_monitor/helper/ShowSnackBar.dart';
 import 'package:ihealth_monitor/screens/Doctor/forget%20password.dart';
@@ -143,7 +144,6 @@ class _SignUpState extends State<SignIn> {
                         setState(() {});
                         try {
                           await signInUser();
-                          Navigator.pushNamed(context, HomeNavBarDoctor.id);
                         } on FirebaseAuthException catch (e) {
                           if (e.code == 'user-not-found') {
                             AwesomeDialog(
@@ -228,7 +228,76 @@ class _SignUpState extends State<SignIn> {
   }
 
   Future<void> signInUser() async {
-       FirebaseAuth.instance
-        .signInWithEmailAndPassword(email: email.text, password: password.text);
+    try {
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email.text,
+        password: password.text,
+      );
+
+      User? user = userCredential.user;
+      if (user != null) {
+        String userId = user.uid;
+
+        // Fetch the user's role from Firestore
+        DocumentSnapshot userDoc = await FirebaseFirestore.instance
+            .collection('Users')
+            .doc(userId)
+            .get();
+        String? role = userDoc['role'];
+
+        // Check if role is set
+        if (role == null || role.isEmpty) {
+          print('Role not set for this user');
+          await FirebaseAuth.instance.signOut();
+          AwesomeDialog(
+            context: context,
+            dialogType: DialogType.error,
+            animType: AnimType.rightSlide,
+            title: 'Sign-in Error',
+            desc: 'Your role is not set. Please contact support.',
+            btnOkOnPress: () {},
+          ).show();
+        } else {
+          // Navigate based on role
+          if (role == 'patient') {
+            ShowSnackBar(
+                context, 'This account is for the patient application');
+          } else if (role == 'doctor') {
+            Navigator.pushReplacementNamed(context, HomeNavBarDoctor.id);
+          } else if (role == 'shadow') {
+            ShowSnackBar(context, 'This account is for the shadow application');
+          } else {
+            print('Unknown role: $role');
+          }
+        }
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        AwesomeDialog(
+          context: context,
+          dialogType: DialogType.error,
+          animType: AnimType.rightSlide,
+          title: 'Sign-in Error',
+          desc: 'User not found. Please check your email address.',
+          btnOkOnPress: () {},
+        ).show();
+      } else if (e.code == 'wrong-password') {
+        AwesomeDialog(
+          context: context,
+          dialogType: DialogType.error,
+          animType: AnimType.rightSlide,
+          title: 'Sign-in Error',
+          desc: 'Wrong password. Please check your password and try again.',
+          btnOkOnPress: () {},
+        ).show();
+      } else {
+        ShowSnackBar(context, 'Error: ${e.message}');
+      }
+    } catch (e) {
+      // Handle other errors
+      ShowSnackBar(context, 'Sign-in failed. Please try again later.');
+      print('Sign-in failed: $e');
+    }
   }
 }

@@ -72,6 +72,7 @@ class _LabScreenState extends State<LabScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color(0xff69B5AB),
         title: const Row(
           children: [
             Spacer(

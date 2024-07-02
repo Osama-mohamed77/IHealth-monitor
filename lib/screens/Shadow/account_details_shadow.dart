@@ -1,4 +1,3 @@
-
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -19,6 +18,7 @@ class _AccountDetailsShadowState extends State<AccountDetailsShadow> {
   String userName = '';
   String email = '';
   String PhoneNumber = '';
+
   Future<void> fetchData() async {
     try {
       DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
@@ -34,7 +34,7 @@ class _AccountDetailsShadowState extends State<AccountDetailsShadow> {
           email = documentSnapshot['email'];
           PhoneNumber = documentSnapshot['phoneNumber'];
         });
-      } else {}
+      }
     } catch (e) {
       return;
     }
@@ -42,8 +42,8 @@ class _AccountDetailsShadowState extends State<AccountDetailsShadow> {
 
   @override
   void initState() {
-    fetchData();
     super.initState();
+    fetchData();
     changeColor();
   }
 
@@ -53,21 +53,86 @@ class _AccountDetailsShadowState extends State<AccountDetailsShadow> {
   GlobalKey<FormState> formKey = GlobalKey();
 
   Future<void> changeColor() async {
-    if (fullNameController.text != '') {
+    if (fullNameController.text.isNotEmpty ||
+        PhoneNumberController.text.isNotEmpty ||
+        UserNameController.text.isNotEmpty) {
       setState(() {
         color = 0xffA9A360;
       });
     }
-    if (PhoneNumberController.text != '') {
-      setState(() {
-        color = 0xffA9A360;
-      });
-    }
-    if (UserNameController.text != '') {
-      setState(() {
-        color = 0xffA9A360;
-      });
-    } else {}
+  }
+
+  Future<void> updateFullname({
+    required String fullname,
+  }) async {
+    await FirebaseFirestore.instance
+        .collection('Shadow')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .update({'FullName': fullname}).catchError((error) => null);
+  }
+
+  Future<void> updatePhoneNumber({
+    required String phoneNumer,
+  }) async {
+    await FirebaseFirestore.instance
+        .collection('Shadow')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .update({'phoneNumber': phoneNumer}).catchError((error) => null);
+  }
+
+  Future<void> updateUsername({
+    required String userName,
+  }) async {
+    await FirebaseFirestore.instance
+        .collection('Shadow')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .update({'userName': userName}).catchError((error) => null);
+
+    // Optionally update username in 'Users' collection as well
+    await FirebaseFirestore.instance
+        .collection('Users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .update({'userName': userName}).catchError((error) => null);
+  }
+
+  Future<bool> isUsernameUnique(String userName) async {
+    // Check in the 'Shadow' collection
+    final shadowQuerySnapshot = await FirebaseFirestore.instance
+        .collection('Shadow')
+        .where('userName', isEqualTo: userName)
+        .get();
+
+    // Check in the 'Users' collection
+    final usersQuerySnapshot = await FirebaseFirestore.instance
+        .collection('Users')
+        .where('userName', isEqualTo: userName)
+        .get();
+
+    // Returns true if the username is not found in both collections
+    return shadowQuerySnapshot.docs.isEmpty && usersQuerySnapshot.docs.isEmpty;
+  }
+
+  void _showErrorDialog(String message) {
+    AwesomeDialog(
+      context: context,
+      dialogType: DialogType.error,
+      animType: AnimType.rightSlide,
+      title: 'Error',
+      desc: message,
+      btnOkOnPress: () {},
+    ).show();
+  }
+
+  void _showSuccessDialog() {
+    AwesomeDialog(
+      context: context,
+      dialogType: DialogType.success,
+      animType: AnimType.rightSlide,
+      title: 'Success',
+      btnOkOnPress: () {
+        Navigator.pushNamed(context, SettingsShadow.id);
+      },
+    ).show();
   }
 
   @override
@@ -77,18 +142,14 @@ class _AccountDetailsShadowState extends State<AccountDetailsShadow> {
         backgroundColor: const Color(0xffCFCCAE),
         title: const Row(
           children: [
-            Spacer(
-              flex: 1,
-            ),
+            Spacer(flex: 1),
             Text('Account details',
                 style: TextStyle(
                   fontFamily: 'alata',
                   fontSize: 30,
                   color: Colors.black,
                 )),
-            Spacer(
-              flex: 2,
-            ),
+            Spacer(flex: 2),
           ],
         ),
       ),
@@ -98,9 +159,7 @@ class _AccountDetailsShadowState extends State<AccountDetailsShadow> {
           key: formKey,
           child: ListView(
             children: [
-              const SizedBox(
-                height: 70,
-              ),
+              const SizedBox(height: 70),
               Center(
                 child: SizedBox(
                   height: 100,
@@ -157,50 +216,38 @@ class _AccountDetailsShadowState extends State<AccountDetailsShadow> {
               ),
               Row(
                 children: [
-                  const SizedBox(
-                    width: 30,
-                  ),
+                  const SizedBox(width: 30),
                   Expanded(
                     child: GestureDetector(
                       onTap: () async {
-                        if (fullNameController.text != '') {
+                        bool hasError = false;
+                        String errorMessage = '';
+
+                        if (fullNameController.text.isNotEmpty) {
                           await updateFullname(
                               fullname: fullNameController.text);
-                          AwesomeDialog(
-                            context: context,
-                            dialogType: DialogType.success,
-                            animType: AnimType.rightSlide,
-                            title: 'Success',
-                            btnOkOnPress: () {
-                              Navigator.pushNamed(context, SettingsShadow.id);
-                            },
-                          ).show();
+                          _showSuccessDialog();
                         }
-                        if (PhoneNumberController.text != '') {
+                        if (PhoneNumberController.text.isNotEmpty) {
                           await updatePhoneNumber(
                               phoneNumer: PhoneNumberController.text);
-                          AwesomeDialog(
-                            context: context,
-                            dialogType: DialogType.success,
-                            animType: AnimType.rightSlide,
-                            title: 'Success',
-                            btnOkOnPress: () {
-                              Navigator.pushNamed(context, SettingsShadow.id);
-                            },
-                          ).show();
+                          _showSuccessDialog();
                         }
-                        if (UserNameController.text != '') {
-                          await updateUsername(
-                              userName: UserNameController.text);
-                          AwesomeDialog(
-                            context: context,
-                            dialogType: DialogType.success,
-                            animType: AnimType.rightSlide,
-                            title: 'Success',
-                            btnOkOnPress: () {
-                              Navigator.pushNamed(context, SettingsShadow.id);
-                            },
-                          ).show();
+                        if (UserNameController.text.isNotEmpty) {
+                          final newUserName = UserNameController.text;
+                          final isUnique = await isUsernameUnique(newUserName);
+                          if (isUnique) {
+                            await updateUsername(userName: newUserName);
+                            _showSuccessDialog();
+                          } else {
+                            hasError = true;
+                            errorMessage =
+                                'Username already exists. Please choose a different one.';
+                          }
+                        }
+
+                        if (hasError) {
+                          _showErrorDialog(errorMessage);
                         }
                       },
                       child: Container(
@@ -217,9 +264,7 @@ class _AccountDetailsShadowState extends State<AccountDetailsShadow> {
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    width: 30,
-                  ),
+                  const SizedBox(width: 30),
                 ],
               ),
             ],
@@ -230,39 +275,19 @@ class _AccountDetailsShadowState extends State<AccountDetailsShadow> {
   }
 }
 
-Future<void> updateFullname({
-  required String fullname,
-}) async {
-  await FirebaseFirestore.instance
+Future<bool> isUsernameUnique(String userName) async {
+  // Check in the 'Shadow' collection
+  final shadowQuerySnapshot = await FirebaseFirestore.instance
       .collection('Shadow')
-      .doc(FirebaseAuth.instance.currentUser!.uid)
-      .update({
-        'FullName': fullname,
-      })
-      .catchError((error) =>  null);
-}
+      .where('userName', isEqualTo: userName)
+      .get();
 
-Future<void> updatePhoneNumber({
-  required String phoneNumer,
-}) async {
-  await FirebaseFirestore.instance
-      .collection('Shadow')
-      .doc(FirebaseAuth.instance.currentUser!.uid)
-      .update({
-        'phoneNumber': phoneNumer,
-      })
-      
-      .catchError((error) => null);
-}
+  // Check in the 'Users' collection
+  final usersQuerySnapshot = await FirebaseFirestore.instance
+      .collection('Users')
+      .where('userName', isEqualTo: userName)
+      .get();
 
-Future<void> updateUsername({
-  required String userName,
-}) async {
-  await FirebaseFirestore.instance
-      .collection('Shadow')
-      .doc(FirebaseAuth.instance.currentUser!.uid)
-      .update({
-        'userName': userName,
-      })
-      .catchError((error) =>  null);
+  // Returns true if the username is not found in both collections
+  return shadowQuerySnapshot.docs.isEmpty && usersQuerySnapshot.docs.isEmpty;
 }

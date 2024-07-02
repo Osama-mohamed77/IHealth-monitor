@@ -52,12 +52,13 @@ class _EltarshoubyState extends State<Eltarshouby> {
       key: formKey,
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: const Color(0xff69B5AB),
           title: const Row(
             children: [
               Spacer(
                 flex: 1,
               ),
-              Text('Measuring devices'),
+              Text('Eltarshouby pharmacy'),
               Spacer(
                 flex: 2,
               ),

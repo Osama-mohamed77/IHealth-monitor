@@ -1,133 +1,115 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:ihealth_monitor/screens/Doctor/Dpmore%20deteils.dart';
+import 'package:gap/gap.dart';
+import 'package:ihealth_monitor/screens/Patient/notifications_patient.dart'; // Assuming this is a package you are using
 
-class NotificationsShadow extends StatelessWidget {
+class NotificationsShadow extends StatefulWidget {
   const NotificationsShadow({super.key});
-  static String id = 'notifications';
+
+  @override
+  _NotificationsShadowState createState() => _NotificationsShadowState();
+}
+
+class _NotificationsShadowState extends State<NotificationsShadow> {
+  List<Map<String, dynamic>> _savedNotifications = [];
+  User? currentUser;
+
+  @override
+  void initState() {
+    super.initState();
+    // Get the current logged-in user
+    currentUser = FirebaseAuth.instance.currentUser;
+    // Fetch notifications on screen initialization
+    _fetchNotifications();
+  }
+
+  Future<void> _fetchNotifications() async {
+    if (currentUser != null) {
+      final notifications =
+          await NotificationManager.getSavedNotifications(currentUser!.uid);
+      setState(() {
+        _savedNotifications = notifications;
+      });
+    }
+  }
+
+  Future<void> _deleteNotification(int id) async {
+    if (currentUser != null) {
+      await NotificationManager.clearSavedNotification(currentUser!.uid, id);
+      _fetchNotifications();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         backgroundColor: const Color(0xffA9A360),
-        title: const Center(
-          child: Text(
-            'Notifications',
-            style: TextStyle(
-              fontFamily: 'alata',
-              fontSize: 25,
-              color: Colors.black,
-            ),
-          ),
-        ),
+        automaticallyImplyLeading: false,
+        title: const Center(child: Text('Notifications')),
       ),
-      backgroundColor: const Color(0xffF0F0F0),
-      body: ListView(children: [
-        const SizedBox(
-          height: 30,
-        ),
-        GestureDetector(
-          onTap: () {
-            Navigator.pushNamed(context, MoreDeteilsDiabetics.id);
-          },
-          child: NotificationsTest(
-              'Abdallah ahmed,  added new \nmeasurements today 15/April'),
-        ),
-        const SizedBox(
-          height: 15,
-        ),
-        NotificationsTest(
-            'Osama mohamed,  added new \nmeasurements today 16/April'),
-        const SizedBox(
-          height: 15,
-        ),
-        NotificationsTest(
-            'Mariam samwel,  added new \nmeasurements today 17/April'),
-        const SizedBox(
-          height: 15,
-        ),
-        NotificationsTest(
-            'Rina samir,  added new \nmeasurements today 18/April'),
-        const SizedBox(
-          height: 15,
-        ),
-        NotificationsTest(
-            'Ahmed mohamed,  added new \nmeasurements today 19/April'),
-        const SizedBox(
-          height: 15,
-        ),
-        NotificationsTest(
-            'Adham mohamed,  added new \nmeasurements today 20/April'),
-        const SizedBox(
-          height: 15,
-        ),
-        NotificationsTest(
-            'Mohamed abdallah,  added new \nmeasurements today 21/April'),
-      ]),
-    );
-  }
+      body: _savedNotifications.isEmpty
+          ? const Center(child: Text("You haven't received any notifications."))
+          : ListView.builder(
+              itemCount: _savedNotifications.length,
+              itemBuilder: (context, index) {
+                final notification = _savedNotifications[index];
+                final title = notification['title'];
+                final body = notification['body'];
+                final id = notification['id'];
+                final timestamp =
+                    notification['timestamp']; // If you stored timestamps
 
-  Widget NotificationsTest(String text) {
-    return Row(
-      children: [
-        const SizedBox(
-          width: 10,
-        ),
-        Expanded(
-          child: Container(
-            width: 322,
-            height: 70,
-            decoration: const BoxDecoration(
-              color: Color(0xffCFCCAE),
-              borderRadius: BorderRadius.all(
-                Radius.circular(10),
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: Color(0x3f000000),
-                  offset: Offset(0, 4),
-                  blurRadius: 2,
-                ),
-                BoxShadow(
-                  color: Color(0x3f000000),
-                  offset: Offset(0, 4),
-                  blurRadius: 2,
-                ),
-              ],
-            ),
-            child: Row(
-              children: [
-                const SizedBox(
-                  width: 20,
-                ),
-                Text(
-                  text,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontFamily: 'alata',
-                    fontSize: 15,
+                return Dismissible(
+                  key: Key(id.toString()), // Use id as the key
+                  direction:
+                      DismissDirection.endToStart, // Swipe right to delete
+                  onDismissed: (direction) async {
+                    // Remove notification from list and storage
+                    await _deleteNotification(id);
+                  },
+                  background: Container(
+                    color: Colors.red,
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Icon(
+                          Icons.delete,
+                          color: Colors.white,
+                        ),
+                        SizedBox(width: 20),
+                      ],
+                    ),
                   ),
-                ),
-                const Expanded(
-                  child: SizedBox(
-                    width: 20,
+                  child: Row(
+                    children: [
+                      const Gap(15),
+                      Expanded(
+                        child: Container(
+                          margin: const EdgeInsets.only(top: 20),
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey),
+                              color: const Color(0xffE4E4E4),
+                              borderRadius: BorderRadius.circular(20)),
+                          child: ListTile(
+                            title: Text(
+                              title,
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            subtitle: Text(body),
+                            trailing: timestamp != null
+                                ? Text(timestamp)
+                                : null, // Display timestamp if available
+                          ),
+                        ),
+                      ),
+                      const Gap(15),
+                    ],
                   ),
-                ),
-                const Icon(
-                  Icons.arrow_forward,
-                  color: Colors.black,
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
-              ],
+                );
+              },
             ),
-          ),
-        ),
-        const SizedBox(
-          width: 10,
-        ),
-      ],
     );
   }
 }

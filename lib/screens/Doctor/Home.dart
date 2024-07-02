@@ -2,8 +2,8 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:ihealth_monitor/screens/Doctor/blood_pressure_patients.dart';
-import 'package:ihealth_monitor/screens/Doctor/Diabetics%20screen.dart';
+import 'package:ihealth_monitor/screens/Doctor/list%20of%20Blood/blood_pressure_patients.dart';
+import 'package:ihealth_monitor/screens/Doctor/list%20of%20diabetics/Diabetics%20screen.dart';
 
 class HomeDoctor extends StatefulWidget {
   const HomeDoctor({super.key});
@@ -51,7 +51,7 @@ class _HomeDoctorState extends State<HomeDoctor> {
                     bottomLeft: Radius.circular(30),
                     bottomRight: Radius.circular(30)),
                 color: Color(0xff92B28F)),
-            height: 214,
+            height: 170,
             width: 360,
             child: Padding(
               padding: const EdgeInsets.only(top: 10),
@@ -108,36 +108,6 @@ class _HomeDoctorState extends State<HomeDoctor> {
                           )),
                     ],
                   ),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  const Row(
-                    children: [
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Expanded(
-                        child: SizedBox(
-                          width: 300,
-                          height: 40,
-                          child: TextField(
-                            decoration: InputDecoration(
-                                border: OutlineInputBorder(),
-                                hintText: 'Search',
-                                hintStyle: TextStyle(height: 1),
-                                filled: true,
-                                fillColor: Color(0xffD9D9D9)),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      SizedBox(
-                        width: 35,
-                      ),
-                    ],
-                  )
                 ],
               ),
             ),

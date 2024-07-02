@@ -64,13 +64,16 @@ class _SettingsShadowState extends State<SettingsShadow> {
 
   Future<void> _loadImage() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String userId = FirebaseAuth.instance.currentUser!.uid;
-    String? imagePath = prefs.getString('profile_image_$userId');
-    if (imagePath != null) {
-      setState(() {
-        _image = File(imagePath);
-      });
-    }
+    User? currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser != null) {
+      String userId = currentUser.uid;
+      String? imagePath = prefs.getString('profile_image_$userId');
+      if (imagePath != null) {
+        setState(() {
+          _image = File(imagePath);
+        });
+      }
+    } else {}
   }
 
   Future<void> _deleteImage() async {

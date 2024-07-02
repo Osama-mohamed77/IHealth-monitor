@@ -2,7 +2,9 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/helper/class.dart';
 import 'package:ihealth_monitor/screens/Patient/enter_measurements_suger.dart';
+import 'package:ihealth_monitor/screens/Patient/notifications_patient.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:firebase_auth/firebase_auth.dart'; // Import FirebaseAuth
 
 class SelectDateSuger extends StatefulWidget {
   const SelectDateSuger({super.key});
@@ -14,7 +16,9 @@ class SelectDateSuger extends StatefulWidget {
 
 class _SelectDateSugerState extends State<SelectDateSuger> {
   bool isLoading = false;
+
   TimeOfDay _FirstTimeOfDay = const TimeOfDay(hour: 00, minute: 00);
+
   GlobalKey<FormState> formKey = GlobalKey();
   _ShowTimePickerFirst() async {
     await showTimePicker(context: context, initialTime: TimeOfDay.now())
@@ -66,7 +70,7 @@ class _SelectDateSugerState extends State<SelectDateSuger> {
                 Spacer(
                   flex: 1,
                 ),
-                Text('Enter measurements',
+                Text('Sugar Measurements',
                     style: TextStyle(
                       fontFamily: 'alata',
                       fontSize: 25,
@@ -133,7 +137,7 @@ class _SelectDateSugerState extends State<SelectDateSuger> {
                           const SizedBox(
                             width: 7,
                           ),
-                          Text(_FirstTimeOfDay.format(context).toString(),
+                          Text(_FirstTimeOfDay.format(context),
                               style: const TextStyle(
                                 fontFamily: 'alata',
                                 fontSize: 15,
@@ -233,33 +237,37 @@ class _SelectDateSugerState extends State<SelectDateSuger> {
                   ),
                   GestureDetector(
                     onTap: () async {
-                      //first notification
+                      User? currentUser = FirebaseAuth.instance.currentUser;
+                      if (currentUser != null) {
+                        // First notification
+                        if (formKey.currentState!.validate()) {
+                          await sugerNotification(
+                              currentUser.uid,
+                              2,
+                              'Diabetes Reminder',
+                              'It\'s time to measure your first diabetes.',
+                              _FirstTimeOfDay);
+                          // Second notification
+                          isLoading = true;
+                          setState(() {});
+                          await MoreClass().datesMeasurementSuger(
+                              firstTime:
+                                  _FirstTimeOfDay.format(context).toString(),
+                              secondTime:
+                                  _SecondTimeOfDay.format(context).toString());
 
-                      if (formKey.currentState!.validate()) {
-                        await sugerNotification(
-                            2,
-                            'Diabetes Reminder',
-                            'It\'s time to measure your first diabetes.',
-                            _FirstTimeOfDay);
-                        //secound notification
-
-                        isLoading = true;
-                        setState(() {});
-                        await MoreClass().datesMeasurementSuger(
-                            firstTime:
-                                _FirstTimeOfDay.format(context).toString(),
-                            secondTime:
-                                _SecondTimeOfDay.format(context).toString());
-
-                        Navigator.pushNamed(context, EnterMeasurementsSuger.id);
-                        isLoading = false;
-                        setState(() {});
-                      } else if (formKey.currentState!.validate()) {
-                        await sugerNotification(
-                            3,
-                            'Diabetes Reminder',
-                            'It\'s time to measure your second diabetes.',
-                            _SecondTimeOfDay);
+                          Navigator.pushNamed(
+                              context, EnterMeasurementsSuger.id);
+                          isLoading = false;
+                          setState(() {});
+                        } else if (formKey.currentState!.validate()) {
+                          await sugerNotification(
+                              currentUser.uid,
+                              3,
+                              'Diabetes Reminder',
+                              'It\'s time to measure your second diabetes.',
+                              _SecondTimeOfDay);
+                        }
                       }
                     },
                     child: Container(
@@ -340,17 +348,14 @@ class _SelectDateSugerState extends State<SelectDateSuger> {
   }
 }
 
-Future<void> sugerNotification(
-    int id, String title, String body, TimeOfDay scheduledTime) async {
+Future<void> sugerNotification(String userId, int id, String title, String body,
+    TimeOfDay scheduledTime) async {
   final notificationContent = NotificationContent(
     id: id,
     channelKey: 'basic_channel', // Ensure it matches your channel
     title: title,
     body: body,
   );
-
-  // final now = DateTime.now();
-  // final secondsUntilScheduledTime = scheduledTime.difference(now).inSeconds;
 
   final timeZone = await AwesomeNotifications().getLocalTimeZoneIdentifier();
 
@@ -364,4 +369,5 @@ Future<void> sugerNotification(
     content: notificationContent,
     schedule: schedule,
   );
+  await NotificationManager.saveNotification(userId, id, title, body);
 }

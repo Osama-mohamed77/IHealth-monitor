@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/screens/Patient/pharmacies/19011.dart';
 import 'package:ihealth_monitor/screens/Patient/pharmacies/El_Ezaby.dart';
@@ -82,6 +81,7 @@ class _PharmacyScreenState extends State<PharmacyScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color(0xff69B5AB),
         title: const Row(
           children: [
             Spacer(

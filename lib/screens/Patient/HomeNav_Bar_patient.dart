@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:ihealth_monitor/screens/Patient/Requests_received_patient.dart';
+import 'package:ihealth_monitor/screens/Patient/histoy.dart';
 import 'package:ihealth_monitor/screens/Patient/Home%20Patient.dart';
-import 'package:ihealth_monitor/screens/Patient/add_Followers.dart';
 import 'package:ihealth_monitor/screens/Patient/notifications_patient.dart';
 import 'package:ihealth_monitor/screens/Patient/settings_patient.dart';
 
@@ -16,10 +17,12 @@ class _HomeNavBarPatientState extends State<HomeNavBarPatient> {
   int _currenIndex = 0;
   final List<Widget> listoption = <Widget>[
     const HomePatients(),
-    const AddFollowers(),
+    const History(),
+    const RequestsReceivedPatient(),
     const NotificationsPatient(),
     const SettingsPatient()
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +43,7 @@ class _HomeNavBarPatientState extends State<HomeNavBarPatient> {
             color: Colors.white,
             activeColor: Colors.white,
             tabBackgroundColor: const Color(0xff424242),
-            gap: 9,
+            gap: 5,
             padding: const EdgeInsets.all(11),
             tabs: const [
               GButton(
@@ -48,8 +51,12 @@ class _HomeNavBarPatientState extends State<HomeNavBarPatient> {
                 text: 'Home',
               ),
               GButton(
-                icon: Icons.person_add_alt_1,
-                text: 'add ',
+                icon: Icons.history,
+                text: 'History ',
+              ),
+              GButton(
+                icon: Icons.mail,
+                text: 'Requests',
               ),
               GButton(
                 icon: Icons.notifications,

@@ -27,7 +27,7 @@ class _HomeNavBarShadowState extends State<HomeNavBarShadow> {
       bottomNavigationBar: Container(
         color: Colors.black,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 8),
           child: GNav(
             selectedIndex: _currenIndex,
             onTabChange: (value) {
@@ -48,8 +48,8 @@ class _HomeNavBarShadowState extends State<HomeNavBarShadow> {
                 text: 'Home',
               ),
               GButton(
-                icon: Icons.person_add_alt_1,
-                text: 'add ',
+                icon: Icons.person_add,
+                text: 'Add',
               ),
               GButton(
                 icon: Icons.notifications,

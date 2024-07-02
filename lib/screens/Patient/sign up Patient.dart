@@ -16,7 +16,10 @@ class SignUpPatient extends StatefulWidget {
 
 class _SignUpPatientState extends State<SignUpPatient> {
   bool isLoading = false;
+  bool isUsernameTaken = false;
+  bool isCheckingUsername = false;
   String dropdownValue = 'Male';
+
   RegExp regexPassword =
       RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
   RegExp regexEmail = RegExp(
@@ -109,7 +112,23 @@ class _SignUpPatientState extends State<SignUpPatient> {
                       if (!usernameRegExp.hasMatch(value)) {
                         return 'Enter a Valid Username (letters and numbers only)';
                       }
+                      if (isUsernameTaken) {
+                        return 'Username already taken';
+                      }
                       return null;
+                    },
+                    onChanged: (value) async {
+                      if (value.isNotEmpty && usernameRegExp.hasMatch(value)) {
+                        setState(() {
+                          isCheckingUsername = true;
+                        });
+                        bool usernameTaken =
+                            await MoreClass().usernameExists(value);
+                        setState(() {
+                          isUsernameTaken = usernameTaken;
+                          isCheckingUsername = false;
+                        });
+                      }
                     },
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
@@ -117,6 +136,12 @@ class _SignUpPatientState extends State<SignUpPatient> {
                       filled: true,
                       fillColor: Colors.white70,
                       labelText: 'Username',
+                      suffixIcon: isCheckingUsername
+                          ? const Padding(
+                              padding: EdgeInsets.all(10),
+                              child: CircularProgressIndicator(strokeWidth: 2),
+                            )
+                          : null,
                     ),
                   ),
                 ),
@@ -290,6 +315,7 @@ class _SignUpPatientState extends State<SignUpPatient> {
                 SizedBox(
                   height: 65,
                   child: TextFormField(
+                    controller: ConfairmPassword,
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Enter Your Confirm Password';
@@ -315,10 +341,11 @@ class _SignUpPatientState extends State<SignUpPatient> {
                   child: GestureDetector(
                     onTap: () async {
                       if (formKey.currentState!.validate()) {
-                        isLoading = true;
-                        setState(() {});
+                        setState(() {
+                          isLoading = true;
+                        });
                         try {
-                          MoreClass().signUpPatients(
+                          await MoreClass().signUpPatients(
                               email: email.text,
                               password: password.text,
                               fullname: fullName.text,
@@ -328,9 +355,7 @@ class _SignUpPatientState extends State<SignUpPatient> {
                               gender: dropdownValue,
                               token: '');
 
-                          Navigator.pushNamed(context, AddAddress.id);
-
-                          // addUser();
+                          ShowSnackBar(context, 'Sign up successful');
                         } on FirebaseAuthException catch (ex) {
                           if (ex.code == 'weak-password') {
                             ShowSnackBar(context, 'Weak password');
@@ -339,10 +364,13 @@ class _SignUpPatientState extends State<SignUpPatient> {
                           }
                         } catch (ex) {
                           ShowSnackBar(context, 'There was an error');
+                        } finally {
+                          setState(() {
+                            isLoading = false;
+                          });
                         }
-                        isLoading = false;
-                        setState(() {});
                       }
+                      await Navigator.pushNamed(context, AddAddress.id);
                     },
                     child: Container(
                       decoration: const BoxDecoration(
@@ -351,13 +379,15 @@ class _SignUpPatientState extends State<SignUpPatient> {
                       ),
                       height: 50,
                       width: 234,
-                      child: const Text(
-                        'Sign up',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: 'alata',
-                          fontSize: 32,
-                          color: Colors.white,
+                      child: const Center(
+                        child: Text(
+                          'Sign up',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: 'alata',
+                            fontSize: 32,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),

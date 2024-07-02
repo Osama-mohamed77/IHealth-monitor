@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/screens/Patient/select_date_Pressure.dart';
-import 'package:ihealth_monitor/screens/Patient/select_date_suger.dart';
+import 'package:ihealth_monitor/screens/Patient/select_date_sugar.dart';
 
 class ChooseType extends StatefulWidget {
   const ChooseType({super.key});
@@ -11,7 +11,6 @@ class ChooseType extends StatefulWidget {
 }
 
 class _ChooseTypeState extends State<ChooseType> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +21,7 @@ class _ChooseTypeState extends State<ChooseType> {
             Spacer(
               flex: 1,
             ),
-            Text('Enter measurements',
+            Text('Choose type',
                 style: TextStyle(
                   fontFamily: 'alata',
                   fontSize: 25,

@@ -1,7 +1,8 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:ihealth_monitor/screens/Doctor/Bpmore%20deteils.dart';
+import 'package:ihealth_monitor/screens/Doctor/list%20of%20Blood/more_blood_details.dart';
 
 class BloodPressure extends StatefulWidget {
   static String id = 'BloodPressure';
@@ -14,8 +15,10 @@ class BloodPressure extends StatefulWidget {
 class _BloodPressurePatientsState extends State<BloodPressure> {
   List<Map<String, dynamic>> patients = [];
 
+
   @override
   void initState() {
+
     super.initState();
     _fetchData();
   }
@@ -24,11 +27,15 @@ class _BloodPressurePatientsState extends State<BloodPressure> {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     CollectionReference patientsRef = firestore.collection('Patients');
 
-    QuerySnapshot querySnapshot = await patientsRef.get();
+    QuerySnapshot querySnapshot = await patientsRef
+        .where('doctorID', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .get();
 
-    patients = querySnapshot.docs
-        .map((doc) => doc.data() as Map<String, dynamic>)
-        .toList();
+    patients = querySnapshot.docs.map((doc) {
+      Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+      data['id'] = doc.id; // Include the document ID
+      return data;
+    }).toList();
     setState(() {});
   }
 
@@ -40,13 +47,9 @@ class _BloodPressurePatientsState extends State<BloodPressure> {
         backgroundColor: const Color(0xff92B28F),
         title: const Row(
           children: [
-            Spacer(
-              flex: 1,
-            ),
+            Spacer(flex: 1),
             Text('Blood Pressure Patients'),
-            Spacer(
-              flex: 2,
-            ),
+            Spacer(flex: 2),
           ],
         ),
       ),
@@ -57,28 +60,28 @@ class _BloodPressurePatientsState extends State<BloodPressure> {
 
           return Column(
             children: [
-              const SizedBox(
-                height: 30,
-              ),
+              const SizedBox(height: 30),
               Row(
                 children: [
-                  const SizedBox(
-                    width: 15,
-                  ),
+                  const SizedBox(width: 15),
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(
-                            context, MoreBloodPressureDetails.id);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MoreBloodPressureDetails(
+                              patientId: patient['id'],
+                            ),
+                          ),
+                        );
                       },
                       child: Container(
                         width: 322,
                         height: 47,
                         decoration: const BoxDecoration(
                           color: Color(0xffCEDBCD),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(10),
-                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
                           boxShadow: [
                             BoxShadow(
                               color: Color(0x3f000000),
@@ -94,9 +97,7 @@ class _BloodPressurePatientsState extends State<BloodPressure> {
                         ),
                         child: Row(
                           children: [
-                            const SizedBox(
-                              width: 20,
-                            ),
+                            const SizedBox(width: 20),
                             Text(
                               '${patient['FullName']}, ${patient['age']}, ${patient['gender']}',
                               textAlign: TextAlign.center,
@@ -124,25 +125,19 @@ class _BloodPressurePatientsState extends State<BloodPressure> {
                                 color: Color.fromARGB(255, 234, 34, 19),
                               ),
                             const Expanded(
-                              child: SizedBox(
-                                width: 20,
-                              ),
+                              child: SizedBox(width: 20),
                             ),
                             const Icon(
                               Icons.error_outline_sharp,
                               color: Colors.black,
                             ),
-                            const SizedBox(
-                              width: 20,
-                            ),
+                            const SizedBox(width: 20),
                           ],
                         ),
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    width: 10,
-                  )
+                  const SizedBox(width: 10),
                 ],
               ),
             ],
@@ -154,8 +149,3 @@ class _BloodPressurePatientsState extends State<BloodPressure> {
 }
 
 
-
-// ListTile(
-//             title: Text(patient['FullName']),
-//             subtitle: Text('${patient['age']} ${patient['gender']}'),
-//           );

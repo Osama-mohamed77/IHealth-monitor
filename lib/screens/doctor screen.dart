@@ -1,59 +1,63 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 class DoctorExplain extends StatelessWidget {
   const DoctorExplain({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Color(0xff1C2731),
-      body: Column(
+    // Get screen width and height
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    // Scale text sizes based on screen size
+    double getTextScale(double size) {
+      return size * (screenWidth / 375); // 375 is a common reference width
+    }
+
+    return Scaffold(
+      backgroundColor: const Color(0xff1C2731),
+      body: ListView(
+        padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.01),
         children: [
-          Expanded(
-            child: SizedBox(
-              height: 0,
-            ),
-          ),
+          SizedBox(height: screenHeight * 0.15), // Top margin
           Center(
-            child: Image(
-              image: AssetImage('assets/images/doctor.png'),
-              height: 232,
-              width: 249,
+            child: Image.asset(
+              'assets/images/doctor.png',
+              height: screenHeight *
+                  0.3, // Adjust image height based on screen height
+              width:
+                  screenWidth * 0.7, // Adjust image width based on screen width
+            ),
+          ),
+          SizedBox(height: screenHeight * 0.05), // Gap between image and text
+          Center(
+            child: Text(
+              'Doctor!',
+              style: TextStyle(
+                fontSize: getTextScale(35), // Scaled font size
+                fontFamily: 'alata',
+                color: Colors.white,
+              ),
             ),
           ),
           SizedBox(
-            height: 40,
-          ),
-          Text('Doctor!',
-              style: TextStyle(
-                  fontSize: 35, fontFamily: 'alata', color: Colors.white)),
-          SizedBox(
-            height: 50,
-          ),
-          Row(
-            children: [
-              SizedBox(
-                width: 15,
-              ),
-              Expanded(
-                child: SizedBox(
-                  child: Text(
-                      textAlign: TextAlign.center,
-                      'IHealth monitor will simplify your workflow,\nEnhancing communication and raising the level of patient care.',
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontFamily: 'alata',
-                          color: Color(0xff7C8894))),
+              height: screenHeight * 0.02), // Gap between title and description
+          Center(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
+              child: Text(
+                'IHealth monitor will simplify your workflow, Enhancing communication and raising the level of patient care.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: getTextScale(16), // Scaled font size
+                  fontFamily: 'alata',
+                  color: const Color(0xff7C8894),
                 ),
               ),
-              SizedBox(
-                width: 15,
-              ),
-            ],
+            ),
           ),
-          SizedBox(
-            height: 200,
-          )
+          SizedBox(height: screenHeight * 0.1), // Bottom margin
         ],
       ),
     );

@@ -1,21 +1,68 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ihealth_monitor/screens/Shadow/Sign%20in%20shadow.dart';
-import 'package:ihealth_monitor/screens/Shadow/verify%20shadow.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class ForgetShadow extends StatefulWidget {
   const ForgetShadow({super.key});
   static RegExp regexEmail = RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-  static String id = 'forgetPassword';
+  static String id = 'ForgetShadow';
 
   @override
   State<ForgetShadow> createState() => _ForgetShadowState();
 }
 
 class _ForgetShadowState extends State<ForgetShadow> {
-  GlobalKey<FormState> formKey = GlobalKey();
+  final GlobalKey<FormState> formKey = GlobalKey();
+  final TextEditingController emailController = TextEditingController();
   bool isLoading = false;
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    super.dispose();
+  }
+
+  Future<void> passwordReset() async {
+    if (!formKey.currentState!.validate()) {
+      return;
+    }
+    setState(() {
+      isLoading = true;
+    });
+    try {
+      await FirebaseAuth.instance
+          .sendPasswordResetEmail(email: emailController.text.trim());
+      AwesomeDialog(
+        context: context,
+        dialogType: DialogType.success,
+        animType: AnimType.rightSlide,
+        title: 'Success',
+        desc: 'Password reset link sent! Check your email',
+        btnOkOnPress: () {
+          Navigator.pushNamed(context, SignInShadow.id);
+        },
+      ).show();
+    } catch (e) {
+      AwesomeDialog(
+        context: context,
+        dialogType: DialogType.error,
+        animType: AnimType.rightSlide,
+        title: 'Error',
+        desc:
+            'Failed to send reset link. Please check your email address and try again.',
+        btnOkOnPress: () {},
+      ).show();
+      return;
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return ModalProgressHUD(
@@ -80,6 +127,7 @@ class _ForgetShadowState extends State<ForgetShadow> {
                   child: SizedBox(
                     height: 70,
                     child: TextFormField(
+                      controller: emailController,
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Enter Your Email';
@@ -103,11 +151,7 @@ class _ForgetShadowState extends State<ForgetShadow> {
                 Center(
                   child: GestureDetector(
                     onTap: () async {
-                      if (formKey.currentState!.validate()) {
-                        isLoading = true;
-                        setState(() {});
-                        Navigator.pushNamed(context, VerifyShadow.id);
-                      }
+                      await passwordReset();
                     },
                     child: Container(
                       decoration: const BoxDecoration(
@@ -118,13 +162,14 @@ class _ForgetShadowState extends State<ForgetShadow> {
                       ),
                       height: 50,
                       width: 234,
-                      child: const Text(
-                        textAlign: TextAlign.center,
-                        'Send',
-                        style: TextStyle(
-                          fontFamily: 'alata',
-                          fontSize: 32,
-                          color: Colors.white,
+                      child: const Center(
+                        child: Text(
+                          'Send',
+                          style: TextStyle(
+                            fontFamily: 'alata',
+                            fontSize: 32,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),

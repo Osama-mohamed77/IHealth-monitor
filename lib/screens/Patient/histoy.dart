@@ -2,16 +2,17 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
-class BookingDate extends StatefulWidget {
-  static String id = 'BookingDate';
-  const BookingDate({super.key});
+class History extends StatefulWidget {
+  static String id = 'History';
+  const History({super.key});
 
   @override
-  State<BookingDate> createState() => _BookingDateState();
+  State<History> createState() => _HistoryState();
 }
 
-class _BookingDateState extends State<BookingDate> {
+class _HistoryState extends State<History> {
   //clinic
   IconData emptyIconClinic = const IconData(0, fontFamily: 'MaterialIcons');
 
@@ -207,22 +208,15 @@ class _BookingDateState extends State<BookingDate> {
     return Scaffold(
       backgroundColor: const Color(0xffF0F0F0),
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: const Color(0xff69B5AB),
-        title: const Row(
-          children: [
-            Spacer(
-              flex: 1,
-            ),
-            Text('Booking date',
-                style: TextStyle(
-                  fontFamily: 'alata',
-                  fontSize: 30,
-                  color: Colors.black,
-                )),
-            Spacer(
-              flex: 2,
-            ),
-          ],
+        title: const Center(
+          child: Text('History',
+              style: TextStyle(
+                fontFamily: 'alata',
+                fontSize: 30,
+                color: Colors.black,
+              )),
         ),
       ),
       body: ListView(
@@ -524,6 +518,7 @@ class _BookingDateState extends State<BookingDate> {
                 )
               ],
             ),
+          const Gap(30),
         ],
       ),
     );
@@ -542,230 +537,3 @@ Future<void> Notification(int id, String title, String body) async {
     content: notificationContent,
   );
 }
-
-// import 'package:awesome_notifications/awesome_notifications.dart';
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
-
-// class BookingDate extends StatefulWidget {
-//   static String id = 'BookingDate';
-//   const BookingDate({super.key});
-
-//   @override
-//   State<BookingDate> createState() => _BookingDateState();
-// }
-
-// class _BookingDateState extends State<BookingDate> {
-//   IconData emptyIcon = const IconData(0, fontFamily: 'MaterialIcons');
-//   String bookingDate = '';
-//   String doctorName = '';
-//   String AppointmentStatus = 'Waiting for approval';
-//   int color = 0xffDDDBDB;
-//   Icon icon = const Icon(Icons.hourglass_bottom);
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     fetchBookingDate();
-//     fetchApproval();
-//     AwesomeNotifications().initialize(null, [
-//       NotificationChannel(
-//         channelGroupKey: 'basic_channel_group',
-//         channelKey: 'basic_channel',
-//         channelName: 'Basic Notification',
-//         channelDescription: 'Test notification channel',
-//       ),
-//     ], channelGroups: [
-//       NotificationChannelGroup(
-//           channelGroupKey: 'basic_channel_group',
-//           channelGroupName: 'Basic Group'),
-//     ]);
-//   }
-
-//   Future<void> fetchBookingDate() async {
-//     try {
-//       DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
-//           .collection('Patients')
-//           .doc(FirebaseAuth
-//               .instance.currentUser!.uid) // Use the correct document ID here
-//           .get();
-
-//       if (documentSnapshot.exists) {
-//         setState(() {
-//           bookingDate = documentSnapshot['bookingDate'];
-//           doctorName = documentSnapshot['doctorName'];
-//         });
-//       } else {
-//          
-//       }
-//     } catch (e) {
-//        
-//     }
-//   }
-
-//   Future<void> fetchApproval() async {
-//     try {
-//       DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
-//           .collection('Patients list')
-//           .doc(FirebaseAuth
-//               .instance.currentUser!.uid) // Use the correct document ID here
-//           .get();
-
-//       if (documentSnapshot.exists) {
-//         setState(() {
-//           AppointmentStatus = 'Approved';
-//           color = 0xff69B5AB;
-//           icon = Icon(emptyIcon);
-//         });
-//         sugerNotification(
-//             5, 'appointment Reminder', 'Your request has been approved.');
-//       } else {
-//          
-//       }
-//     } catch (e) {
-//        
-//     }
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: const Color(0xffF0F0F0),
-//       appBar: AppBar(
-//         backgroundColor: const Color(0xff69B5AB),
-//         title: const Row(
-//           children: [
-//             Spacer(
-//               flex: 1,
-//             ),
-//             Text('Booking date',
-//                 style: TextStyle(
-//                   fontFamily: 'alata',
-//                   fontSize: 30,
-//                   color: Colors.black,
-//                 )),
-//             Spacer(
-//               flex: 2,
-//             ),
-//           ],
-//         ),
-//       ),
-//       body: ListView(
-//         children: [
-//           const SizedBox(
-//             height: 30,
-//           ),
-//           Row(
-//             children: [
-//               const SizedBox(
-//                 width: 10,
-//               ),
-//               Expanded(
-//                 child: Container(
-//                   height: 170,
-//                   decoration: BoxDecoration(
-//                       borderRadius: BorderRadius.circular(20),
-//                       color: Colors.white,
-//                       border: Border.all(color: Colors.grey)),
-//                   child: Column(
-//                     children: [
-//                       const Text(
-//                         'Clinic',
-//                         style: TextStyle(
-//                             fontSize: 25,
-//                             color: Color.fromARGB(255, 76, 155, 145)),
-//                       ),
-//                       const SizedBox(
-//                         height: 15,
-//                       ),
-//                       Row(
-//                         mainAxisAlignment: MainAxisAlignment.center,
-//                         children: [
-//                           const Icon(
-//                             Icons.date_range_sharp,
-//                             color: Colors.red,
-//                           ),
-//                           Text('Booking Date: $bookingDate'),
-//                           const SizedBox(
-//                             width: 10,
-//                           ),
-//                         ],
-//                       ),
-//                       Row(
-//                         mainAxisAlignment: MainAxisAlignment.center,
-//                         children: [
-//                           const Icon(
-//                             Icons.person,
-//                             color: Colors.red,
-//                           ),
-//                           Text('Doctor named: $doctorName'),
-//                           const SizedBox(
-//                             width: 10,
-//                           ),
-//                         ],
-//                       ),
-//                       const SizedBox(
-//                         height: 20,
-//                       ),
-//                       Container(
-//                         height: 30,
-//                         width: 250,
-//                         decoration: BoxDecoration(
-//                             borderRadius: BorderRadius.circular(10),
-//                             border: Border.all(color: Colors.grey),
-//                             color: Color(color)),
-//                         child: Row(
-//                           mainAxisAlignment: MainAxisAlignment.center,
-//                           children: [
-//                             Padding(
-//                               padding: const EdgeInsets.only(left: 15),
-//                               child: Text(
-//                                 AppointmentStatus,
-//                                 style: const TextStyle(fontSize: 18),
-//                               ),
-//                             ),
-//                             icon
-//                           ],
-//                         ),
-//                       )
-//                     ],
-//                   ),
-//                 ),
-//               ),
-//               const SizedBox(
-//                 width: 10,
-//               )
-//             ],
-//           )
-//         ],
-//       ),
-//     );
-//   }
-// }
-
-// Future<void> sugerNotification(int id, String title, String body) async {
-//   final notificationContent = NotificationContent(
-//     id: id,
-//     channelKey: 'basic_channel', // Ensure it matches your channel
-//     title: title,
-//     body: body,
-//   );
-
-//   // final now = DateTime.now();
-//   // final secondsUntilScheduledTime = scheduledTime.difference(now).inSeconds;
-
-//   final timeZone = await AwesomeNotifications().getLocalTimeZoneIdentifier();
-
-//   final schedule = NotificationInterval(
-//     interval: 10,
-//     repeats: false,
-//     timeZone: timeZone,
-//   );
-
-//   await AwesomeNotifications().createNotification(
-//     content: notificationContent,
-//     schedule: schedule,
-//   );
-// }

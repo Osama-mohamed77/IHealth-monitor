@@ -53,12 +53,13 @@ class _NumbersPharmacyState extends State<NumbersPharmacy> {
       key: formKey,
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: const Color(0xff69B5AB),
           title: const Row(
             children: [
               Spacer(
                 flex: 1,
               ),
-              Text('Measuring devices'),
+              Text('19011 pharmacy'),
               Spacer(
                 flex: 2,
               ),
