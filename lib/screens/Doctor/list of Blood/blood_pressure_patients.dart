@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -15,17 +14,15 @@ class BloodPressure extends StatefulWidget {
 class _BloodPressurePatientsState extends State<BloodPressure> {
   List<Map<String, dynamic>> patients = [];
 
-
   @override
   void initState() {
-
     super.initState();
     _fetchData();
   }
 
   Future<void> _fetchData() async {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
-    CollectionReference patientsRef = firestore.collection('Patients');
+    CollectionReference patientsRef = firestore.collection('Patients list');
 
     QuerySnapshot querySnapshot = await patientsRef
         .where('doctorID', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
@@ -147,5 +144,3 @@ class _BloodPressurePatientsState extends State<BloodPressure> {
     );
   }
 }
-
-

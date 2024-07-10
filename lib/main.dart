@@ -359,8 +359,7 @@ class _IHealthMonitorState extends State<IHealthMonitor> {
               .doc(userId)
               .update({'friendsStatus': '', 'AcceptorName': ''});
         }
-      } else {
-        print('Document does not exist'); // Debug print
+      } else {        print('Document does not exist'); // Debug print
       }
     } catch (e) {
       print('Error fetching accepted shadow: $e'); // Debug print

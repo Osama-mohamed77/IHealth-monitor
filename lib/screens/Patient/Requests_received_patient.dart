@@ -232,7 +232,7 @@ class RequestsReceivedPatient extends StatelessWidget {
                           child: ListTile(
                             title: Text(
                               senderFullName,
-                              style: const TextStyle(fontSize: 20),
+                              style: const TextStyle(fontSize: 17),
                             ),
                             subtitle: Text(
                               'Username: $senderUsername',
