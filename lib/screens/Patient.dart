@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 
 class PatientExplain extends StatelessWidget {
   const PatientExplain({super.key});

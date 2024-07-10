@@ -41,7 +41,7 @@ class _HomeShadowState extends State<HomeShadow> {
             .toList();
       });
     } catch (e) {
-      print('Error fetching data: $e');
+      return;
     }
   }
 

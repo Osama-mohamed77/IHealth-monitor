@@ -50,7 +50,8 @@ class _MoreDeteilsDiabeticsState extends State<MoreDeteilsDiabetics> {
         });
       }
     } catch (e) {
-      print('Error fetching name: $e');
+      return;
+
     }
   }
 
@@ -67,7 +68,8 @@ class _MoreDeteilsDiabeticsState extends State<MoreDeteilsDiabetics> {
         });
       }
     } catch (e) {
-      print('Error fetching image: $e');
+      return;
+
     }
   }
 
@@ -94,10 +96,11 @@ class _MoreDeteilsDiabeticsState extends State<MoreDeteilsDiabetics> {
       }
       setState(() {
         customNumbers = tempCustomNumbers;
-        print('Custom Numbers: $customNumbers'); // Debug print
+        // Debug print
       });
     } catch (e) {
-      print('Error fetching measurements: $e');
+      return;
+
     }
   }
 
@@ -293,7 +296,6 @@ class _MoreDeteilsDiabeticsState extends State<MoreDeteilsDiabetics> {
                       animType: AnimType.scale,
                       title: 'Success',
                       btnOkOnPress: () {
-                        print(widget.patientId);
                         Navigator.pushNamed(context, HomeNavBarDoctor.id);
                       },
                     ).show();

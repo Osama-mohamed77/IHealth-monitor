@@ -42,7 +42,7 @@ class _MoreBloodPressureDetailsState extends State<MoreBloodPressureDetails> {
         });
       }
     } catch (e) {
-      print('Error fetching name: $e');
+      return;
     }
   }
 
@@ -67,7 +67,7 @@ class _MoreBloodPressureDetailsState extends State<MoreBloodPressureDetails> {
         });
       }
     } catch (e) {
-      print('Error fetching image: $e');
+      return;
     }
   }
 
@@ -94,10 +94,10 @@ class _MoreBloodPressureDetailsState extends State<MoreBloodPressureDetails> {
       }
       setState(() {
         customNumbers = tempCustomNumbers;
-        print('Custom Numbers: $customNumbers'); // Debug print
+        // Debug print
       });
     } catch (e) {
-      print('Error fetching measurements: $e');
+      return;
     }
   }
 

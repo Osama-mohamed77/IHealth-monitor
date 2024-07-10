@@ -315,8 +315,7 @@ class _SignUpState extends State<SignUp> {
 
                     if (data != null) {
                       data.forEach((key, value) {
-                        print(
-                            'Key: $key, Value: $value'); // Debug print statement
+                        // Debug print statement
                         if (value is Map &&
                             value.containsKey('name') &&
                             value['name'] is String &&
@@ -328,8 +327,7 @@ class _SignUpState extends State<SignUp> {
                     }
 
                     List<String> clinicNamesList = clinicNames.toList();
-                    print(
-                        'Clinic Names: $clinicNamesList'); // Debug print statement
+                    // Debug print statement
 
                     // Ensure that selectedClinic is in clinicNamesList
                     if (selectedClinic != null &&

@@ -54,7 +54,6 @@ import 'package:ihealth_monitor/screens/Shadow/Sign%20in%20shadow.dart';
 import 'package:ihealth_monitor/screens/Shadow/Sign%20up%20shadow.dart';
 import 'package:ihealth_monitor/screens/Shadow/account_details_shadow.dart';
 import 'package:ihealth_monitor/screens/Shadow/more_details.dart';
-import 'package:ihealth_monitor/screens/Shadow/notifications%20shadow.dart';
 import 'package:ihealth_monitor/screens/Shadow/settings%20shadow.dart';
 import 'package:ihealth_monitor/screens/choose%20screen.dart';
 import 'package:ihealth_monitor/screens/Doctor/forget%20password.dart';
@@ -149,17 +148,17 @@ class _IHealthMonitorState extends State<IHealthMonitor> {
       if (userDoc.exists) {
         var data = userDoc.data() as Map<String, dynamic>;
         userRole = data['role'];
-        print('User role fetched: $userRole'); // Debug print
+        // Debug print
         if (userRole == 'patient') {
           fetchData();
         } else if (userRole == 'shadow') {
           fetchShadow();
         }
       } else {
-        print('User document does not exist'); // Debug print
+        // Debug print
       }
     } catch (e) {
-      print('Error fetching user role and data: $e'); // Debug print
+      // Debug print
     }
   }
 
@@ -324,15 +323,15 @@ class _IHealthMonitorState extends State<IHealthMonitor> {
   Future<void> fetchShadow() async {
     if (currentUser != null && userRole == 'shadow') {
       String userId = currentUser!.uid;
-      print('Fetching shadow data for user ID: $userId'); // Debug print
+      // Debug print
       await fetchDataShadow(userId);
     } else {
-      print('User is null or not a shadow.'); // Debug print
+      // Debug print
     }
   }
 
   Future<void> fetchDataShadow(String userId) async {
-    print('Fetching data for shadow user ID: $userId'); // Debug print
+    // Debug print
     await fetchAcceptedShadow(userId);
   }
 
@@ -348,8 +347,7 @@ class _IHealthMonitorState extends State<IHealthMonitor> {
         var friendsStatus = data['friendsStatus'];
         var AcceptorName = data['AcceptorName'];
 
-        print(
-            'Fetched document data: friendsStatus = $friendsStatus, AcceptorName = $AcceptorName'); // Debug print
+        // Debug print
 
         if (friendsStatus == '$userId accepted') {
           await NotificationPatient(9, 'Request Accept',
@@ -359,10 +357,10 @@ class _IHealthMonitorState extends State<IHealthMonitor> {
               .doc(userId)
               .update({'friendsStatus': '', 'AcceptorName': ''});
         }
-      } else {        print('Document does not exist'); // Debug print
+      } else {        // Debug print
       }
     } catch (e) {
-      print('Error fetching accepted shadow: $e'); // Debug print
+      // Debug print
     }
   }
 
@@ -384,7 +382,7 @@ class _IHealthMonitorState extends State<IHealthMonitor> {
             currentUser!.uid, id, title, body);
       }
     } catch (e) {
-      print('Error sending notification: $e'); // Debug print
+      // Debug print
     }
   }
 

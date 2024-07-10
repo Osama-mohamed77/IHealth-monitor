@@ -42,16 +42,13 @@ class _DawyClinicState extends State<DawyClinic> {
 
   Future<void> fetchDoctors() async {
     try {
-      print('Fetching doctors for clinic: $clinicName');
       final snapshot = await FirebaseFirestore.instance
           .collection('Doctors')
           .where('Clinic name', isEqualTo: clinicName)
           .get();
 
-      print('Number of documents fetched: ${snapshot.docs.length}');
 
       if (snapshot.docs.isEmpty) {
-        print('No doctors found for clinic: $clinicName');
         setState(() {
           doctors = [];
           selectedDoctor = null;
@@ -61,11 +58,10 @@ class _DawyClinicState extends State<DawyClinic> {
 
       final List<Map<String, String>> fetchedDoctors = snapshot.docs.map((doc) {
         final data = doc.data();
-        print('Document data: $data'); // Debugging statement
+        // Debugging statement
         return {'name': data['FullName'] as String, 'id': doc.id};
       }).toList();
 
-      print('Doctor names fetched: $fetchedDoctors');
 
       setState(() {
         doctors = fetchedDoctors;
@@ -75,7 +71,6 @@ class _DawyClinicState extends State<DawyClinic> {
         }
       });
     } catch (e) {
-      print('Error fetching doctors: $e');
       ShowSnackBar(context, 'Error fetching doctor names');
     }
   }

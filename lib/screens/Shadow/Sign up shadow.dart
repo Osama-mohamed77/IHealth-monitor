@@ -42,7 +42,6 @@ class _SignUpShadowState extends State<SignUpShadow> {
           .get();
       return result.docs.isNotEmpty;
     } catch (e) {
-      print('Error checking username existence: $e');
       return false; // Handle or propagate the error as needed
     }
   }
@@ -57,7 +56,8 @@ class _SignUpShadowState extends State<SignUpShadow> {
         'password': password.text,
       });
     } catch (error) {
-      print('Error adding user: $error');
+      return;
+
     }
   }
 

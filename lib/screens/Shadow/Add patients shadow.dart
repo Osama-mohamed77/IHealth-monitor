@@ -114,12 +114,11 @@ class _AddPatientsShadowState extends State<AddPatientsShadow> {
           }
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('User not found')),
+            const SnackBar(content: Text('User not found')),
           );
         }
       }
     } catch (e) {
-      print(e);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error sending friend request: $e')),
       );
@@ -197,10 +196,10 @@ class _AddPatientsShadowState extends State<AddPatientsShadow> {
           const SizedBox(height: 10),
           Row(
             children: [
-              SizedBox(width: 30),
+              const SizedBox(width: 30),
               Text(
                 'Your username is $username',
-                style: TextStyle(
+                style: const TextStyle(
                   fontFamily: 'alata',
                   fontSize: 13,
                   color: Color(0xff8D8D8D),
@@ -219,7 +218,7 @@ class _AddPatientsShadowState extends State<AddPatientsShadow> {
                   sendFriendRequest(receiverUsername);
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Please enter a username')),
+                    const SnackBar(content: Text('Please enter a username')),
                   );
                 }
               },

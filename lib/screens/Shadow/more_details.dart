@@ -41,7 +41,7 @@ class _MoreDeteilsShadowState extends State<MoreDeteilsShadow> {
         });
       }
     } catch (e) {
-      print('Error fetching name: $e');
+      return;
     }
   }
 
@@ -58,7 +58,8 @@ class _MoreDeteilsShadowState extends State<MoreDeteilsShadow> {
         });
       }
     } catch (e) {
-      print('Error fetching image: $e');
+      return;
+
     }
   }
 
@@ -85,10 +86,11 @@ class _MoreDeteilsShadowState extends State<MoreDeteilsShadow> {
       }
       setState(() {
         pressureMeasurements = tempCustomNumbers;
-        print('Pressure Measurements: $pressureMeasurements'); // Debug print
+        // Debug print
       });
     } catch (e) {
-      print('Error fetching pressure measurements: $e');
+      return;
+
     }
   }
 
@@ -115,10 +117,11 @@ class _MoreDeteilsShadowState extends State<MoreDeteilsShadow> {
       }
       setState(() {
         sugarMeasurements = tempCustomNumbers;
-        print('Sugar Measurements: $sugarMeasurements'); // Debug print
+        // Debug print
       });
     } catch (e) {
-      print('Error fetching sugar measurements: $e');
+      return;
+
     }
   }
 

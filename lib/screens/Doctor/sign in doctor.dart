@@ -248,7 +248,6 @@ class _SignUpState extends State<SignIn> {
 
         // Check if role is set
         if (role == null || role.isEmpty) {
-          print('Role not set for this user');
           await FirebaseAuth.instance.signOut();
           AwesomeDialog(
             context: context,
@@ -268,7 +267,6 @@ class _SignUpState extends State<SignIn> {
           } else if (role == 'shadow') {
             ShowSnackBar(context, 'This account is for the shadow application');
           } else {
-            print('Unknown role: $role');
           }
         }
       }
@@ -297,7 +295,6 @@ class _SignUpState extends State<SignIn> {
     } catch (e) {
       // Handle other errors
       ShowSnackBar(context, 'Sign-in failed. Please try again later.');
-      print('Sign-in failed: $e');
     }
   }
 }

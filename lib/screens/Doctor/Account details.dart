@@ -34,7 +34,7 @@ class _AccountDetailsState extends State<AccountDetails> {
         });
       }
     } catch (e) {
-      print('Error fetching data: $e');
+      return;
     }
   }
 
